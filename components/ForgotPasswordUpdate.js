@@ -13,6 +13,7 @@ class ForgotPasswordUpdate extends Component {
             const isCheckbox = e.target.type === "checkbox";
             this.setState({[e.target.name]: isCheckbox ? e.target.checked : e.target.value})
         }
+
         const handleSubmit = (e) => {
             e.preventDefault();
             this.setState({errors: {}})
