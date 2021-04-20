@@ -180,7 +180,7 @@ class UserDetail extends Component {
                     <img
                         src={this.state.profileDetails.avatar ? this.state.profileDetails.avatar : this.state.profileImage}
                         width="140px" height="140px" className="custom-user-profile-image rounded-circle ml-5"/>
-                    <div className="text-center align-content-center align-items-center custom-user-data-section">
+                    <div className="ml-2 custom-user-data-section">
                         <div className="d-flex custom-user-profile-data ml-5">
                             <div className="d-inline-flex flex-column custom-user-data ">
                                 <span className="custom-profile-username">{this.state.profileDetails.username}</span>
