@@ -39,7 +39,7 @@ class Navbar extends React.Component {
 
         return (
             <div>
-                <div className="container-fluid">
+                <div className="container-fluid custom-navbar-z-index">
                     <ReactBootstrap.Navbar className="custom-top-navbar-platform" fixed="top" collapseOnSelect
                                            expand="lg" variant="dark">
                         <Link href="/">
