@@ -892,6 +892,7 @@ a:hover{
 .custom-music-detail-page{
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   padding-top: 60px;
   padding-bottom: 100px;
   background: #162332;
@@ -899,6 +900,7 @@ a:hover{
 .custom-user-detail-page{
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   padding-top: 60px;
   padding-bottom: 100px;
   background: #162332;
@@ -906,6 +908,7 @@ a:hover{
 .loggedin-user-profile{
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   padding-top: 60px;
   padding-bottom: 100px;
   background: #162332;
@@ -913,6 +916,7 @@ a:hover{
 .custom-playlist-page{
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   padding-top: 60px;
   padding-bottom: 100px;
   background: #162332;
@@ -920,6 +924,7 @@ a:hover{
 .custom-followers-page{
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   padding-top: 60px;
   padding-bottom: 100px;
   background: #162332;
@@ -927,6 +932,7 @@ a:hover{
 .custom-followings-page{
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   padding-top: 60px;
   padding-bottom: 100px;
   background: #162332;
@@ -1194,11 +1200,38 @@ a:hover{
   position: absolute;
   z-index:15;
 }
+.mobile-view{
+  visibility: hidden;
+}
+.mobile-user-profile-btns{
 
-
-
-
-
+}
+.custom-profile-options-row{
+  margin: 0;
+}
+.custom-bg-dark{
+  background: #2F4961;
+}
+.custom-file-input {
+  width: 100%;
+  height: 45px;
+  padding-left: 40px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  box-shadow: none;
+  border: 1px solid #00000020;
+  border-radius: 50px;
+  outline: none;
+  background: transparent;
+}
+.custom-input-label{
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.input-field-custom-info{
+  color: #ffffff;
+}
 
 @media screen and (min-width: 540px) and (max-width: 780px) {
   .custom-music-detail-comment-section .custom-nav-search{
@@ -1211,6 +1244,18 @@ a:hover{
   }
   .custom-currentuser-profile-data{
     margin-top: 75px;
+  }
+  .mobile-hide{
+    visibility: hidden;
+  }
+  .mobile-view{
+    visibility: visible;
+  }
+  .mobile-user-profile-btns{
+    margin-top: 70px;
+    margin-left: 100%;
+    width: 100px;
+    flex: border-box;
   }
   .custom-user-profile-image{
     z-index: 10;

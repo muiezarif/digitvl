@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import Link from "next/link"
 import Image from "next/image";
 import {connect} from "react-redux";
+import Router from "next/router";
+import CurrentUserPlaylist from "./CurrentUserPlaylist";
 import {
     FacebookShareButton,
     TwitterShareButton,
@@ -224,7 +226,7 @@ class MusicDetail extends Component {
             }).catch(err => {
             })
         } else if (!userSession) {
-            history.push("/login")
+            Router.push("/login")
         }
 
     }
@@ -306,7 +308,7 @@ class MusicDetail extends Component {
             }
         }
         if (!userSession) {
-            history.push("/login")
+            Router.push("/login")
         }
         this.setState({addComment: ""})
     }
@@ -349,6 +351,14 @@ class MusicDetail extends Component {
         this.setState({ApiError: true});
     }
     render() {
+        const handleChange = (e) => {
+            const isCheckbox = e.target.type === "checkbox";
+            this.setState({[e.target.name]: isCheckbox ? e.target.checked : e.target.value})
+        }
+        const handleClose = () => this.setState({show: false});
+        const handleShow = () => this.setState({show: true});
+        const handleCloseAddPlayList = () => this.setState({showAddPlaylist: false});
+        const handleShowAddPlayList = () => this.setState({showAddPlaylist: true});
         return (
             <div className="container-fluid custom-music-detail-page">
                 <Navbar/>
@@ -367,13 +377,13 @@ class MusicDetail extends Component {
                                 </div>
                                 <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
                                     {this.renderLikeButton()}
-                                    <button className="btn btn-outline-primary btn-sm m-2" type="button">
+                                    <button onClick={handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">
                                         <i className="far fa-share-square"/> Share
                                     </button>
-                                    <button className="btn btn-outline-primary btn-sm m-2" type="button">
+                                    <button onClick={() => this.addNextToList(this.state.musicDetail)} className="btn btn-outline-primary btn-sm m-2" type="button">
                                         <i className="far fa-list-alt"/> Add To Next Up
                                     </button>
-                                    {userLoggedIn ?<button className="btn btn-outline-primary btn-sm m-2"
+                                    {userLoggedIn ?<button onClick={handleShowAddPlayList} className="btn btn-outline-primary btn-sm m-2"
                                             type="button">
                                         <i className="far fa-list-alt"/> Add To My PlayList
                                     </button>:null}
@@ -395,11 +405,90 @@ class MusicDetail extends Component {
                                         <img src={this.state.userProfilePic? this.state.userProfilePic : profileImage} className="rounded-circle" width="60" height="60"
                                              alt=""/>
                                         <form onSubmit={this.addUserComment} className="w-100">
-                                            <input type="text" className="custom-nav-search"
+                                            <input type="text" name="addComment" value={this.state.addComment} onChange={handleChange} className="custom-nav-search"
                                                    placeholder="Write a comment"/>
                                         </form>
                                     </div>
                                 </div>
+                                <ReactBootstrap.Modal
+                                    show={this.state.show}
+                                    onHide={handleClose}
+                                    backdrop="static"
+                                    keyboard={false}>
+                                    <ReactBootstrap.Modal.Header closeButton>
+                                        <ReactBootstrap.Modal.Title>Share</ReactBootstrap.Modal.Title>
+                                    </ReactBootstrap.Modal.Header>
+                                    <ReactBootstrap.Modal.Body>
+                                        <div className="custom-input">
+                                            <span><i className="fas fa-globe"> </i></span>
+                                            <input name="shareDescription" value={this.state.shareDescription} type="text"
+                                                   onChange={handleChange}
+                                                   placeholder="Description"/>
+                                        </div>
+                                        <FacebookShareButton
+                                            url={window.location.href}
+                                            quote={this.state.shareDescription}
+                                            className="Demo__some-network__share-button"
+                                        >
+                                            <FacebookIcon size={32} round/>
+                                        </FacebookShareButton>
+                                        <TwitterShareButton
+                                            url={window.location.href}
+                                            title={this.state.shareDescription}
+                                            className="Demo__some-network__share-button"
+                                        >
+                                            <TwitterIcon size={32} round/>
+                                        </TwitterShareButton>
+                                        {/*<LinkedinShareButton url="https://www.google.com" className="Demo__some-network__share-button">*/}
+                                        {/*    <LinkedinIcon size={32} round />*/}
+                                        {/*</LinkedinShareButton>*/}
+                                        <input className="form-control" type="text" placeholder={window.location.href}
+                                               readOnly/>
+                                    </ReactBootstrap.Modal.Body>
+                                    <ReactBootstrap.Modal.Footer>
+                                        <ReactBootstrap.Button variant="secondary" onClick={handleClose}>
+                                            Close
+                                        </ReactBootstrap.Button>
+                                    </ReactBootstrap.Modal.Footer>
+                                </ReactBootstrap.Modal>
+
+                                <ReactBootstrap.Modal
+                                    show={this.state.showAddPlaylist}
+                                    onHide={handleCloseAddPlayList}
+                                    backdrop="static"
+                                    keyboard={false}>
+                                    <ReactBootstrap.Modal.Header closeButton>
+                                        <ReactBootstrap.Modal.Title>Add To
+                                            PlayList</ReactBootstrap.Modal.Title>
+                                    </ReactBootstrap.Modal.Header>
+                                    <ReactBootstrap.Modal.Body>
+                                        <CurrentUserPlaylist hover="-hover" addToPlayList={this.onPlayListClicked}/>
+                                    </ReactBootstrap.Modal.Body>
+                                    <ReactBootstrap.Modal.Footer>
+                                        <ReactBootstrap.Button variant="secondary"
+                                                               onClick={handleCloseAddPlayList}>
+                                            Close
+                                        </ReactBootstrap.Button>
+                                    </ReactBootstrap.Modal.Footer>
+                                </ReactBootstrap.Modal>
+
+                                <ReactBootstrap.Modal
+                                    show={this.state.ApiError}
+                                    onHide={this.handleApiErrorClose}
+                                    backdrop="static"
+                                    keyboard={false}>
+                                    <ReactBootstrap.Modal.Header closeButton>
+                                        <ReactBootstrap.Modal.Title>Error</ReactBootstrap.Modal.Title>
+                                    </ReactBootstrap.Modal.Header>
+                                    <ReactBootstrap.Modal.Body>
+                                        <p>There is something wrong. Music not found</p>
+                                    </ReactBootstrap.Modal.Body>
+                                    <ReactBootstrap.Modal.Footer>
+                                        <ReactBootstrap.Button variant="secondary" onClick={this.handleApiErrorClose}>
+                                            Close
+                                        </ReactBootstrap.Button>
+                                    </ReactBootstrap.Modal.Footer>
+                                </ReactBootstrap.Modal>
                                 <div className="custom-music-detail-comment-list mt-5">
                                     <div
                                         className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">

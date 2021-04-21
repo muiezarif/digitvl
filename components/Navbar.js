@@ -7,7 +7,7 @@ import Router from "next/router";
 let userLoggedIn
 let userSession
 class Navbar extends React.Component {
-    state = {userLoggedIn: false, coins: 0, is_staff: false, notificationCount: 0}
+    state = {userLoggedIn: false, coins: 0, is_staff: false, notificationCount: 0,userImage: "http://nicesnippets.com/demo/1499344631_malecostume.png"}
 
     componentDidMount() {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
@@ -15,6 +15,21 @@ class Navbar extends React.Component {
         userSession = JSON.parse(userSession)
         if(userLoggedIn === "true"){
             this.setState({userLoggedIn:true})
+        }
+        if (userSession.user) {
+            this.setState({verified_blue_tick:userSession.user.profile.blue_tick_verified})
+            if (userSession.user.profile.avatar) {
+                this.setState({
+                    userImage: userSession.user.profile.avatar
+                })
+            }
+        }
+        if (userSession.profile) {
+            if (userSession.profile.avatar) {
+                this.setState({
+                    userImage: userSession.profile.avatar
+                })
+            }
         }
     }
 
@@ -38,6 +53,21 @@ class Navbar extends React.Component {
     onLogoutClick = () => {
         localStorage.clear()
         Router.push("/")
+    }
+    onProfileClick = () =>{
+        Router.push("/profile")
+    }
+    onFeedsClick = () =>{
+        Router.push("/feeds")
+    }
+    onLibraryClick = () =>{
+        Router.push("/library")
+    }
+    onPostBlogClick = () =>{
+        Router.push("/post-blog")
+    }
+    onWalletClick = () =>{
+        Router.push("/wallet")
     }
     render() {
 
@@ -98,12 +128,15 @@ class Navbar extends React.Component {
                                                role="button" data-toggle="dropdown" aria-haspopup="true"
                                                aria-expanded="false">
                                                 <img
-                                                    src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                                                    src={this.state.userImage}
                                                     width="60" height="60" className="rounded-circle custom-rounded-circle"/>
                                             </a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <div className="dropdown-item"><Link href="/profile">Profile</Link></div>
-                                                <a className="dropdown-item" href="#">Edit Profile</a>
+                                                <div onClick={this.onProfileClick} className="btn dropdown-item">Profile</div>
+                                                <div onClick={this.onWalletClick} className="btn dropdown-item">Wallet</div>
+                                                <div onClick={this.onLibraryClick} className="btn dropdown-item">Library</div>
+                                                <div onClick={this.onFeedsClick} className="btn dropdown-item">Feeds</div>
+                                                {this.state.userLoggedIn && this.state.is_staff ?<div onClick={this.onPostBlogClick} className="dropdown-item">Post Blog</div>:null}
                                                 <div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div>
                                             </div>
                                         </li>

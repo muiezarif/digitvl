@@ -7,8 +7,7 @@ import Link from "next/link";
 import {confirmAlert} from "react-confirm-alert";
 import {createPlayList,addCoins} from "../actions";
 import CurrentUserTracks from "./CurrentUserTracks";
-let userLoggedIn
-let userSession
+
 
 class LoggedInUserProfile extends Component {
     state = {
@@ -34,9 +33,8 @@ class LoggedInUserProfile extends Component {
         youtubeUrl: ""
     }
     componentDidMount() {
-        userSession = localStorage.getItem("userSession")
+        let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession);
-        console.log(userSession)
         if (userSession.user) {
             this.setState({verified_blue_tick:userSession.user.profile.blue_tick_verified})
             if (userSession.user.profile.avatar) {
@@ -163,7 +161,7 @@ class LoggedInUserProfile extends Component {
 
     }
     renderContainer() {
-        userSession = localStorage.getItem("userSession")
+        let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         if (this.state.text === 0) {
             return (
@@ -278,6 +276,16 @@ class LoggedInUserProfile extends Component {
                             </div>
                         </div>
                     </div>
+                    <div className="row custom-profile-options-row pb-5">
+                        <div className="row col-md-12 col-sm-6 justify-content-end">
+                            <Link href="/profile/edit"><div className="col-md-2 mt-3 ml-3 btn btn-primary btn-sm">Edit Profile</div></Link>
+                            <Link  href="/profile/links"><div className="col-md-2 mt-3 ml-3 btn btn-primary btn-sm">Add Social Links</div></Link>
+                            <button onClick={handleShowCreatePlayList}
+                                    className="col-md-2 mt-3 ml-3 btn btn-primary btn-sm">Create Playlist
+                            </button>
+                            <Link href="/profile/invite-user"><div className="col-md-2 mt-3 ml-3 btn btn-primary btn-sm">Invite User(Earn Points) </div></Link>
+                        </div>
+                    </div>
                     <div className="">
                         <div className="row custom-row-margin">
                             <div className="col-md-3 col-sm-6 custom-left-side-user-data ml-5 mt-5">
@@ -306,6 +314,59 @@ class LoggedInUserProfile extends Component {
                                                     className="fab fa-youtube"/></a></p> : null}
                                         </div>
                                     </div>
+                                    <ReactBootstrap.Modal
+                                        show={this.state.showCreatePlayList}
+                                        onHide={handleCloseCreatePlayList}
+                                        backdrop="static"
+                                        keyboard={false}>
+                                        <ReactBootstrap.Modal.Header closeButton>
+                                            <ReactBootstrap.Modal.Title>Create
+                                                PlayList</ReactBootstrap.Modal.Title>
+                                        </ReactBootstrap.Modal.Header>
+                                        <ReactBootstrap.Modal.Body>
+                                            <div className="input-group mb-3">
+                                                <div className="input-group-prepend">
+                                                    <span className="input-group-text">A</span>
+                                                </div>
+                                                <input type="text" name="playListName"
+                                                       onChange={handleChange}
+                                                       value={this.state.playListName}
+                                                       className="form-control"
+                                                       placeholder="Playlist Name"/>
+                                            </div>
+                                            <div onChange={this.radioValue}>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="radio"
+                                                           name="exampleRadios" id="exampleRadios1"
+                                                           value="public"
+                                                           checked/>
+                                                    <label className="form-check-label"
+                                                           htmlFor="exampleRadios1">
+                                                        Public
+                                                    </label>
+                                                </div>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="radio"
+                                                           name="exampleRadios" id="exampleRadios2"
+                                                           value="private"/>
+                                                    <label className="form-check-label"
+                                                           htmlFor="exampleRadios2">
+                                                        Private
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </ReactBootstrap.Modal.Body>
+                                        <ReactBootstrap.Modal.Footer>
+                                            <ReactBootstrap.Button variant="secondary"
+                                                                   onClick={handleCloseCreatePlayList}>
+                                                Close
+                                            </ReactBootstrap.Button>
+                                            <ReactBootstrap.Button variant="primary" disabled={this.state.createPlaylist}
+                                                                   onClick={this.state.createPlaylist?null:createPlaylist}>
+                                                Create
+                                            </ReactBootstrap.Button>
+                                        </ReactBootstrap.Modal.Footer>
+                                    </ReactBootstrap.Modal>
                                     <span className="custom-user-profile-data-spans-title mt-3"><Link href={`/u-details/${this.state.username_slug}/followers`}>Followers</Link></span>
                                     <span className="custom-user-profile-data-spans-counts">{this.state.followerCount}</span>
                                     <span className="custom-user-profile-data-spans-title"><Link href={`/u-details/${this.state.username_slug}/followings`}>Following</Link></span>
