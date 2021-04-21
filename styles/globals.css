@@ -903,6 +903,13 @@ a:hover{
   padding-bottom: 100px;
   background: #162332;
 }
+.loggedin-user-profile{
+  width: 100%;
+  height: 100%;
+  padding-top: 60px;
+  padding-bottom: 100px;
+  background: #162332;
+}
 .custom-playlist-page{
   width: 100%;
   height: 100%;
@@ -1121,6 +1128,9 @@ a:hover{
 .custom-user-profile-data{
   margin-top: 45px;
 }
+.custom-currentuser-profile-data{
+  margin-top: 65px;
+}
 .custom-user-profile-data-spans-title{
   color: #ffffff;
   font-size: 16px;
@@ -1155,8 +1165,15 @@ a:hover{
   font-weight: bold;
   color: #ffffff;
 }
+.custom-profile-edit{
+  color: #A4A9AF;
+  font-size: 12px;
+}
 .custom-user-data-section{
   width: 190px;
+}
+.custom-currentuser-data-section{
+
 }
 .custom-track-list-bg{
   background: #0E1A2B;
@@ -1191,6 +1208,9 @@ a:hover{
 @media screen and (max-width: 540px){
   .custom-user-profile-data{
     margin-top: 55px;
+  }
+  .custom-currentuser-profile-data{
+    margin-top: 75px;
   }
   .custom-user-profile-image{
     z-index: 10;

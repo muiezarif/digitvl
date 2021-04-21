@@ -12,7 +12,7 @@ class LandingPage extends React.Component {
     state = {userLoggedIn: "", trendingListResponse: {}, trendingList: [], page: 1, featuredReleases: {}}
 
     componentDidMount() {
-        localStorage.clear()
+        // localStorage.clear()
         userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
@@ -46,7 +46,7 @@ class LandingPage extends React.Component {
             return this.state.featuredReleases.results.slice(0, 4).map(result => {
                 return (
                     <div className="col-md-3 custom-trending-card">
-                        <div className="trending-custom-img" onClick={() => this.playSong(result.target)}>
+                        <div className="trending-custom-img" onClick={() => this.playFeaturedSong(result.target)}>
                             <img src={result.target.photo_main}/>
                         </div>
                         <div className="trending-custom-info-text">

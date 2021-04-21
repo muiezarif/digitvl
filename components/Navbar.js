@@ -3,6 +3,7 @@ import * as ReactBootstrap from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
+import Router from "next/router";
 let userLoggedIn
 let userSession
 class Navbar extends React.Component {
@@ -34,7 +35,10 @@ class Navbar extends React.Component {
             );
         }
     }
-
+    onLogoutClick = () => {
+        localStorage.clear()
+        Router.push("/")
+    }
     render() {
 
         return (
@@ -98,9 +102,9 @@ class Navbar extends React.Component {
                                                     width="60" height="60" className="rounded-circle custom-rounded-circle"/>
                                             </a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <a className="dropdown-item" href="#">Dashboard</a>
+                                                <div className="dropdown-item"><Link href="/profile">Profile</Link></div>
                                                 <a className="dropdown-item" href="#">Edit Profile</a>
-                                                <a className="dropdown-item" href="#">Log Out</a>
+                                                <div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div>
                                             </div>
                                         </li>
                                     {/*</ul>*/}

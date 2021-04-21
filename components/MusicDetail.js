@@ -373,10 +373,10 @@ class MusicDetail extends Component {
                                     <button className="btn btn-outline-primary btn-sm m-2" type="button">
                                         <i className="far fa-list-alt"/> Add To Next Up
                                     </button>
-                                    <button className="btn btn-outline-primary btn-sm m-2"
+                                    {userLoggedIn ?<button className="btn btn-outline-primary btn-sm m-2"
                                             type="button">
                                         <i className="far fa-list-alt"/> Add To My PlayList
-                                    </button>
+                                    </button>:null}
                                     <a href={`/`} target="_blank"
                                        className="btn btn-outline-primary btn-sm m-2">
                                         <i className="fas fa-store"/>
