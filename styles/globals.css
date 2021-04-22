@@ -1407,6 +1407,7 @@ a:hover {
     background-image: url("../public/images/coins_gradient_bg.svg");
     height: 250px;
     border-radius: 6px;
+    margin-left: 50px;
 }
 
 .custom-wallet-title span {
@@ -1436,6 +1437,7 @@ a:hover {
     border-radius: 6px;
     height: auto;
     min-height: 250px;
+    margin-left: 50px;
 }
 
 .custom-margin-faqs {
@@ -1454,6 +1456,7 @@ a:hover {
     border-radius: 6px;
     height: auto;
     min-height: 250px;
+    margin-left: 50px;
 }
 
 .custom-total-coins {
@@ -1614,6 +1617,15 @@ a:hover {
 }
 
 @media screen and (max-width: 540px) {
+    .custom-how-to-use-digitvl-coins {
+        margin: 0;
+    }
+    .custom-how-to-earn-coins {
+        margin: 0;
+    }
+    .custom-totalcoins-bg {
+        margin: 0;
+    }
     .custom-user-profile-data {
         margin-top: 55px;
     }

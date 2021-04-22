@@ -16,13 +16,13 @@ class UserWallet extends Component {
                         <span>Wallet</span>
                     </div>
                     <div className="row custom-row-margin mt-5">
-                        <div className="col-md-5 col-sm-6 custom-totalcoins-bg ml-5">
-                            <div className="d-flex flex-column mt-5 ml-5">
-                            <span className="custom-total-coins-title">Your DIGITVL Coins</span>
-                            <span className="custom-total-coins">{this.state.coins}</span>
+                        <div className="col-md-5 col-sm-6 custom-totalcoins-bg">
+                            <div className="d-flex flex-column mt-5">
+                            <span className="custom-total-coins-title ml-5">Your DIGITVL Coins</span>
+                            <span className="custom-total-coins ml-5">{this.state.coins}</span>
                             </div>
                         </div>
-                        <div className="col-md-5 col-sm-6 custom-how-to-earn-coins ml-5 pt-5">
+                        <div className="col-md-5 col-sm-6 custom-how-to-earn-coins pt-5">
                             <span className="custom-earn-title ml-5">How To Earn DIGITVL Coins</span>
                             <div className="row custom-row-margin">
                                 <div className="col-md-12 col-sm-6 mt-3">
@@ -33,7 +33,7 @@ class UserWallet extends Component {
                         </div>
                     </div>
                     <div className="row custom-row-margin">
-                        <div className="col-md-8 custom-how-to-use-digitvl-coins mt-5 ml-5 pt-5">
+                        <div className="col-md-8 custom-how-to-use-digitvl-coins mt-5 pt-5">
                             <span className="custom-earn-title ml-5">How To Use DIGITVL Coins</span>
                             <div className="row custom-row-margin">
                                 <div className="col-md-12 col-sm-6 mt-3">
