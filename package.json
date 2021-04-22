@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "next start -H 0.0.0.0 -p $PORT",
+    "start:dev": "next start",
+    "start:prod": "next start -p 80",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
