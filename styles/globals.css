@@ -1616,7 +1616,9 @@ a:hover {
     font-weight: normal;
     color: #ffffff;
 }
-
+.userdonation-body{
+    color: #ffffff;
+}
 @media screen and (min-width: 540px) and (max-width: 780px) {
     .custom-music-detail-comment-section .custom-nav-search {
         width: 100%;

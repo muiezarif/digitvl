@@ -13,8 +13,13 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-notifications-component/dist/theme.css'
 import "@pathofdev/react-tag-input/build/index.css";
 // import "react-spinkit/css/loaders-css.css"
+import {loadStripe} from "@stripe/stripe-js";
+import {Elements} from "@stripe/react-stripe-js";
 import CustomMusicPlayer from "../components/player/CustomMusicPlayer";
 import ReactNotification from "react-notifications-component";
+
+const STRIPE_PUBLISHABLE_KEY = "pk_live_vwxZQV1ljD5wUdGz3WQRbPr900EibgZ1HH"
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY)
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
   React.useEffect(() => {
@@ -24,7 +29,7 @@ function MyApp({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
-  return (<Provider store={store}><React.Fragment>
+  return (<Elements stripe={stripePromise}><Provider store={store}><React.Fragment>
     <Head>
       <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     </Head>
@@ -36,7 +41,7 @@ function MyApp({ Component, pageProps }) {
       <CustomMusicPlayer />
     </ThemeProvider>
   </React.Fragment>
-  </Provider>);
+  </Provider></Elements>);
 }
 
 export default MyApp
