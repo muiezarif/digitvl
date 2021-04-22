@@ -98,7 +98,9 @@ const Donations = () => {
 
             <Navbar/>
             <div className="userdonation-body mx-sm-5">
+                <div className="mt-5 mx-auto justify-content-center">
                 <Image src='/images/secure_stripe.png' alt="" width="500" height="50" className="mx-auto secure-payment-mobile-view"/>
+                </div>
                 <div className="card card-body custom-bg-dark">
                     <h4 className="title text-center mt-4 text-white">Support Our Efforts To Support Independent Artist</h4>
                     <form className="form-box px-3" onSubmit={payMoney}>
@@ -136,7 +138,7 @@ const Donations = () => {
                                          }}
                             />
                         </div>
-                        <div className="mb-3 w-75 center-div-custom">
+                        <div className="mb-3 w-75 center-div-custom mx-auto">
                             <button type="submit" tabIndex="5" disabled={!stripe}
                                     className="btn btn-block text-uppercase">Donate
                             </button>
