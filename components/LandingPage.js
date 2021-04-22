@@ -48,6 +48,9 @@ class LandingPage extends React.Component {
                     <div className="col-md-3 custom-trending-card">
                         <div className="trending-custom-img" onClick={() => this.playFeaturedSong(result.target)}>
                             <img src={result.target.photo_main}/>
+                            <div className="play-landing">
+                                <span><i className="fa fa-play"/></span>
+                            </div>
                         </div>
                         <div className="trending-custom-info-text">
                             <span><Link href={`/m-details/${result.target.username_slug}/${result.target.slug}`}
@@ -82,6 +85,9 @@ class LandingPage extends React.Component {
                             {/*    animationDuration="1s"*/}
                             {/*    placeholder alt=""/>*/}
                             <img src={result.photo_main}/>
+                            <div className="play-landing">
+                                <span><i className="fa fa-play"/></span>
+                            </div>
                         </div>
                         <div className="trending-custom-info-text">
                             <span><Link href={`/m-details/${result.username_slug}/${result.slug}`}

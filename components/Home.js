@@ -20,6 +20,8 @@ import {confirmAlert} from "react-confirm-alert";
 import Router from "next/router";
 
 let userSession
+let guestUser
+let loggedUser
 
 class Home extends React.Component {
     state = {
@@ -41,75 +43,82 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         if (userSession) {
             this.props.fetchCurrentUserLikes(userSession, 1).then(() => {
                 this.setState({likes: this.props.likesResponse.results})
             })
-            if (userSession.user) {
-                // this.props.getWhoToFollowList(userSession, userSession.user.profile.username_slug).then(() => {
-                //     console.log(this.props.whoToFollowResponse)
-                //     this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
-                // }).catch(err => {
-                //     const options = {
-                //         title: 'Error!',
-                //         message: 'Something is wrong with your account. Please Logout and login again',
-                //         buttons: [
-                //             {
-                //                 label: 'Okay',
-                //                 onClick: () => {
-                //                     // history.push("/logout")
-                //                 }
-                //             }
-                //         ],
-                //         closeOnEscape: true,
-                //         closeOnClickOutside: true,
-                //         willUnmount: () => {
-                //         },
-                //         afterClose: () => {
-                //         },
-                //         onClickOutside: () => {
-                //         },
-                //         onKeypressEscape: () => {
-                //         }
-                //     };
-                //     confirmAlert(options)
-                // })
-            }
-            if (userSession.profile) {
-                // this.props.getWhoToFollowList(userSession, userSession.profile.username_slug).then(() => {
-                //     this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
-                //     console.log(this.props.whoToFollowResponse)
-                // }).catch(err => {
-                //     const options = {
-                //         title: 'Error!',
-                //         message: 'Something is wrong with your account. Please Logout and login again',
-                //         buttons: [
-                //             {
-                //                 label: 'Okay',
-                //                 onClick: () => {
-                //                     history.push("/logout")
-                //                 }
-                //             }
-                //         ],
-                //         closeOnEscape: true,
-                //         closeOnClickOutside: true,
-                //         willUnmount: () => {
-                //         },
-                //         afterClose: () => {
-                //         },
-                //         onClickOutside: () => {
-                //         },
-                //         onKeypressEscape: () => {
-                //         }
-                //     };
-                //     confirmAlert(options)
-                // })
+            if (userLoggedIn === "true") {
+                loggedUser = true
+                guestUser = false
+                if (userSession.user) {
+                    this.props.getWhoToFollowList(userSession, userSession.user.profile.username_slug).then(() => {
+                        console.log(this.props.whoToFollowResponse)
+                        this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
+                    }).catch(err => {
+                        const options = {
+                            title: 'Error!',
+                            message: 'Something is wrong with your account. Please Logout and login again',
+                            buttons: [
+                                {
+                                    label: 'Okay',
+                                    onClick: () => {
+                                        // history.push("/logout")
+                                    }
+                                }
+                            ],
+                            closeOnEscape: true,
+                            closeOnClickOutside: true,
+                            willUnmount: () => {
+                            },
+                            afterClose: () => {
+                            },
+                            onClickOutside: () => {
+                            },
+                            onKeypressEscape: () => {
+                            }
+                        };
+                        confirmAlert(options)
+                    })
+                }
+                if (userSession.profile) {
+                    this.props.getWhoToFollowList(userSession, userSession.profile.username_slug).then(() => {
+                        this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
+                        console.log(this.props.whoToFollowResponse)
+                    }).catch(err => {
+                        const options = {
+                            title: 'Error!',
+                            message: 'Something is wrong with your account. Please Logout and login again',
+                            buttons: [
+                                {
+                                    label: 'Okay',
+                                    onClick: () => {
+                                        history.push("/logout")
+                                    }
+                                }
+                            ],
+                            closeOnEscape: true,
+                            closeOnClickOutside: true,
+                            willUnmount: () => {
+                            },
+                            afterClose: () => {
+                            },
+                            onClickOutside: () => {
+                            },
+                            onKeypressEscape: () => {
+                            }
+                        };
+                        confirmAlert(options)
+                    })
+                }
+            } else {
+                loggedUser = false
+                guestUser = true
             }
         }
         this.props.fetchHomeMusic(this.state.page).then(() => {
-            console.log(this.props.newReleases[0].results)
             this.setState({
                 newReleases: this.props.newReleases[0],
                 musicPlayerPlaylist: this.props.newReleases[0].results
@@ -341,7 +350,7 @@ class Home extends React.Component {
             </nav>
         );
     }
-    searchTag = (term) =>{
+    searchTag = (term) => {
         Router.push(`/search/${term}`)
     }
     renderFeaturedReleases = () => {
@@ -355,19 +364,25 @@ class Home extends React.Component {
             }
             return this.state.featuredReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display" >
-                        <div className="custom-home-music-img" onClick={() => this.playFeaturedSong(result.target)}>
+                    <div className={`col-md-4 custom-home-music-display mobile-track-home-margin`}>
+                        <div className={`custom-home-music-img ${guestUser?"guest-view-home":null}`} onClick={() => this.playFeaturedSong(result.target)}>
                             <img src={result.target.photo_main}/>
+                            <div className="play">
+                                <span><i className="fa fa-play"/></span>
+                            </div>
                         </div>
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.target.username_slug}/${result.target.slug}`}
-                                  className="music-name">{result.target.song_title.slice(0,20)}</Link> by <Link href={`/u-details/${result.target.username_slug}`} className="user-name">{result.target.username}</Link>
+                                  className="music-name">{result.target.song_title.slice(0, 20)}</Link> by <Link
+                            href={`/u-details/${result.target.username_slug}`}
+                            className="user-name">{result.target.username}</Link>
                         </div>
                     </div>
                 )
             })
         }
     }
+
     renderLikesList() {
         if (this.state.likes) {
             if (this.state.likes.length === 0) {
@@ -384,6 +399,7 @@ class Home extends React.Component {
             })
         }
     }
+
     renderNewReleases() {
         if (this.state.newReleases.results) {
             if (this.state.newReleases.results.length === 0) {
@@ -395,19 +411,24 @@ class Home extends React.Component {
             }
             return this.state.newReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display" >
+                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                         <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
                             <img src={result.photo_main}/>
+                            <div className="play">
+                                <span><i className="fa fa-play"/></span>
+                            </div>
                         </div>
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
-                                  className="music-name">{result.song_title.slice(0,20)}</Link> by <Link href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
+                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
                         </div>
                     </div>
                 )
             })
         }
     }
+
     renderChillReleases() {
         if (this.state.chillReleases.results) {
             if (this.state.chillReleases.results.length === 0) {
@@ -419,19 +440,24 @@ class Home extends React.Component {
             }
             return this.state.chillReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display" >
+                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                         <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
                             <img src={result.photo_main}/>
+                            <div className="play">
+                                <span><i className="fa fa-play"/></span>
+                            </div>
                         </div>
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
-                                  className="music-name">{result.song_title.slice(0,20)}</Link> by <Link href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
+                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
                         </div>
                     </div>
                 )
             })
         }
     }
+
     renderRelaxReleases() {
         const col_md_4 = "col-md-4"
         const col_md_3 = "col-md-3"
@@ -445,18 +471,272 @@ class Home extends React.Component {
             }
             return this.state.relaxReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display" >
+                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                         <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
                             <img src={result.photo_main}/>
+                            <div className="play">
+                                <span><i className="fa fa-play"/></span>
+                            </div>
                         </div>
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
-                                  className="music-name">{result.song_title.slice(0,20)}</Link> by <Link href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
+                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
                         </div>
                     </div>
                 )
             })
         }
+    }
+
+    renderLoggedInUser = () => {
+        return (<div>
+            <div className="custom-home-screen">
+                <div className="row custom-row-setting">
+                    <div className="col-md-9">
+                        <div className="custom-home-headers">
+                            <h3>Featured Tracks</h3>
+                        </div>
+                        <div className="row">
+                            <div className="row col-md-12 custom-home-left-section">
+                                {this.renderFeaturedReleases()}
+                            </div>
+                        </div>
+                        <div className="custom-home-headers mt-5">
+                            <h3>New Releases</h3>
+                        </div>
+                        <div className="row">
+                            <div className="row col-md-12 custom-home-left-section">
+                                {this.renderNewReleases()}
+                            </div>
+                        </div>
+                        <div className="custom-home-headers mt-5">
+                            <h3>Chill Tracks</h3>
+                        </div>
+                        <div className="row">
+                            <div className="row col-md-12 custom-home-left-section">
+                                {this.renderChillReleases()}
+                            </div>
+                        </div>
+                        <div className="custom-home-headers mt-5">
+                            <h3>Relax Tracks</h3>
+                        </div>
+                        <div className="row">
+                            <div className="row col-md-12 custom-home-left-section">
+                                {this.renderRelaxReleases()}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="custom-home-right-section-wrapper">
+                            <div className="row">
+                                <div className="col-md-11 home-right-menu-tags-heading">
+                                    <span className="span-heading">Popular Tags</span>
+                                </div>
+                                <div className="col-md-11 cupl home-right-menu-tags-content">
+                                    <ReactBootstrap.Badge onClick={() => this.searchTag("chill")}
+                                                          className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
+                                                          pill
+                                                          variant="primary">
+                                        #Chill
+                                    </ReactBootstrap.Badge>
+                                    <ReactBootstrap.Badge onClick={() => this.searchTag("relax")}
+                                                          className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
+                                                          pill
+                                                          variant="primary">
+                                        #Relax
+                                    </ReactBootstrap.Badge>
+                                    <ReactBootstrap.Badge onClick={() => this.searchTag("party")}
+                                                          className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
+                                                          pill
+                                                          variant="primary">
+                                        #Party
+                                    </ReactBootstrap.Badge>
+                                    <ReactBootstrap.Badge onClick={() => this.searchTag("hot")}
+                                                          className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
+                                                          pill
+                                                          variant="primary">
+                                        #Hot
+                                    </ReactBootstrap.Badge>
+                                    <ReactBootstrap.Badge onClick={() => this.searchTag("disco")}
+                                                          className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
+                                                          pill
+                                                          variant="primary">
+                                        #Disco
+                                    </ReactBootstrap.Badge>
+                                    <ReactBootstrap.Badge onClick={() => this.searchTag("love")}
+                                                          className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
+                                                          pill
+                                                          variant="primary">
+                                        #Love
+                                    </ReactBootstrap.Badge>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-11 home-right-menu-who-to-follow-heading">
+                                        <span className="span-heading">
+                                            <ReactBootstrap.Accordion
+                                                className="btn text-accent font-weight-bold"
+                                                onClick={() => this.setState({openWhoToFollow: !this.state.openWhoToFollow})}
+                                                aria-controls="example-collapse-text"
+                                                aria-expanded={this.state.openWhoToFollow}
+                                            >
+                                            Who To Follow?  +
+                                            </ReactBootstrap.Accordion>
+                                        </span>
+                                </div>
+                                <ReactBootstrap.Collapse in={this.state.openWhoToFollow}>
+                                    <div className="home-right-menu-who-to-follow-content">
+                                        <div
+                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
+                                            <div className="d-flex flex-row align-items-center"><img
+                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
+                                                height="55"/>
+                                                <div className="d-flex flex-column align-items-start ml-2">
+                                                    <div className="d-flex">
+                                                            <span className="font-weight-bold"><Link href={`/`}
+                                                                                                     className="user-name">Demo User</Link></span>
+                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                                    </div>
+                                                    <span className="followers">100 Followers</span></div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
+                                            <div className="d-flex flex-row align-items-center"><img
+                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
+                                                height="55"/>
+                                                <div className="d-flex flex-column align-items-start ml-2">
+                                                    <div className="d-flex">
+                                                            <span className="font-weight-bold"><Link href={`/`}
+                                                                                                     className="user-name">Demo User</Link></span>
+                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                                    </div>
+                                                    <span className="followers">100 Followers</span></div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
+                                            <div className="d-flex flex-row align-items-center"><img
+                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
+                                                height="55"/>
+                                                <div className="d-flex flex-column align-items-start ml-2">
+                                                    <div className="d-flex">
+                                                            <span className="font-weight-bold"><Link href={`/`}
+                                                                                                     className="user-name">Demo User</Link></span>
+                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                                    </div>
+                                                    <span className="followers">100 Followers</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ReactBootstrap.Collapse>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12 home-right-menu-likes-heading">
+                                    <div className="">
+                                        <span className="span-heading-likes">Likes</span>
+                                        {/*<p className="custom-likes-view-all">*/}
+                                        <span
+                                            className="btn text-link-accent custom-likes-view-all">View all</span>
+                                        {/*</p>*/}
+                                    </div>
+                                </div>
+                                <div className="cupl home-right-menu-likes-content">
+                                    <div
+                                        className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
+                                        <div className="d-flex flex-row align-items-center"><img
+                                            className="rounded-circle" src={this.state.tempUserImage} width="55"
+                                            height="55"/>
+                                            <div className="d-flex flex-column align-items-start ml-2">
+                                                <div className="d-flex">
+                                                        <span className="font-weight-bold"><Link href={`/`}
+                                                                                                 className="user-name">Demo Track</Link></span>
+                                                    {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                                </div>
+                                                {/*<span className="followers">100 Followers</span>*/}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
+                                        <div className="d-flex flex-row align-items-center"><img
+                                            className="rounded-circle" src={this.state.tempUserImage} width="55"
+                                            height="55"/>
+                                            <div className="d-flex flex-column align-items-start ml-2">
+                                                <div className="d-flex">
+                                                        <span className="font-weight-bold"><Link href={`/`}
+                                                                                                 className="user-name">Demo Track</Link></span>
+                                                    {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                                </div>
+                                                {/*<span className="followers">100 Followers</span>*/}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
+                                        <div className="d-flex flex-row align-items-center"><img
+                                            className="rounded-circle" src={this.state.tempUserImage} width="55"
+                                            height="55"/>
+                                            <div className="d-flex flex-column align-items-start ml-2">
+                                                <div className="d-flex">
+                                                        <span className="font-weight-bold"><Link href={`/`}
+                                                                                                 className="user-name">Demo Track</Link></span>
+                                                    {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                                </div>
+                                                {/*<span className="followers">100 Followers</span>*/}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>)
+    }
+    renderGuestUser = () => {
+        return (<div>
+            <div className="custom-home-screen">
+                <div className="row custom-row-margin custom-row-setting">
+                    <div className="col-md-12 col-sm-6">
+                        <div className="custom-home-headers">
+                            <h3>Featured Tracks</h3>
+                        </div>
+                        <div className="row custom-row-margin">
+                            <div className="row col-md-12 col-sm-6 custom-row-margin custom-home-left-section">
+                                {this.renderFeaturedReleases()}
+                            </div>
+                        </div>
+                        <div className="custom-home-headers mt-5">
+                            <h3>New Releases</h3>
+                        </div>
+                        <div className="row custom-row-margin">
+                            <div className="row col-md-12 custom-row-margin custom-home-left-section">
+                                {this.renderNewReleases()}
+                            </div>
+                        </div>
+                        <div className="custom-home-headers mt-5">
+                            <h3>Chill Tracks</h3>
+                        </div>
+                        <div className="row custom-row-margin">
+                            <div className="row col-md-12 custom-row-margin custom-home-left-section">
+                                {this.renderChillReleases()}
+                            </div>
+                        </div>
+                        <div className="custom-home-headers mt-5">
+                            <h3>Relax Tracks</h3>
+                        </div>
+                        <div className="row custom-row-margin">
+                            <div className="row col-md-12 custom-row-margin custom-home-left-section">
+                                {this.renderRelaxReleases()}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>)
     }
 
     render() {
@@ -469,208 +749,7 @@ class Home extends React.Component {
         return (
             <div className="home-screen">
                 <Navbar/>
-                <div className="custom-home-screen">
-                    <div className="row custom-row-setting">
-                        <div className="col-md-9">
-                            <div className="custom-home-headers">
-                                <h3>Featured Tracks</h3>
-                            </div>
-                            <div className="row">
-                                <div className="row col-md-12 custom-home-left-section">
-                                    {this.renderFeaturedReleases()}
-                                </div>
-                            </div>
-                            <div className="custom-home-headers mt-5">
-                                <h3>New Releases</h3>
-                            </div>
-                            <div className="row">
-                                <div className="row col-md-12 custom-home-left-section">
-                                    {this.renderNewReleases()}
-                                </div>
-                            </div>
-                            <div className="custom-home-headers mt-5">
-                                <h3>Chill Tracks</h3>
-                            </div>
-                            <div className="row">
-                                <div className="row col-md-12 custom-home-left-section">
-                                    {this.renderChillReleases()}
-                                </div>
-                            </div>
-                            <div className="custom-home-headers mt-5">
-                                <h3>Relax Tracks</h3>
-                            </div>
-                            <div className="row">
-                                <div className="row col-md-12 custom-home-left-section">
-                                    {this.renderRelaxReleases()}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-3">
-                            <div className="custom-home-right-section-wrapper">
-                                <div className="row">
-                                    <div className="col-md-11 home-right-menu-tags-heading">
-                                        <span className="span-heading">Popular Tags</span>
-                                    </div>
-                                    <div className="col-md-11 cupl home-right-menu-tags-content">
-                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("chill")}
-                                            className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
-                                            pill
-                                            variant="primary">
-                                            #Chill
-                                        </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("relax")}
-                                            className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
-                                            pill
-                                            variant="primary">
-                                            #Relax
-                                        </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("party")}
-                                            className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
-                                            pill
-                                            variant="primary">
-                                            #Party
-                                        </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("hot")}
-                                            className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
-                                            pill
-                                            variant="primary">
-                                            #Hot
-                                        </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("disco")}
-                                            className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
-                                            pill
-                                            variant="primary">
-                                            #Disco
-                                        </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("love")}
-                                            className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
-                                            pill
-                                            variant="primary">
-                                            #Love
-                                        </ReactBootstrap.Badge>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-11 home-right-menu-who-to-follow-heading">
-                                        <span className="span-heading">
-                                            <ReactBootstrap.Accordion
-                                                className="btn text-accent font-weight-bold"
-                                                onClick={() => this.setState({openWhoToFollow: !this.state.openWhoToFollow})}
-                                                aria-controls="example-collapse-text"
-                                                aria-expanded={this.state.openWhoToFollow}
-                                            >
-                                            Who To Follow?  +
-                                            </ReactBootstrap.Accordion>
-                                        </span>
-                                    </div>
-                                    <ReactBootstrap.Collapse in={this.state.openWhoToFollow}>
-                                        <div className="home-right-menu-who-to-follow-content">
-                                            <div className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
-                                                <div className="d-flex flex-row align-items-center"><img
-                                                    className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                    height="55"/>
-                                                    <div className="d-flex flex-column align-items-start ml-2">
-                                                        <div className="d-flex">
-                                                            <span className="font-weight-bold"><Link href={`/`}
-                                                                                                     className="user-name">Demo User</Link></span>
-                                                            {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                        </div>
-                                                        <span className="followers">100 Followers</span></div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
-                                                <div className="d-flex flex-row align-items-center"><img
-                                                    className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                    height="55"/>
-                                                    <div className="d-flex flex-column align-items-start ml-2">
-                                                        <div className="d-flex">
-                                                            <span className="font-weight-bold"><Link href={`/`}
-                                                                                                     className="user-name">Demo User</Link></span>
-                                                            {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                        </div>
-                                                        <span className="followers">100 Followers</span></div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
-                                                <div className="d-flex flex-row align-items-center"><img
-                                                    className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                    height="55"/>
-                                                    <div className="d-flex flex-column align-items-start ml-2">
-                                                        <div className="d-flex">
-                                                            <span className="font-weight-bold"><Link href={`/`}
-                                                                                                     className="user-name">Demo User</Link></span>
-                                                            {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                        </div>
-                                                        <span className="followers">100 Followers</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ReactBootstrap.Collapse>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-12 home-right-menu-likes-heading">
-                                        <div className="">
-                                            <span className="span-heading-likes">Likes</span>
-                                            {/*<p className="custom-likes-view-all">*/}
-                                            <span
-                                                className="btn text-link-accent custom-likes-view-all">View all</span>
-                                            {/*</p>*/}
-                                        </div>
-                                    </div>
-                                    <div className="cupl home-right-menu-likes-content">
-                                        <div
-                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
-                                            <div className="d-flex flex-row align-items-center"><img
-                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                height="55"/>
-                                                <div className="d-flex flex-column align-items-start ml-2">
-                                                    <div className="d-flex">
-                                                        <span className="font-weight-bold"><Link href={`/`}
-                                                                                                 className="user-name">Demo Track</Link></span>
-                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                    </div>
-                                                    {/*<span className="followers">100 Followers</span>*/}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
-                                            <div className="d-flex flex-row align-items-center"><img
-                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                height="55"/>
-                                                <div className="d-flex flex-column align-items-start ml-2">
-                                                    <div className="d-flex">
-                                                        <span className="font-weight-bold"><Link href={`/`}
-                                                                                                 className="user-name">Demo Track</Link></span>
-                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                    </div>
-                                                    {/*<span className="followers">100 Followers</span>*/}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
-                                            <div className="d-flex flex-row align-items-center"><img
-                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                height="55"/>
-                                                <div className="d-flex flex-column align-items-start ml-2">
-                                                    <div className="d-flex">
-                                                        <span className="font-weight-bold"><Link href={`/`}
-                                                                                                 className="user-name">Demo Track</Link></span>
-                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                    </div>
-                                                    {/*<span className="followers">100 Followers</span>*/}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {userSession ? this.renderLoggedInUser() : this.renderGuestUser()}
             </div>
         );
     }

@@ -797,10 +797,10 @@ a:hover {
     margin-top: 20px;
     /*margin-left: 70px;*/
 }
-
 .custom-music-detail-img {
     width: 200px;
     height: 200px;
+    /*margin-top: 50px;*/
 }
 
 .custom-music-detail-img img {
@@ -1619,13 +1619,68 @@ a:hover {
 .userdonation-body{
     color: #ffffff;
 }
+/*.mobile-track-home-margin{*/
+/*    margin: 0;*/
+/*}*/
 @media screen and (min-width: 540px) and (max-width: 780px) {
     .custom-music-detail-comment-section .custom-nav-search {
         width: 100%;
     }
 }
-
+.custom-dropdown-navbar{
+    position: absolute;
+    left: -100px;
+}
+.play {
+    color: #20C997;
+    font-size: 30px;
+    position: absolute;
+    opacity: 0;
+    top: 45%;
+    left: 50%;
+    transition: .5s ease;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+.play-landing {
+    color: #20C997;
+    font-size: 30px;
+    position: absolute;
+    opacity: 0;
+    top: 40%;
+    left: 50%;
+    transition: .5s ease;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+.play-music-detail {
+    color: #20C997;
+    font-size: 30px;
+    position: absolute;
+    opacity: 0;
+    top: 60%;
+    left: 60%;
+    transition: .5s ease;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+.custom-home-music-img:hover .play{
+    opacity: 1;
+}
+.trending-custom-img:hover .play-landing{
+    opacity: 1;
+}
+.custom-music-detail-img:hover .play-music-detail{
+    opacity: 1;
+}
 @media screen and (max-width: 540px) {
+    .mobile-track-home-margin{
+        margin-left: 25%;
+    }
+    .navbar-nav .dropdown-menu{
+        position: absolute;
+        top: -100px;
+    }
     .custom-how-to-use-digitvl-coins {
         margin: 0;
     }
@@ -1803,6 +1858,9 @@ a:hover {
         width: 100%;
         border-radius: 20px 20px;
         padding: 8px;
+    }
+    .mobile-track-home-margin .custom-home-music-display{
+        margin-top: 100px;
     }
 
 }

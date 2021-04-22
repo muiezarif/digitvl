@@ -15,22 +15,23 @@ class Navbar extends React.Component {
         userSession = JSON.parse(userSession)
         if(userLoggedIn === "true"){
             this.setState({userLoggedIn:true,coins:userSession.user.coins,is_staff:userSession.user.is_staff})
-        }
-        if (userSession.user) {
-            this.setState({verified_blue_tick:userSession.user.profile.blue_tick_verified})
-            if (userSession.user.profile.avatar) {
-                this.setState({
-                    userImage: userSession.user.profile.avatar
-                })
+            if (userSession.user) {
+                this.setState({verified_blue_tick:userSession.user.profile.blue_tick_verified})
+                if (userSession.user.profile.avatar) {
+                    this.setState({
+                        userImage: userSession.user.profile.avatar
+                    })
+                }
+            }
+            if (userSession.profile) {
+                if (userSession.profile.avatar) {
+                    this.setState({
+                        userImage: userSession.profile.avatar
+                    })
+                }
             }
         }
-        if (userSession.profile) {
-            if (userSession.profile.avatar) {
-                this.setState({
-                    userImage: userSession.profile.avatar
-                })
-            }
-        }
+
     }
 
     renderLogin = () => {
@@ -126,23 +127,40 @@ class Navbar extends React.Component {
                                 {/*</button>*/}
                                 {/*<div className="collapse navbar-collapse" id="navbar-list-4">*/}
                                 {/*    <ul className="navbar-nav">*/}
-                                        <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                               role="button" data-toggle="dropdown" aria-haspopup="true"
-                                               aria-expanded="false">
-                                                <img
-                                                    src={this.state.userImage}
-                                                    width="60" height="60" className="rounded-circle custom-rounded-circle"/>
-                                            </a>
-                                            <div className="dropdown-menu pr-5 mr-5" aria-labelledby="navbarDropdownMenuLink">
-                                                <div onClick={this.onProfileClick} className="btn dropdown-item">Profile</div>
-                                                <div onClick={this.onWalletClick} className="btn dropdown-item">Wallet</div>
-                                                <div onClick={this.onLibraryClick} className="btn dropdown-item">Library</div>
-                                                <div onClick={this.onFeedsClick} className="btn dropdown-item">Feeds</div>
-                                                {this.state.is_staff ?<div onClick={this.onPostBlogClick} className="btn dropdown-item">Post Blog</div>:null}
-                                                <div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div>
-                                            </div>
-                                        </li>
+                                {/*        <li className="nav-item dropdown">*/}
+                                {/*            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"*/}
+                                {/*               role="button" data-toggle="dropdown" aria-haspopup="true"*/}
+                                {/*               aria-expanded="false">*/}
+                                {/*                <img*/}
+                                {/*                    src={this.state.userImage}*/}
+                                {/*                    width="60" height="60" className="rounded-circle custom-rounded-circle"/>*/}
+                                {/*            </a>*/}
+                                {/*            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">*/}
+                                {/*                */}
+                                {/*                */}
+                                {/*                */}
+                                {/*                */}
+                                {/*                {this.state.is_staff ?:null}*/}
+                                {/*                */}
+                                {/*            </div>*/}
+                                {/*        </li>*/}
+                                {this.state.userLoggedIn ? (<ReactBootstrap.Dropdown>
+                                    <ReactBootstrap.Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                        <img
+                                            src={this.state.userImage}
+                                            width="80" height="80" className="rounded-circle custom-rounded-circle"/>
+                                    </ReactBootstrap.Dropdown.Toggle>
+
+                                    <ReactBootstrap.Dropdown.Menu className="mr-5 custom-dropdown-navbar">
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto"><div onClick={this.onProfileClick} className="btn dropdown-item"><i className="fas fa-user-circle"/> Profile</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onWalletClick} className="btn dropdown-item"><i className="fas fa-wallet"/> Wallet</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onLibraryClick} className="btn dropdown-item"><i className="fas fa-book-reader"/> Library</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><ReactBootstrap.OverlayTrigger placement="bottom" overlay={renderRedeemCoinsTooltip}><Link className="text-color-links" to="/redeem-coins"><i className="fas fa-coins"/> Redeem Coins</Link></ReactBootstrap.OverlayTrigger></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onFeedsClick} className="btn dropdown-item"><i className="fas fa-rss"/> Feeds</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn && this.state.is_staff ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onPostBlogClick} className="btn dropdown-item"><i className="fas fa-rss"/> Post Blog</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2 text-accent"><div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                    </ReactBootstrap.Dropdown.Menu>
+                                </ReactBootstrap.Dropdown>) : null}
                                     {/*</ul>*/}
                                 {/*</div>*/}
                             </ReactBootstrap.Nav>
