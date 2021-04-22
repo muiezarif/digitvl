@@ -57,7 +57,7 @@ class Trending extends Component {
                                 <div className="d-flex flex-row custom-trending-item-artist-track">
                                     <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
                                     <i className="ml-3 mr-3">•</i>
-                                    <Link href={`/m-details/${result.username_user}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
+                                    <Link href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
                                     <div className="ml-3 my-auto custom-trending-item-plays-count">
                                         ▶ {result.plays_count} plays
                                     </div>

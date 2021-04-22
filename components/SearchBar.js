@@ -24,7 +24,7 @@ class SearchBar extends React.Component{
             <div className="custom-nav-search-bar">
                 <div className="input-group mb-3">
                     {/*<i className="fas fa-search my-auto ml-5"/>*/}
-                    <input type="text" className="custom-nav-search" placeholder="What are you looking for..." aria-label="Username"
+                    <input type="text" className="custom-nav-search custom-tweet-inputtext" placeholder="What are you looking for..." aria-label="Username"
                            aria-describedby="basic-addon1" onKeyDown={this.handleKeyDown}
                            name="searchTerm" value={this.state.searchTerm} onChange={handleChange}/>
                 </div>
