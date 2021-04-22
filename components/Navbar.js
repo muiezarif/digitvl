@@ -139,7 +139,7 @@ class Navbar extends React.Component {
                                                 <div onClick={this.onWalletClick} className="btn dropdown-item">Wallet</div>
                                                 <div onClick={this.onLibraryClick} className="btn dropdown-item">Library</div>
                                                 <div onClick={this.onFeedsClick} className="btn dropdown-item">Feeds</div>
-                                                {this.state.is_staff ?<div onClick={this.onPostBlogClick} className="dropdown-item">Post Blog</div>:null}
+                                                {this.state.is_staff ?<div onClick={this.onPostBlogClick} className="btn dropdown-item">Post Blog</div>:null}
                                                 <div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div>
                                             </div>
                                         </li>

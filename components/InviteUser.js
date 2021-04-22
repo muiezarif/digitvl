@@ -100,7 +100,7 @@ class InviteUser extends Component {
                         <div className="container-fluid w-75 h-100 custom-login-form custom-bg-dark pb-5 mx-auto mx-md-auto mx-sm-auto">
                             <div className="text-center custom-login-heading pt-5">Invite & Earn DIGITVL Points</div>
                             <div className="custom-input w-100 mt-2 text-center">
-                                <input className="mx-auto w-75" name="email"  value={this.state.email} onChange={handleChange} type="email" placeholder="Email" tabIndex="1" required/>
+                                <input className="mx-auto w-75 custom-tweet-inputtext" name="email"  value={this.state.email} onChange={handleChange} type="email" placeholder="Email" tabIndex="1" required/>
                             </div>
                             <div className="w-50 mt-3 mx-auto">
                                 <button type="submit" tabIndex="3" className="custom-login-button btn btn-block">

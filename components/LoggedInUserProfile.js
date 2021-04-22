@@ -227,7 +227,7 @@ class LoggedInUserProfile extends Component {
                             {
                                 label: 'Goto Library',
                                 onClick: () => {
-                                    history.push("/library")
+                                    Router.push("/library")
                                 }
                             },
                             {
