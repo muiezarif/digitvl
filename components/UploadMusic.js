@@ -5,6 +5,20 @@ import {uploadMusic,addCoins} from "../actions";
 import {connect} from "react-redux";
 import {store} from 'react-notifications-component';
 import * as ReactBootstrap from "react-bootstrap";
+import {
+    ChasingDots,
+    Circle,
+    CubeGrid,
+    DoubleBounce,
+    FadingCircle,
+    FoldingCube,
+    Pulse,
+    RotatingPlane,
+    ThreeBounce,
+    WanderingCubes,
+    Wave
+} from 'better-react-spinkit'
+import Router from "next/router";
 // import Spinner from "react-spinkit";
 
 // import dynamic from "next/dynamic";
@@ -138,7 +152,7 @@ class UploadMusic extends Component {
                         user.user.coins = this.props.addCoinsResponse.total_coins
                         localStorage.setItem("userSession", JSON.stringify(user));
                         notify();
-                        history.push("/home");
+                        Router.push("/home");
                     })
                 } else if (!this.props.responseData.status) {
                     this.setState({errors: this.props.responseData.message, loader: false,disableUpload:false})
@@ -183,7 +197,7 @@ class UploadMusic extends Component {
                                 {/*                            variant="info" active*/}
                                 {/*                            label={`${this.state.uploadPercentage}%`}/>}*/}
                                 {this.state.loader ?
-                                    <Spinner className="text-center" name="line-scale" color="steelblue"/> : null}
+                                    <div className="row justify-content-center text-center pb-5"><Wave size={50}  color="steelblue" className="" name="line-scale"/></div> : null}
 
                                 {this.state.errors.limit_error ? (
                                     <div className="alert alert-danger" role="alert">
