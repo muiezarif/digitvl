@@ -60,6 +60,9 @@ class Navbar extends React.Component {
     onFeedsClick = () =>{
         Router.push("/feeds")
     }
+    onNotificationsClick = () =>{
+        Router.push("/notifications")
+    }
     onLibraryClick = () =>{
         Router.push("/library")
     }
@@ -114,7 +117,7 @@ class Navbar extends React.Component {
                                 Upload
                             </div></Link>
                             </ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><div className=""><i className="fas fa-bell"/></div></ReactBootstrap.Nav>
+                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><div onClick={this.onNotificationsClick} className="btn">{this.state.notificationCount > 0?this.state.notificationCount:null}<i className="fas fa-bell"/></div></ReactBootstrap.Nav>
                             <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links">
                                 {/*<button className="navbar-toggler" type="button" data-toggle="collapse"*/}
                                 {/*        data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false"*/}
