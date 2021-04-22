@@ -19,6 +19,7 @@ import CustomMusicPlayer from "../components/player/CustomMusicPlayer";
 import ReactNotification from "react-notifications-component";
 
 const STRIPE_PUBLISHABLE_KEY = "pk_live_vwxZQV1ljD5wUdGz3WQRbPr900EibgZ1HH"
+// const STRIPE_PUBLISHABLE_KEY = "pk_test_LPbi74JE59NNYpohjEuJHf15004en8ReKA"
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY)
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)

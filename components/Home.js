@@ -335,7 +335,35 @@ class Home extends React.Component {
             </nav>
         );
     }
-
+    renderWhoToFollowList = () => {
+        if (this.state.whoToFollowList){
+            if (this.state.whoToFollowList.length === 0){
+                return (
+                    <div className="col-md-12">
+                        <span className="text-center">Follow More People!</span>
+                    </div>
+                );
+            }
+            const shuffledArrayV = this.shuffleArray(this.state.whoToFollowList)
+            return shuffledArrayV.slice(0,10).map(user =>{
+                return (
+                    <div className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
+                        <div className="d-flex flex-row align-items-center"><img
+                            className="rounded-circle" src={user.profile.avatar?user.profile.avatar:this.state.tempUserImage} width="55"
+                            height="55"/>
+                            <div className="d-flex flex-column align-items-start ml-2">
+                                <div className="d-flex">
+                                                            <span className="font-weight-bold"><Link href={`/u-details/${user.profile.username_slug}`}
+                                                                                                     className="user-name">{user.profile.username}</Link></span>
+                                    {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                </div>
+                                <span className="followers">{user.profile.followers_count} Followers</span></div>
+                        </div>
+                    </div>
+                )
+            })
+        }
+    }
     renderRelaxPagination = () => {
         return (
             <nav aria-label="Page navigation">
@@ -394,7 +422,23 @@ class Home extends React.Component {
             }
             return this.state.likes.slice(0, 5).map(result => {
                 return (
-                    <div></div>
+                    <div>
+                        <div
+                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
+                            <div className="d-flex flex-row align-items-center"><img
+                                className="rounded-circle" src={result.photo_main} width="55"
+                                height="55"/>
+                                <div className="d-flex flex-column align-items-start ml-2">
+                                    <div className="d-flex">
+                                                        <span className="font-weight-bold"><Link href={`/m-details/${result.username_slug}/${result.slug}`}
+                                                                                                 className="user-name">{result.song_title.slice(0,16)}</Link></span>
+                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
+                                    </div>
+                                    {/*<span className="followers">100 Followers</span>*/}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 )
             })
         }
@@ -587,48 +631,7 @@ class Home extends React.Component {
                                 </div>
                                 <ReactBootstrap.Collapse in={this.state.openWhoToFollow}>
                                     <div className="home-right-menu-who-to-follow-content">
-                                        <div
-                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
-                                            <div className="d-flex flex-row align-items-center"><img
-                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                height="55"/>
-                                                <div className="d-flex flex-column align-items-start ml-2">
-                                                    <div className="d-flex">
-                                                            <span className="font-weight-bold"><Link href={`/`}
-                                                                                                     className="user-name">Demo User</Link></span>
-                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                    </div>
-                                                    <span className="followers">100 Followers</span></div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
-                                            <div className="d-flex flex-row align-items-center"><img
-                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                height="55"/>
-                                                <div className="d-flex flex-column align-items-start ml-2">
-                                                    <div className="d-flex">
-                                                            <span className="font-weight-bold"><Link href={`/`}
-                                                                                                     className="user-name">Demo User</Link></span>
-                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                    </div>
-                                                    <span className="followers">100 Followers</span></div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
-                                            <div className="d-flex flex-row align-items-center"><img
-                                                className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                                height="55"/>
-                                                <div className="d-flex flex-column align-items-start ml-2">
-                                                    <div className="d-flex">
-                                                            <span className="font-weight-bold"><Link href={`/`}
-                                                                                                     className="user-name">Demo User</Link></span>
-                                                        {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                    </div>
-                                                    <span className="followers">100 Followers</span></div>
-                                            </div>
-                                        </div>
+                                        {this.renderWhoToFollowList()}
                                     </div>
                                 </ReactBootstrap.Collapse>
                             </div>
@@ -637,57 +640,13 @@ class Home extends React.Component {
                                     <div className="">
                                         <span className="span-heading-likes">Likes</span>
                                         {/*<p className="custom-likes-view-all">*/}
-                                        <span
-                                            className="btn text-link-accent custom-likes-view-all">View all</span>
+                                        <Link href="/library"><span
+                                            className="btn text-link-accent custom-likes-view-all">View all</span></Link>
                                         {/*</p>*/}
                                     </div>
                                 </div>
                                 <div className="cupl home-right-menu-likes-content">
-                                    <div
-                                        className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
-                                        <div className="d-flex flex-row align-items-center"><img
-                                            className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                            height="55"/>
-                                            <div className="d-flex flex-column align-items-start ml-2">
-                                                <div className="d-flex">
-                                                        <span className="font-weight-bold"><Link href={`/`}
-                                                                                                 className="user-name">Demo Track</Link></span>
-                                                    {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                </div>
-                                                {/*<span className="followers">100 Followers</span>*/}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
-                                        <div className="d-flex flex-row align-items-center"><img
-                                            className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                            height="55"/>
-                                            <div className="d-flex flex-column align-items-start ml-2">
-                                                <div className="d-flex">
-                                                        <span className="font-weight-bold"><Link href={`/`}
-                                                                                                 className="user-name">Demo Track</Link></span>
-                                                    {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                </div>
-                                                {/*<span className="followers">100 Followers</span>*/}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        className="cupl-container d-flex flex-row justify-content-between align-items-center mb-3">
-                                        <div className="d-flex flex-row align-items-center"><img
-                                            className="rounded-circle" src={this.state.tempUserImage} width="55"
-                                            height="55"/>
-                                            <div className="d-flex flex-column align-items-start ml-2">
-                                                <div className="d-flex">
-                                                        <span className="font-weight-bold"><Link href={`/`}
-                                                                                                 className="user-name">Demo Track</Link></span>
-                                                    {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
-                                                </div>
-                                                {/*<span className="followers">100 Followers</span>*/}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {this.renderLikesList()}
                                 </div>
                             </div>
                         </div>
