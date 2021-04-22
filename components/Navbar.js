@@ -14,7 +14,7 @@ class Navbar extends React.Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         if(userLoggedIn === "true"){
-            this.setState({userLoggedIn:true})
+            this.setState({userLoggedIn:true,coins:userSession.user.coins,is_staff:userSession.user.is_staff})
         }
         if (userSession.user) {
             this.setState({verified_blue_tick:userSession.user.profile.blue_tick_verified})
@@ -131,12 +131,12 @@ class Navbar extends React.Component {
                                                     src={this.state.userImage}
                                                     width="60" height="60" className="rounded-circle custom-rounded-circle"/>
                                             </a>
-                                            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <div className="dropdown-menu pr-5 mr-5" aria-labelledby="navbarDropdownMenuLink">
                                                 <div onClick={this.onProfileClick} className="btn dropdown-item">Profile</div>
                                                 <div onClick={this.onWalletClick} className="btn dropdown-item">Wallet</div>
                                                 <div onClick={this.onLibraryClick} className="btn dropdown-item">Library</div>
                                                 <div onClick={this.onFeedsClick} className="btn dropdown-item">Feeds</div>
-                                                {this.state.userLoggedIn && this.state.is_staff ?<div onClick={this.onPostBlogClick} className="dropdown-item">Post Blog</div>:null}
+                                                {this.state.is_staff ?<div onClick={this.onPostBlogClick} className="dropdown-item">Post Blog</div>:null}
                                                 <div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div>
                                             </div>
                                         </li>

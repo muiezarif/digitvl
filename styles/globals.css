@@ -1232,7 +1232,52 @@ a:hover{
 .input-field-custom-info{
   color: #ffffff;
 }
+.custom-totalcoins-bg{
+  background-image: url("../public/images/coins_gradient_bg.svg");
+  height: 250px;
+  border-radius: 6px;
+}
+.custom-wallet-title span{
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 50px;
+}
+.custom-how-to-use-digitvl-coins{
+  background: #0E1A2B;
+  border-radius: 6px;
+  height: auto;
+  min-height: 250px;
+}
+.custom-how-to-earn-coins{
+  background: #0E1A2B;
+  border-radius: 6px;
+  height: auto;
+  min-height: 250px;
+}
+.custom-total-coins{
+  color: #ffffff;
+  font-size: 65px;
+  font-weight: bold;
+}
+.custom-total-coins-title{
+  font-size: 30px;
+  color: #ffffff;
+}
+.custom-earn-title{
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+}
+.custom-earn-sections{
+  color: #A4A9AF;
+  font-size: 14px;
+  alignment: left;
 
+}
+.custom-earn-sections i{
+  color: #00D1E5;
+}
 @media screen and (min-width: 540px) and (max-width: 780px) {
   .custom-music-detail-comment-section .custom-nav-search{
     width: 100%;

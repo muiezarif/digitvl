@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import UserLibrary from "../../components/UserLibrary";
+import UserNotifications from "../../components/UserNotifications";
 
 class Index extends Component {
     render() {
         return (
             <div>
-                <UserLibrary/>
+                <UserNotifications/>
             </div>
         );
     }
