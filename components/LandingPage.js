@@ -4,6 +4,7 @@ import Router from "next/router";
 // import ReactImageAppear from "react-image-appear";
 import {connect} from "react-redux";
 import {fetchTrendingTracksList, playMusic, playCount, fetchRandomMusic, fetchHomeFeaturedMusic} from "../actions"
+import {NextSeo} from "next-seo";
 
 let userLoggedIn
 let userSession
@@ -154,6 +155,21 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div className="container-fluid">
+                <NextSeo
+                    title="DIGITVL"
+                    description="Hub for independent creators"
+                    openGraph={{
+                        url: 'https://www.url.ie/a',
+                        title: 'DIGITVL',
+                        description: 'Hub for independent creators',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <div className=" custom-top-content">
                     <div className="custom-transparent-bg black-overlay">
                         <div className="custom-z-index-2000 row w-100 d-flex d-inline-flex">

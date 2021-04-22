@@ -18,6 +18,7 @@ import * as ReactBootstrap from "react-bootstrap";
 import {connect} from "react-redux";
 import {confirmAlert} from "react-confirm-alert";
 import Router from "next/router";
+import {NextSeo} from "next-seo";
 
 let userSession
 let guestUser
@@ -707,6 +708,21 @@ class Home extends React.Component {
         }
         return (
             <div className="home-screen">
+                <NextSeo
+                    title="Home"
+                    description="Explore Hub for independent creators and their unique music art"
+                    openGraph={{
+                        url: 'https://www.url.ie/a',
+                        title: 'Home',
+                        description: 'Explore Hub for independent creators and their unique music art',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <Navbar/>
                 {userSession ? this.renderLoggedInUser() : this.renderGuestUser()}
             </div>
