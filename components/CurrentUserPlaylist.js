@@ -14,10 +14,10 @@ class CurrentUserPlaylist extends Component {
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         if (userSession.user){
-            this.setState({username:userSession.user.username})
+            this.setState({username:userSession.user.username_slug})
         }
         if (userSession.profile){
-            this.setState({username:userSession.profile.username})
+            this.setState({username:userSession.profile.username_slug})
         }
         this.props.fetchCurrentUserPlaylist(userSession, this.state.page).then(()=>{
             console.log(this.props.playlists)
@@ -95,7 +95,7 @@ class CurrentUserPlaylist extends Component {
             return this.state.playlistList.map(result =>{
                 return (<div className="custom-track-list-bg p-3 mt-3" onClick={()=>this.onPlayListClicked(result.slug,result.name)}>
                     <div className="row">
-                        <div className="col-md-2">
+                        <div className="col-md-1">
                             {result.cover_pic ?<img className="rounded"
                                                     src={result.cover_pic}
                                                     width="60" height="60"/>:<Image src="/images/playlist_music_icon.svg" width={60} height={60} className="my-auto"/>}
@@ -103,13 +103,14 @@ class CurrentUserPlaylist extends Component {
                         <div className="d-flex flex-column col-md-6 my-auto">
                             <span className="custom-user-tracklist-track-title"><Link href={`/playlist/${this.state.username}/beats/${result.slug}` }>{result.name}</Link></span>
                             <span className="custom-user-tracklist-track-plays">{result.beats_count} Beats</span>
+                        </div>
+                        <div className="col-md-1 justify-content-end my-auto">
                             <div className="mr-2" onClick={() => this.deleteDialog(result)}>
                                 {/*<Link to={`/profile/track/${result.song_title}/${result.id}/delete`}>*/}
-                                <i className="fas fa-trash-alt heart-color-red"/>
+                                <i className="fas fa-trash-alt text-accent"/>
                                 {/*</Link>*/}
                             </div>
                         </div>
-
                     </div>
                 </div>)
             })

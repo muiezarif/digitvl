@@ -387,10 +387,10 @@ class MusicDetail extends Component {
                                             type="button">
                                         <i className="far fa-list-alt"/> Add To My PlayList
                                     </button>:null}
-                                    <a href={`/`} target="_blank"
+                                    {this.state.musicDetail.store_link ?<a href={this.state.musicDetail.store_link} target="_blank"
                                        className="btn btn-outline-primary btn-sm m-2">
                                         <i className="fas fa-store"/>
-                                    </a>
+                                    </a>:null}
                                 </div>
                             </div>
                         </div>
