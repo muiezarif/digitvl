@@ -1217,7 +1217,10 @@ a:hover {
     height: auto;
     margin: 10px
 }
-
+.custom-blog-description{
+    font-size: 15px;
+    color: #A4A9AF;
+}
 .custom-trending-item-cover-img {
 
 }
