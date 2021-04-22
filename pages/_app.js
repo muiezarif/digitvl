@@ -11,6 +11,8 @@ import '../styles/scss/ControlsToggleButton.scss';
 import '../styles/scss/Name.scss';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-notifications-component/dist/theme.css'
+import "@pathofdev/react-tag-input/build/index.css";
+// import "react-spinkit/css/loaders-css.css"
 import CustomMusicPlayer from "../components/player/CustomMusicPlayer";
 import ReactNotification from "react-notifications-component";
 function MyApp({ Component, pageProps }) {

@@ -1324,7 +1324,7 @@ a:hover{
   margin-bottom: 20px;
   box-sizing: border-box;
   box-shadow: none;
-  border: 1px solid #20C997;
+  border: 1px solid #00DAC8;
   border-radius: 50px;
   outline: none;
   background: transparent;
@@ -1346,7 +1346,7 @@ a:hover{
   position: absolute;
   top: 10px;
   padding-left: 15px;
-  color: #20C997;
+  color: #00DAC8;
 }
 
 .form-input input::placeholder {
@@ -1355,7 +1355,7 @@ a:hover{
 }
 
 .form-input input:focus, .form-input input:valid,.form-input select:focus, .form-input select:valid,.form-input textarea:focus, .form-input textarea:valid {
-  border: 2px solid #20C997;
+  border: 2px solid #00DAC8;
 }
 
 .form-input input:focus::placeholder {
@@ -1363,7 +1363,7 @@ a:hover{
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label:before {
-  background: #20C997 !important;
+  background: #00DAC8 !important;
   border: 0px;
 }
 
@@ -1372,7 +1372,7 @@ a:hover{
   border: none;
   cursor: pointer;
   border-radius: 50px;
-  background: #20C997;
+  background: #00DAC8;
   color: #fff;
   font-size: 90%;
   font-weight: bold;
@@ -1383,10 +1383,10 @@ a:hover{
   background: #0069d9;
 }
 .custom-border-accent{
-  border: 1px solid #20C997;
+  border: 1px solid #00DAC8;
 }
 .custom-option-color-white{
-  color: #20C997;
+  color: #00DAC8;
 }
 .custom-faqs-title{
   color: #ffffff;
@@ -1401,6 +1401,8 @@ a:hover{
   color: #ffffff;
   font-weight: bold;
 }
+
+
 
 
 @media screen and (min-width: 540px) and (max-width: 780px) {
