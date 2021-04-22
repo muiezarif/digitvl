@@ -17,6 +17,7 @@ import {
 import * as ReactBootstrap from "react-bootstrap";
 import {connect} from "react-redux";
 import {confirmAlert} from "react-confirm-alert";
+import Router from "next/router";
 
 let userSession
 
@@ -340,6 +341,9 @@ class Home extends React.Component {
             </nav>
         );
     }
+    searchTag = (term) =>{
+        Router.push(`/search/${term}`)
+    }
     renderFeaturedReleases = () => {
         if (this.state.featuredReleases.results) {
             if (this.state.featuredReleases.results.length === 0) {
@@ -508,37 +512,37 @@ class Home extends React.Component {
                                         <span className="span-heading">Popular Tags</span>
                                     </div>
                                     <div className="col-md-11 cupl home-right-menu-tags-content">
-                                        <ReactBootstrap.Badge
+                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("chill")}
                                             className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
                                             pill
                                             variant="primary">
                                             #Chill
                                         </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge
+                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("relax")}
                                             className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
                                             pill
                                             variant="primary">
                                             #Relax
                                         </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge
+                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("party")}
                                             className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
                                             pill
                                             variant="primary">
                                             #Party
                                         </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge
+                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("hot")}
                                             className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
                                             pill
                                             variant="primary">
                                             #Hot
                                         </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge
+                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("disco")}
                                             className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
                                             pill
                                             variant="primary">
                                             #Disco
                                         </ReactBootstrap.Badge>
-                                        <ReactBootstrap.Badge
+                                        <ReactBootstrap.Badge onClick={() =>this.searchTag("love")}
                                             className="p-2 m-2 bg-accent pointer-cursor home-right-menu-tags-content-pill"
                                             pill
                                             variant="primary">

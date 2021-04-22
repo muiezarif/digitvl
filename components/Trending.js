@@ -91,6 +91,7 @@ class Trending extends Component {
                 <div className="container mt-5 mx-auto row">
                     {this.renderTrendingList()}
                 </div>
+
             </div>
         );
     }
