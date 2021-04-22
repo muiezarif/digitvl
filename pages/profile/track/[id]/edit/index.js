@@ -1,5 +1,6 @@
 import React from "react";
 import {useRouter} from "next/router";
+import EditTrack from "../../../../../components/EditTrack";
 
 
 
@@ -8,7 +9,7 @@ export default function editTrack(){
     console.log(router.query)
     return (
         <div>
-            Edit Track
+            <EditTrack dataparams={router.query} />
             {/*<MusicDetail dataparams={router.query} />*/}
         </div>
     );

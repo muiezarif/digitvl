@@ -1,5 +1,6 @@
 import React from "react";
 import {useRouter} from "next/router";
+import DeleteTrack from "../../../../../../components/DeleteTrack";
 
 
 
@@ -8,7 +9,7 @@ export default function deleteTrack(){
     console.log(router.query)
     return (
         <div>
-            Delete Track
+            <DeleteTrack dataparams={router.query}/>
             {/*<MusicDetail dataparams={router.query} />*/}
         </div>
     );

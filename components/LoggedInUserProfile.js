@@ -271,7 +271,7 @@ class LoggedInUserProfile extends Component {
                             <div className="d-inline-flex flex-column custom-user-data">
                                 <span className="custom-profile-username">{this.state.username}</span>
                                 <div className="align-middle text-center justify-content-center">
-                                    <span className="custom-profile-edit"><Link href={"/"}>Edit Profile</Link></span>
+                                    {/*<span className="custom-profile-edit"><Link href={"/"}>Edit Profile</Link></span>*/}
                                 </div>
                             </div>
                         </div>
