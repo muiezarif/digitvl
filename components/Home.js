@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Link from "next/link"
+import Image from "next/image";
 import {
     fetchCurrentUserLikes,
     fetchHomeMusic,
@@ -299,10 +300,12 @@ class Home extends React.Component {
             <nav aria-label="Page navigation">
                 <ul className="pagination justify-content-center">
                     {this.state.newReleases.previous ? <li className="page-item">
-                        <button onClick={this.onPreviousClick} className="page-link">Previous</button>
+                        {/*<button onClick={this.onPreviousClick} className="page-link">Previous</button>*/}
+                        <Image src="/images/back_btn_icon.svg" onClick={this.onPreviousClick} width={30} height={30} />
                     </li> : null}
                     {this.state.newReleases.next ? <li className="page-item">
-                        <button onClick={this.onNextClick} className="page-link">Next</button>
+                        {/*<button onClick={this.onNextClick} className="page-link">Next</button>*/}
+                        <Image src="/images/next_btn_icon.svg" onClick={this.onNextClick} width={30} height={30} />
                     </li> : null}
                 </ul>
             </nav>
@@ -313,10 +316,12 @@ class Home extends React.Component {
             <nav aria-label="Page navigation">
                 <ul className="pagination justify-content-center">
                     {this.state.featuredReleases.previous ? <li className="page-item">
-                        <button onClick={this.onPreviousFeaturedClick} className="page-link">Previous</button>
+                        {/*<button onClick={this.onPreviousFeaturedClick} className="page-link">Previous</button>*/}
+                        <Image src="/images/back_btn_icon.svg" onClick={this.onPreviousFeaturedClick} width={30} height={30} />
                     </li> : null}
                     {this.state.featuredReleases.next ? <li className="page-item">
-                        <button onClick={this.onNextFeaturedClick} className="page-link">Next</button>
+                        {/*<button onClick={this.onNextFeaturedClick} className="page-link">Next</button>*/}
+                        <Image src="/images/next_btn_icon.svg" onClick={this.onNextFeaturedClick} width={30} height={30} />
                     </li> : null}
                 </ul>
             </nav>
@@ -327,10 +332,12 @@ class Home extends React.Component {
             <nav aria-label="Page navigation">
                 <ul className="pagination justify-content-center">
                     {this.state.chillReleases.previous ? <li className="page-item">
-                        <button onClick={this.onChillPreviousClick} className="page-link">Previous</button>
+                        {/*<button onClick={this.onChillPreviousClick} className="page-link">Previous</button>*/}
+                        <Image src="/images/back_btn_icon.svg" onClick={this.onChillPreviousClick} width={30} height={30} />
                     </li> : null}
                     {this.state.chillReleases.next ? <li className="page-item">
-                        <button onClick={this.onChillNextClick} className="page-link">Next</button>
+                        {/*<button onClick={this.onChillNextClick} className="page-link">Next</button>*/}
+                        <Image src="/images/next_btn_icon.svg" onClick={this.onChillNextClick} width={30} height={30} />
                     </li> : null}
                 </ul>
             </nav>
@@ -370,10 +377,12 @@ class Home extends React.Component {
             <nav aria-label="Page navigation">
                 <ul className="pagination justify-content-center">
                     {this.state.relaxReleases.previous ? <li className="page-item">
-                        <button onClick={this.onRelaxPreviousClick} className="page-link">Previous</button>
+                        {/*<button onClick={this.onRelaxPreviousClick} className="page-link">Previous</button>*/}
+                        <Image src="/images/back_btn_icon.svg" onClick={this.onRelaxPreviousClick} width={30} height={30} />
                     </li> : null}
                     {this.state.relaxReleases.next ? <li className="page-item">
                         <button onClick={this.onRelaxNextClick} className="page-link">Next</button>
+                        <Image src="/images/next_btn_icon.svg" onClick={this.onRelaxNextClick} width={30} height={30} />
                     </li> : null}
                 </ul>
             </nav>
@@ -546,6 +555,9 @@ class Home extends React.Component {
                             <div className="row col-md-12 custom-home-left-section">
                                 {this.renderFeaturedReleases()}
                             </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderFeaturedPagination()}
+                            </div>
                         </div>
                         <div className="custom-home-headers mt-5">
                             <h3>New Releases</h3>
@@ -553,6 +565,9 @@ class Home extends React.Component {
                         <div className="row">
                             <div className="row col-md-12 custom-home-left-section">
                                 {this.renderNewReleases()}
+                            </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderPagination()}
                             </div>
                         </div>
                         <div className="custom-home-headers mt-5">
@@ -562,6 +577,9 @@ class Home extends React.Component {
                             <div className="row col-md-12 custom-home-left-section">
                                 {this.renderChillReleases()}
                             </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderChillPagination()}
+                            </div>
                         </div>
                         <div className="custom-home-headers mt-5">
                             <h3>Relax Tracks</h3>
@@ -569,6 +587,9 @@ class Home extends React.Component {
                         <div className="row">
                             <div className="row col-md-12 custom-home-left-section">
                                 {this.renderRelaxReleases()}
+                            </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderRelaxPagination()}
                             </div>
                         </div>
                     </div>
@@ -668,6 +689,9 @@ class Home extends React.Component {
                             <div className="row col-md-12 col-sm-6 custom-row-margin custom-home-left-section">
                                 {this.renderFeaturedReleases()}
                             </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderFeaturedPagination()}
+                            </div>
                         </div>
                         <div className="custom-home-headers mt-5">
                             <h3>New Releases</h3>
@@ -675,6 +699,9 @@ class Home extends React.Component {
                         <div className="row custom-row-margin">
                             <div className="row col-md-12 custom-row-margin custom-home-left-section">
                                 {this.renderNewReleases()}
+                            </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                            {this.renderPagination()}
                             </div>
                         </div>
                         <div className="custom-home-headers mt-5">
@@ -684,6 +711,9 @@ class Home extends React.Component {
                             <div className="row col-md-12 custom-row-margin custom-home-left-section">
                                 {this.renderChillReleases()}
                             </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderChillPagination()}
+                            </div>
                         </div>
                         <div className="custom-home-headers mt-5">
                             <h3>Relax Tracks</h3>
@@ -691,6 +721,9 @@ class Home extends React.Component {
                         <div className="row custom-row-margin">
                             <div className="row col-md-12 custom-row-margin custom-home-left-section">
                                 {this.renderRelaxReleases()}
+                            </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderRelaxPagination()}
                             </div>
                         </div>
                     </div>
