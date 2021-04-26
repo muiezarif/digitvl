@@ -5,6 +5,7 @@ import Link from "next/link";
 import Router from "next/router";
 import Navbar from "./Navbar";
 import Image from "next/image";
+import {NextSeo} from "next-seo";
 class Trending extends Component {
     state = {trendingListResponse:{},trendingList:[],page:1}
 
@@ -84,6 +85,21 @@ class Trending extends Component {
     render() {
         return (
             <div className="container-fluid custom-trending-page">
+                <NextSeo
+                    title="Trending"
+                    description="Listen to top hot songs on platform right now!!!"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'Trending',
+                        description: 'Listen to top hot songs on platform right now!!!',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <Navbar/>
                 <div className="custom-trending-heading">
                     Trending

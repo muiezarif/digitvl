@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Navbar from "./Navbar";
+import {NextSeo} from "next-seo";
 class UserWallet extends Component {
     state = {coins: 0}
     componentDidMount() {
@@ -10,6 +11,21 @@ class UserWallet extends Component {
     render() {
         return (
             <div className="container-fluid loggedin-user-profile">
+                <NextSeo
+                    title="Wallet"
+                    description="Checkout your DIGITVL Wallet"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'DIGITVL Wallet',
+                        description: 'Checkout your DIGITVL Wallet',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <Navbar/>
                 <div className="container-fluid">
                     <div className="custom-wallet-title mt-5">

@@ -5,6 +5,7 @@ import {confirmAlert} from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import {supportRequest} from "../actions";
 import {connect} from "react-redux";
+import {NextSeo} from "next-seo";
 class SupportForPlatform extends Component {
     state = {openFaqVendorRegister:false,name:"",email:"",accountHelp:"",request:""}
     render() {
@@ -60,6 +61,21 @@ class SupportForPlatform extends Component {
         }
         return (
             <div className="container-fluid loggedin-user-profile">
+                <NextSeo
+                    title="Support"
+                    description="Get Help from our support. We may be small right now but are are always there for you"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'Support',
+                        description: 'Get Help from our support! We may be small right now but are are always there for you',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <Navbar/>
                 <div className="container-fluid">
                     <div className="row custom-row-margin">

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {getBlogsApi} from "../actions";
 import Link from "next/link";
 import Navbar from "./Navbar";
+import {NextSeo} from "next-seo";
 class Blogs extends Component {
     state = {blogs: {},blogsArray:[], page: 1}
 
@@ -71,6 +72,21 @@ class Blogs extends Component {
     render() {
         return (
             <div className="container-fluid custom-blogs-page">
+                <NextSeo
+                    title="Blogs"
+                    description="Get Information and updates about DIGITVL on our blogs"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'DIGITVL',
+                        description: 'Get Information and updates about DIGITVL on our blogs',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <Navbar/>
                 <div className="custom-blogs-heading">
                     Blogs

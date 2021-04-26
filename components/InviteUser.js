@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Navbar from "./Navbar";
 import {inviteUser} from "../actions";
 import {confirmAlert} from "react-confirm-alert";
+import {NextSeo} from "next-seo";
 class InviteUser extends Component {
     state = {email:""}
     render() {
@@ -94,6 +95,21 @@ class InviteUser extends Component {
         }
         return (
             <div className="loggedin-user-profile">
+                <NextSeo
+                    title="Invite User"
+                    description="Invite users on our platform and earn 50 digitvl coins!!!"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'Invite User',
+                        description: 'Invite users on our platform and earn 50 digitvl coins!!!',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <Navbar/>
                 <div className="container-fluid">
                     <form onSubmit={handleSubmit} className="form-box pt-3 pt-sm-3">

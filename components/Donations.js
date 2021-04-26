@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {donateApi} from "../actions";
 import axios from "axios";
 import Image from "next/image";
+import {NextSeo} from "next-seo";
 const Donations = () => {
     // state = {name:"",email:"",amount:5}
     const [name, setName] = useState()
@@ -95,7 +96,21 @@ const Donations = () => {
     }
     return (
         <div className="container-fluid loggedin-user-profile">
-
+            <NextSeo
+                title="Donations"
+                description="Donate and show support our efforts to help independent artists"
+                openGraph={{
+                    url: 'https://www.digitvl.com/',
+                    title: 'DIGITVL',
+                    description: 'Donate and show support our efforts to help independent artists',
+                    site_name: 'DIGITVL',
+                }}
+                twitter={{
+                    handle: '@digitvl',
+                    site: '@digitvl',
+                    cardType: 'summary_large_image',
+                }}
+            />
             <Navbar/>
             <div className="userdonation-body mx-sm-5">
                 <div className="mt-5 mx-auto justify-content-center">

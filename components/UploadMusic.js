@@ -19,6 +19,7 @@ import {
     Wave
 } from 'better-react-spinkit'
 import Router from "next/router";
+import {NextSeo} from "next-seo";
 // import Spinner from "react-spinkit";
 
 // import dynamic from "next/dynamic";
@@ -185,6 +186,21 @@ class UploadMusic extends Component {
         }
         return (
             <div className="container-fluid loggedin-user-profile">
+                <NextSeo
+                    title="DIGITVL"
+                    description="Upload your music content and earn DIGITVL coins"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'DIGITVL',
+                        description: 'Upload your music content and earn DIGITVL coins',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <Navbar/>
                 <div className="container-fluid">
                     <div className="row custom-row-margin px-3 mt-5">
