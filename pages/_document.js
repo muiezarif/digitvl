@@ -131,7 +131,7 @@ class MyDocument extends Document {
                     />
                     <link
                         rel="shortcut icon"
-                        href="images/favicon.ico"
+                        href="favicon.ico"
                         type="image/x-icon"
                     />
                     <link
