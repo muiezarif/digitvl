@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import Router from "next/router";
 import {confirmAlert} from "react-confirm-alert";
 import Link from "next/link";
+import {NextSeo} from "next-seo";
 
 const initialState = {
     email: "",
@@ -92,6 +93,21 @@ class Login extends React.Component {
         }
         return (
             <div className="container-fluid custom-login-page-bg">
+                <NextSeo
+                    title="DIGITVL"
+                    description="Login at DIGITVL and unlock the future"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'DIGITVL',
+                        description: 'Login at DIGITVL and unlock the future',
+                        site_name: 'DIGITVL',
+                    }}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                    }}
+                />
                 <div className="row">
                     <div className="col-md-6 col-sm-3 col-xs-3 text-left digitvl-heading">
                         <Link href="/">DIGITVL</Link>

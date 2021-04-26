@@ -745,7 +745,7 @@ class Home extends React.Component {
                     title="Home"
                     description="Explore Hub for independent creators and their unique music art"
                     openGraph={{
-                        url: 'https://www.url.ie/a',
+                        url: 'https://www.digitvl.com/',
                         title: 'Home',
                         description: 'Explore Hub for independent creators and their unique music art',
                         site_name: 'DIGITVL',

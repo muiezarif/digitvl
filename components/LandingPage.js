@@ -176,7 +176,7 @@ class LandingPage extends React.Component {
                     title="DIGITVL"
                     description="Hub for independent creators"
                     openGraph={{
-                        url: 'https://www.url.ie/a',
+                        url: 'https://www.digitvl.com/',
                         title: 'DIGITVL',
                         description: 'Hub for independent creators',
                         site_name: 'DIGITVL',
