@@ -34,7 +34,12 @@ class LandingPage extends React.Component {
         }, ({data}) => {
         })
     }
-
+    onExploreClicked = () =>{
+        Router.push("/home")
+    }
+    onDonationClicked = () =>{
+        Router.push("/donate")
+    }
     renderFeaturedReleases = () => {
         if (this.state.featuredReleases.results) {
             if (this.state.featuredReleases.results.length === 0) {
@@ -206,10 +211,11 @@ class LandingPage extends React.Component {
                         <div className="custom-landing-page-center-content-style mx-md-auto text-center">
                             <h3>Hub For Independent Creators</h3>
                             <p>Share your content/music, sell merchandise, post on our forum!</p>
-                            <button className="btn custom-explore-btn">Explore</button>
+                            <button className="btn custom-explore-btn" onClick={this.onDonationClicked}>Explore</button>
                         </div>
                     </div>
                 </div>
+
 
 
                 <div className="custom-landing-about-section">
@@ -307,7 +313,7 @@ class LandingPage extends React.Component {
                                 <img src="images/donation_icon.svg"/>
                                 <h3>Donate</h3>
                                 <p>Support our efforts to support independent artists</p>
-                                <button className="btn custom-donate-btn">Donate</button>
+                                <button className="btn custom-donate-btn" onClick={this.onDonationClicked}>Donate</button>
                             </div>
                         </div>
                     </div>
