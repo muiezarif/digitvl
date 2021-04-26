@@ -13,5 +13,5 @@ export default function pList(){
     );
 };
 export function getServerSideProps(){
-
+    return {props: {}}
 }

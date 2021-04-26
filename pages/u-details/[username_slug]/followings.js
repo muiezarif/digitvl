@@ -14,5 +14,5 @@ export default function followersList(){
     );
 };
 export function getServerSideProps(){
-
+    return {props: {}}
 }

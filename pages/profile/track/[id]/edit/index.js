@@ -15,5 +15,5 @@ export default function editTrack(){
     );
 };
 export function getServerSideProps(){
-
+    return {props: {}}
 }

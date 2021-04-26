@@ -12,5 +12,5 @@ export default function mDetails(){
     );
 };
 export function getServerSideProps(){
-
+    return {props: {}}
 }

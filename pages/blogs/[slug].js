@@ -12,5 +12,5 @@ export default function verifyDetails(){
     );
 };
 export function getServerSideProps(){
-
+    return {props: {}}
 }

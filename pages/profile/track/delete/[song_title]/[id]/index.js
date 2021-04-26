@@ -15,5 +15,5 @@ export default function deleteTrack(){
     );
 };
 export function getServerSideProps(){
-
+    return {props: {}}
 }

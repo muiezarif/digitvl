@@ -12,5 +12,5 @@ export default function searchDetails(){
     );
 };
 export function getServerSideProps(){
-
+    return {props: {}}
 }

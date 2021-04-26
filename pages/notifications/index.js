@@ -11,6 +11,6 @@ class Index extends Component {
     }
 }
 export function getServerSideProps(){
-
+    return {props: {}}
 }
 export default Index;
