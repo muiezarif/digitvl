@@ -60,6 +60,6 @@ class index extends React.Component {
     }
 }
 export function getServerSideProps(){
-
+    return {props: {}}
 }
 export default index;
