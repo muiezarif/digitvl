@@ -211,7 +211,7 @@ class LandingPage extends React.Component {
                         <div className="custom-landing-page-center-content-style mx-md-auto text-center">
                             <h3>Hub For Independent Creators</h3>
                             <p>Share your content/music, sell merchandise, post on our forum!</p>
-                            <button className="btn custom-explore-btn" onClick={this.onDonationClicked}>Explore</button>
+                            <button className="btn custom-explore-btn" onClick={this.onExploreClicked}>Explore</button>
                         </div>
                     </div>
                 </div>
