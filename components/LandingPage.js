@@ -65,6 +65,21 @@ class LandingPage extends React.Component {
         }
     }
 
+    renderCompetitionWinners() {
+        return (
+            <div>
+                <div className="col-md-3 custom-trending-card">
+                    <div className="trending-custom-img">
+                        <img src="https://www.instagram.com/p/CN0vsjAJob8/?igshid=s0ugpmgaf6s6"/>
+                    </div>
+                    <div className="trending-custom-info-text">
+                        <span>houseofblues</span>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     renderTrending() {
         if (this.state.trendingList) {
             if (this.state.trendingList.length === 0) {
@@ -101,6 +116,7 @@ class LandingPage extends React.Component {
             });
         }
     }
+
     playFeaturedSong(data) {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
@@ -130,6 +146,7 @@ class LandingPage extends React.Component {
         // this.props.addMusicListToMediaPlayerPlaylist(this.state.musicPlayerPlaylist)
         // ReactDOM.findDOMNode(this.refs.playerFocus).focus();
     }
+
     playSong(data) {
         console.log(data)
         this.props.fetchRandomMusic().then(() => {
@@ -218,6 +235,18 @@ class LandingPage extends React.Component {
                             </div>
 
                         </div>
+                    </div>
+                </div>
+                <div className="custom-landing-trending-section">
+                    <div className="container">
+                        <div className="row justify-content-center section-title">
+                            <h2 className="section-title-heading">Competition Winners</h2>
+                        </div>
+
+                        <div className="row d-flex justify-content-center text-center mt-5">
+                            {this.renderCompetitionWinners()}
+                        </div>
+
                     </div>
                 </div>
                 <div className="custom-landing-trending-section">
