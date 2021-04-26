@@ -14,3 +14,6 @@ export default function deleteTrack(){
         </div>
     );
 };
+export function getServerSideProps(){
+
+}

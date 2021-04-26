@@ -14,3 +14,6 @@ export default function editTrack(){
         </div>
     );
 };
+export function getServerSideProps(){
+
+}

@@ -10,5 +10,7 @@ class Index extends Component {
         );
     }
 }
+export function getStaticProps(){
 
+}
 export default Index;
