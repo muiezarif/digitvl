@@ -135,4 +135,5 @@ const mapStateToProps = (state) =>{
         inviteUserResponse:state.inviteUsers.inviteUserData
     };
 }
+// export function getInitialProps(){}
 export default connect(mapStateToProps,{inviteUser})(InviteUser);

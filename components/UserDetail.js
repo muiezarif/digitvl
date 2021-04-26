@@ -193,11 +193,12 @@ class UserDetail extends Component {
                                     className="fab fa-youtube"/></a></p> : null}
                         </div>
                     </div>
+                    <div className="justify-content-center">
                     <img
                         src={this.state.profileDetails.avatar ? this.state.profileDetails.avatar : this.state.profileImage}
                         width="140px" height="140px" className="custom-user-profile-image rounded-circle ml-5"/>
-                    <div className="ml-2 custom-user-data-section">
-                        <div className="d-flex custom-user-profile-data ml-5">
+                    <div className="ml-2 custom-user-data-section justify-content-center text-center">
+                        <div className="d-flex custom-user-profile-data">
                             <div className="d-inline-flex flex-column custom-user-data ">
                                 <span className="custom-profile-username">{this.state.profileDetails.username}</span>
                                 <div className="align-middle text-center justify-content-center">
@@ -206,6 +207,7 @@ class UserDetail extends Component {
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <ReactBootstrap.Modal
                         show={this.state.ApiError}

@@ -244,7 +244,31 @@ class LandingPage extends React.Component {
                         </div>
 
                         <div className="row d-flex justify-content-center text-center mt-5">
-                            {this.renderCompetitionWinners()}
+                            {/*{this.renderCompetitionWinners()}*/}
+                            <div className="col-md-3 custom-trending-card">
+                                <div className="">
+                                    <img src="/images/t5hudson.jpeg" width={250} height={250}/>
+                                </div>
+                                <div className="trending-custom-info-text">
+                                    <span>T5hudson</span>
+                                </div>
+                            </div>
+                            <div className="col-md-3 custom-trending-card">
+                                <div className="">
+                                    <img src="/images/joelblue.jpeg" width={250} height={250}/>
+                                </div>
+                                <div className="trending-custom-info-text">
+                                    <span>Joel Blue</span>
+                                </div>
+                            </div>
+                            <div className="col-md-3 custom-trending-card">
+                                <div className="">
+                                    <img src="/images/jk.jpeg" width={250} height={250}/>
+                                </div>
+                                <div className="trending-custom-info-text">
+                                    <span>JK</span>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

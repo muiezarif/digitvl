@@ -1286,7 +1286,8 @@ a:hover {
 }
 
 .custom-user-profile-data {
-    margin-top: 45px;
+    margin-top: 25%;
+    margin-left: 10%;
 }
 
 .custom-currentuser-profile-data {
@@ -1673,6 +1674,9 @@ a:hover {
 .custom-music-detail-img:hover .play-music-detail{
     opacity: 1;
 }
+.object-fit-fill-image{
+    object-fit: cover;
+}
 @media screen and (max-width: 540px) {
     .mobile-track-home-margin{
         margin-left: 25%;
@@ -1691,7 +1695,8 @@ a:hover {
         margin: 0;
     }
     .custom-user-profile-data {
-        margin-top: 55px;
+        margin-top: 20%;
+        margin-left: 15%;
     }
 
     .custom-currentuser-profile-data {
