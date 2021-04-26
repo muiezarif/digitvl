@@ -12,3 +12,6 @@ export default function cpList(){
         </div>
     );
 };
+export function getServerSideProps(){
+
+}

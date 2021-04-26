@@ -10,5 +10,7 @@ class index extends Component {
         );
     }
 }
+export function getServerSideProps(){
 
+}
 export default index;

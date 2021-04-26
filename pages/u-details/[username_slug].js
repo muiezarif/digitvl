@@ -11,3 +11,6 @@ export default function mDetails(){
         </div>
     );
 };
+export function getServerSideProps(){
+
+}

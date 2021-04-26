@@ -12,3 +12,6 @@ export default function pList(){
         </div>
     );
 };
+export function getServerSideProps(){
+
+}

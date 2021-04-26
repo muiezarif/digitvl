@@ -11,3 +11,6 @@ export default function searchDetails(){
         </div>
     );
 };
+export function getServerSideProps(){
+
+}

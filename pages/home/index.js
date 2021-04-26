@@ -59,5 +59,7 @@ class index extends React.Component {
         );
     }
 }
+export function getServerSideProps(){
 
+}
 export default index;
