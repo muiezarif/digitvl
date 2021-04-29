@@ -27,7 +27,7 @@ import {
     relatedTracksList
 } from "../actions";
 import * as ReactBootstrap from "react-bootstrap";
-import {NextSeo} from "next-seo";
+
 
 let userSession;
 let userLoggedIn
@@ -362,21 +362,7 @@ class MusicDetail extends Component {
         const handleShowAddPlayList = () => this.setState({showAddPlaylist: true});
         return (
             <div className="container-fluid custom-music-detail-page">
-                <NextSeo
-                    title={this.state.musicDetail.song_title}
-                    description={this.state.musicDetail.description}
-                    openGraph={{
-                        url: 'https://www.digitvl.com/',
-                        title: this.state.musicDetail.song_title,
-                        description: this.state.musicDetail.description,
-                        site_name: 'DIGITVL',
-                    }}
-                    twitter={{
-                        handle: '@digitvl',
-                        site: '@digitvl',
-                        cardType: 'summary_large_image',
-                    }}
-                />
+
                 <Navbar/>
                 <div className="custom-music-detail-data-section">
                     <div className="row">
