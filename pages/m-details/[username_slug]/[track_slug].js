@@ -9,22 +9,7 @@ export default function mDetails({seoprops}){
     console.log(seoprops)
     return (
         <div>
-            <NextSeo
-                title={seoprops.beats_detail.song_title}
-                description={seoprops.beats_detail.description}
-                openGraph={{
-                    url: 'https://www.digitvl.com/',
-                    title: seoprops.beats_detail.song_title,
-                    description: seoprops.beats_detail.description,
-                    site_name: 'DIGITVL',
-                }}
-                twitter={{
-                    handle: '@digitvl',
-                    site: '@digitvl',
-                    cardType: 'summary_large_image',
-                }}
-            />
-            <MusicDetail dataparams={router.query} />
+            <MusicDetail dataparams={router.query} seoparams={seoprops} />
         </div>
     );
 };
