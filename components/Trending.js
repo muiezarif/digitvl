@@ -11,16 +11,13 @@ class Trending extends Component {
 
     componentDidMount() {
         this.props.fetchTrendingTracksList(this.state.page).then(()=>{
-            console.log(this.props.trendingListResponse)
             this.setState({trendingListResponse:this.props.trendingListResponse,trendingList:this.props.trendingListResponse.beats_detail})
         })
     }
     playSong(data) {
         this.props.fetchRandomMusic().then(()=>{
-            console.log(this.props.randomMusicResponse)
             const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item =>{
                 if (item.song_title !== data.song_title) {
-                    // console.log(item)
                     return {
                         song_title: item.song_title,
                         description: item.description,
@@ -32,7 +29,6 @@ class Trending extends Component {
                     }
                 }
             }).filter(q => !!q)
-            console.log(filterPlaylist)
             const filterData = {data: data,playlist:filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
             this.props.playCount(data.id)

@@ -22,14 +22,12 @@ class LandingPage extends React.Component {
             Router.push("/home")
         }
         this.props.fetchTrendingTracksList(this.state.page).then(() => {
-            console.log(this.props.trendingListResponse)
             this.setState({
                 trendingListResponse: this.props.trendingListResponse,
                 trendingList: this.props.trendingListResponse.beats_detail
             })
         })
         this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
-            console.log(this.props.featuredMusicResponse)
             this.setState({featuredReleases: this.props.featuredMusicResponse})
         }, ({data}) => {
         })
@@ -126,10 +124,8 @@ class LandingPage extends React.Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         this.props.fetchRandomMusic().then(() => {
-            console.log(this.props.randomMusicResponse)
             const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item => {
                 if (item.song_title !== data.song_title) {
-                    // console.log(item)
                     return {
                         song_title: item.song_title,
                         description: item.description,
@@ -141,7 +137,6 @@ class LandingPage extends React.Component {
                     }
                 }
             }).filter(q => !!q)
-            console.log(filterPlaylist)
             const filterData = {data: data, playlist: filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
             this.props.playCount(data.id)
@@ -153,7 +148,6 @@ class LandingPage extends React.Component {
     }
 
     playSong(data) {
-        console.log(data)
         this.props.fetchRandomMusic().then(() => {
             const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item => {
                 if (item.song_title !== data.song_title) {

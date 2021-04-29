@@ -8,7 +8,6 @@ class UserPlaylist extends Component {
 
     componentDidMount() {
         this.props.fetchUserPlaylist(this.props.username, this.state.page).then(() => {
-            console.log(this.props.userPlaylistResponse)
             this.setState({
                 playlist: this.props.userPlaylistResponse,
                 playlistList: this.props.userPlaylistResponse.results

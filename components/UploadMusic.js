@@ -149,7 +149,6 @@ class UploadMusic extends Component {
                     this.props.addCoins(userSession).then(() => {
                         let userSession = localStorage.getItem("userSession")
                         let user = JSON.parse(userSession)
-                        console.log(user)
                         user.user.coins = this.props.addCoinsResponse.total_coins
                         localStorage.setItem("userSession", JSON.stringify(user));
                         notify();

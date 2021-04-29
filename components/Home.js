@@ -57,7 +57,6 @@ class Home extends React.Component {
                 guestUser = false
                 if (userSession.user) {
                     this.props.getWhoToFollowList(userSession, userSession.user.profile.username_slug).then(() => {
-                        console.log(this.props.whoToFollowResponse)
                         this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
                     }).catch(err => {
                         const options = {
@@ -88,7 +87,6 @@ class Home extends React.Component {
                 if (userSession.profile) {
                     this.props.getWhoToFollowList(userSession, userSession.profile.username_slug).then(() => {
                         this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
-                        console.log(this.props.whoToFollowResponse)
                     }).catch(err => {
                         const options = {
                             title: 'Error!',
@@ -128,7 +126,6 @@ class Home extends React.Component {
         }, ({data}) => {
         })
         this.props.fetchHomeChillMusic(this.state.chillPage).then(() => {
-            console.log(this.props.chillReleases[0])
             this.setState({chillReleases: this.props.chillReleases[0]})
         }, ({data}) => {
         })
@@ -137,21 +134,17 @@ class Home extends React.Component {
         }, ({data}) => {
         })
         this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
-            console.log(this.props.featuredMusicResponse)
             this.setState({featuredReleases: this.props.featuredMusicResponse})
         }, ({data}) => {
         })
     }
 
     playSong(data) {
-        console.log(data)
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         this.props.fetchRandomMusic().then(() => {
-            console.log(this.props.randomMusicResponse)
             const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item => {
                 if (item.song_title !== data.song_title) {
-                    // console.log(item)
                     return {
                         song_title: item.song_title,
                         description: item.description,
@@ -163,7 +156,6 @@ class Home extends React.Component {
                     }
                 }
             }).filter(q => !!q)
-            console.log(filterPlaylist)
             const filterData = {data: data, playlist: filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
             this.props.playCount(data.id)
@@ -178,10 +170,8 @@ class Home extends React.Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         this.props.fetchRandomMusic().then(() => {
-            console.log(this.props.randomMusicResponse)
             const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item => {
                 if (item.song_title !== data.song_title) {
-                    // console.log(item)
                     return {
                         song_title: item.song_title,
                         description: item.description,
@@ -193,7 +183,6 @@ class Home extends React.Component {
                     }
                 }
             }).filter(q => !!q)
-            console.log(filterPlaylist)
             const filterData = {data: data, playlist: filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
             this.props.playCount(data.id)

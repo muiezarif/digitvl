@@ -9,7 +9,6 @@ class Blogs extends Component {
 
     componentDidMount() {
         this.props.getBlogsApi(this.state.page).then(() => {
-            console.log(this.props.blogsResponse)
             this.setState({blogs: this.props.blogsResponse,blogsArray:this.props.blogsResponse.results})
         }).catch(err => {
 
@@ -22,7 +21,6 @@ class Blogs extends Component {
     }
     fetchBlogsList = (page) =>{
         this.props.getBlogsApi(page).then(() => {
-            console.log(this.props.blogsResponse)
             this.setState({
                 blogs: this.props.blogsResponse,
                 blogsArray:[...this.state.blogsArray,...this.props.blogsResponse.results]})

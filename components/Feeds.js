@@ -14,7 +14,6 @@ class Feeds extends Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         this.props.fetchUserFeeds(userSession, this.state.page).then(() => {
-            console.log(this.props.userFeedsResponse)
             this.setState({
                 feedsListResponse: this.props.userFeedsResponse,
                 feeds: this.props.userFeedsResponse.results
@@ -33,7 +32,6 @@ class Feeds extends Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         this.props.fetchUserFeeds(userSession, pageNo).then(() => {
-            console.log(this.props.userFeedsResponse)
             this.setState({
                 feedsListResponse: this.props.userFeedsResponse,
                 feeds: [...this.state.feeds, ...this.props.userFeedsResponse.results]

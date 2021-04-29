@@ -64,13 +64,11 @@ class MusicDetail extends Component {
                 this.setState({userProfilePic: userSession.profile.avatar})
             }
             this.props.fetchMusicDetailsWithToken(this.props.dataparams.username_slug, this.props.dataparams.track_slug, userSession).then(() => {
-                console.log(this.props.fetchMusicDetail)
                 this.setState({
                     musicDetail: this.props.fetchMusicDetail.beats_detail,
                     like: this.props.fetchMusicDetail.beats_detail.users_like
                 })
                 this.props.getMusicComments(userSession, this.props.fetchMusicDetail.beats_detail.id, this.state.commentPageNo).then(() => {
-                    console.log(this.props.musicCommentsResponse)
                     this.setState({
                         commentsListResponse: this.props.musicCommentsResponse,
                         comments: this.props.musicCommentsResponse.results
@@ -78,47 +76,37 @@ class MusicDetail extends Component {
                 })
 
                 this.props.getMusicLikesList(this.props.fetchMusicDetail.beats_detail.slug, this.state.likesPage).then(() => {
-                    console.log(this.props.musicLikesListResponse.results)
                     this.setState({likesList: this.props.musicLikesListResponse.results})
                 })
                 this.props.relatedTracksList(this.props.fetchMusicDetail.beats_detail.slug).then(() => {
-                    console.log("Featured")
-                    console.log(this.props.relatedTracksResponse)
                     this.setState({relatedTracks: this.props.relatedTracksResponse})
                 }).catch(err => {
                     alert(err)
                 })
-                console.log(this.props.fetchMusicDetail)
             }).catch(err => {
                 this.setState({ApiError: true})
             })
         }
         if (!userSession) {
             this.props.fetchMusicDetails(this.props.dataparams.username_slug, this.props.dataparams.track_slug).then(() => {
-                console.log(this.props.fetchMusicDetail)
                 this.setState({
                     musicDetail: this.props.fetchMusicDetail.beats_detail,
                     like: this.props.fetchMusicDetail.beats_detail.users_like
                 })
                 this.props.getMusicComments(userSession, this.props.fetchMusicDetail.beats_detail.id, this.state.commentPageNo).then(() => {
-                    console.log(this.props.musicCommentsResponse)
                     this.setState({
                         commentsListResponse: this.props.musicCommentsResponse,
                         comments: this.props.musicCommentsResponse.results
                     })
                 })
                 this.props.getMusicLikesList(this.props.fetchMusicDetail.beats_detail.slug, this.state.likesPage).then(() => {
-                    console.log(this.props.musicLikesListResponse.results)
                     this.setState({likesList: this.props.musicLikesListResponse.results})
                 })
                 this.props.relatedTracksList(this.props.fetchMusicDetail.beats_detail.slug).then(() => {
-                    console.log("Featured")
-                    console.log(this.props.relatedTracksResponse)
                     this.setState({relatedTracks: this.props.relatedTracksResponse})
                 }).catch(err => {
                     alert(err)
                 })
-                console.log(this.props.fetchMusicDetail)
             }).catch(err => {
                 this.setState({ApiError: true})
             })
@@ -152,7 +140,6 @@ class MusicDetail extends Component {
         );
     }
     playSong = (data) => {
-        console.log(data)
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         const filterData = {data: data, action: "playDetail"}
@@ -167,30 +154,24 @@ class MusicDetail extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.dataparams.track_slug !== prevProps.dataparams.track_slug) {
             this.props.fetchMusicDetails(this.props.dataparams.username_slug, this.props.dataparams.track_slug).then(() => {
-                console.log(this.props.fetchMusicDetail)
                 this.setState({
                     musicDetail: this.props.fetchMusicDetail.beats_detail,
                     like: this.props.fetchMusicDetail.beats_detail.users_like
                 })
                 this.props.getMusicComments(userSession, this.props.fetchMusicDetail.beats_detail.id, this.state.commentPageNo).then(() => {
-                    console.log(this.props.musicCommentsResponse)
                     this.setState({
                         commentsListResponse: this.props.musicCommentsResponse,
                         comments: this.props.musicCommentsResponse.results
                     })
                 })
                 this.props.getMusicLikesList(this.props.fetchMusicDetail.beats_detail.slug, this.state.likesPage).then(() => {
-                    console.log(this.props.musicLikesListResponse.results)
                     this.setState({likesList: this.props.musicLikesListResponse.results})
                 })
                 this.props.relatedTracksList(this.props.fetchMusicDetail.beats_detail.slug).then(() => {
-                    console.log("Featured")
-                    console.log(this.props.relatedTracksResponse)
                     this.setState({relatedTracks: this.props.relatedTracksResponse})
                 }).catch(err => {
                     alert(err)
                 })
-                console.log(this.props.fetchMusicDetail)
                 this.setState({newSong: false})
             }).catch(err => {
                 this.setState({ApiError: true})
@@ -200,19 +181,16 @@ class MusicDetail extends Component {
     }
 
     likesMusic = (id) => {
-        console.log(id)
         if (userSession) {
             if (!this.state.like) {
                 // this.props.addCoins(userSession).then(() => {
                 //     let userSession = localStorage.getItem("userSession")
                 //     let user = JSON.parse(userSession)
-                //     console.log(user)
                 //     user.user.coins = this.props.addCoinsResponse.total_coins
                 //     localStorage.setItem("userSession", JSON.stringify(user));
                 // })
             }
             this.props.likeMusicApi(id, userSession).then(() => {
-                console.log(this.props.likeMusicResponse)
                 this.setState({like: this.props.likeMusicResponse.like})
                 this.props.fetchMusicDetailsWithToken(this.props.dataparams.username_slug, this.props.dataparams.track_slug, userSession).then(() => {
                     this.setState({
@@ -220,7 +198,6 @@ class MusicDetail extends Component {
                         like: this.props.fetchMusicDetail.beats_detail.users_like
                     })
                     this.props.getMusicLikesList(this.props.fetchMusicDetail.beats_detail.slug, this.state.likesPage).then(() => {
-                        console.log(this.props.musicLikesListResponse.results)
                         this.setState({likesList: this.props.musicLikesListResponse.results})
                     })
                 })
@@ -295,14 +272,12 @@ class MusicDetail extends Component {
             if (userSession) {
                 const data = {body: this.state.addComment}
                 this.props.addMusicComments(userSession, this.state.musicDetail.id, data).then(() => {
-                    console.log(this.props.addMusicCommentResponse)
                     this.props.getMusicComments(userSession, this.state.musicDetail.id).then(() => {
                         this.setState({comments: this.props.musicCommentsResponse.results})
                     })
                     // this.props.addCoins(userSession).then(() => {
                     //     let userSession = localStorage.getItem("userSession")
                     //     let user = JSON.parse(userSession)
-                    //     console.log(user)
                     //     user.user.coins = this.props.addCoinsResponse.total_coins
                     //     localStorage.setItem("userSession", JSON.stringify(user));
                     // })
@@ -368,8 +343,8 @@ class MusicDetail extends Component {
                     description={this.props.seoparams.beats_detail.description}
                     openGraph={{
                         url: 'https://www.digitvl.com/',
-                        title: this.props.seoparams.beats_detail.song_title,
-                        description: this.props.seoparams.beats_detail.description,
+                        title: 'Listen to '+this.props.seoparams.beats_detail.song_title,
+                        description: 'Listen to '+this.props.seoparams.beats_detail.song_title+' by '+this.props.seoparams.beats_detail.username,
                         site_name: 'DIGITVL',
                     }}
                     twitter={{

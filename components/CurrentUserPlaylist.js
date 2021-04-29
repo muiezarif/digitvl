@@ -20,7 +20,6 @@ class CurrentUserPlaylist extends Component {
             this.setState({username:userSession.profile.username_slug})
         }
         this.props.fetchCurrentUserPlaylist(userSession, this.state.page).then(()=>{
-            console.log(this.props.playlists)
             this.setState({playList:this.props.playlists[0],playlistList:this.props.playlists[0].results})
         })
     }
@@ -52,7 +51,6 @@ class CurrentUserPlaylist extends Component {
         );
     }
     deleteDialog = (data) =>{
-        console.log(data.slug)
         const options = {
             title: 'Delete Playlist',
             message: `Are you sure you want to delete ${data.name}?`,

@@ -12,7 +12,6 @@ class FollowingsList extends Component {
         userSession = JSON.parse(userSession)
         if (userSession) {
             this.props.getUserFollowingList(this.props.dataparams.username_slug, userSession, this.state.page).then(() => {
-                console.log(this.props.userFollowingListResponse)
                 this.setState({
                     followingListResponse: this.props.userFollowingListResponse,
                     followingList: this.props.userFollowingListResponse.results
@@ -21,7 +20,6 @@ class FollowingsList extends Component {
         }
         if (!userSession) {
             this.props.getUserFollowingListWithoutToken(this.props.dataparams.username_slug, this.state.page).then(() => {
-                console.log(this.props.userFollowingListResponse)
                 this.setState({
                     followingListResponse: this.props.userFollowingListResponse,
                     followingList: this.props.userFollowingListResponse.results

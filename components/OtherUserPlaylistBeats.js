@@ -7,15 +7,12 @@ class OtherUserPlaylistBeats extends Component {
     state = {playlistTracks:{},musicPlayerPlaylist:[]}
     componentDidMount() {
         this.props.fetchUserPlaylistBeats(this.props.dataparams.username,this.props.dataparams.slug).then(()=>{
-            console.log(this.props.userPlaylistResponse)
             this.setState({playlistTracks:this.props.userPlaylistResponse.playlist[0],musicPlayerPlaylist:this.props.userPlaylistResponse.playlist[0].beats})
         })
     }
     playSong(data){
-        console.log(data)
         const filterPlaylist = this.state.musicPlayerPlaylist.filter(q => !!q).map(item =>{
             if (item.song_title !== data.song_title) {
-                // console.log(item)
                 return {
                     song_title: item.song_title,
                     description: item.description,
@@ -27,7 +24,6 @@ class OtherUserPlaylistBeats extends Component {
                 }
             }
         }).filter(q => !!q)
-        console.log(filterPlaylist)
         const filterData = {data:data,playlist:filterPlaylist,action:"play"}
         this.props.playMusic(filterData)
         this.props.playCount(data.id)

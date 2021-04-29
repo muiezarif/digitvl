@@ -191,7 +191,6 @@ class UserProfileEdit extends Component {
                     Router.push("/profile");
                 }
                 if (!this.props.userProfileEditResponse.status) {
-                    console.log(this.props.userProfileEditResponse)
                     this.setState({errors: this.props.userProfileEditResponse.message})
                 }
 

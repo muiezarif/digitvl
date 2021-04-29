@@ -52,7 +52,6 @@ class PostBlog extends Component {
                 formData.append("blog_image", this.state.imageFile);
             }
             this.props.postBlog(userSession,formData).then(()=>{
-                console.log(this.props.postBlogResponse)
                 if (this.props.postBlogResponse.status){
                     this.notify()
                 }else{
