@@ -301,11 +301,11 @@ class Home extends React.Component {
                 <ul className="pagination justify-content-center">
                     {this.state.newReleases.previous ? <li className="page-item">
                         {/*<button onClick={this.onPreviousClick} className="page-link">Previous</button>*/}
-                        <Image src="/images/back_btn_icon.svg" onClick={this.onPreviousClick} width={30} height={30} />
+                        <img src="/images/back_btn_icon.svg" className="mt-3" onClick={this.onPreviousClick} width={30} height={30} />
                     </li> : null}
                     {this.state.newReleases.next ? <li className="page-item">
                         {/*<button onClick={this.onNextClick} className="page-link">Next</button>*/}
-                        <Image src="/images/next_btn_icon.svg" onClick={this.onNextClick} width={30} height={30} />
+                        <img src="/images/next_btn_icon.svg" className="mt-3" onClick={this.onNextClick} width={30} height={30} />
                     </li> : null}
                 </ul>
             </nav>
@@ -594,7 +594,7 @@ class Home extends React.Component {
                         </div>
                     </div>
                     <div className="col-md-3">
-                        <div className="custom-home-right-section-wrapper">
+                        <div className="custom-home-right-section-wrapper mobile-home-right-section-wrapper">
                             <div className="row">
                                 <div className="col-md-11 home-right-menu-tags-heading">
                                     <span className="span-heading">Popular Tags</span>

@@ -856,6 +856,7 @@ a:hover {
     font-size: 12px;
 }
 
+
 .home-right-menu-likes {
 
 }
@@ -1866,6 +1867,9 @@ a:hover {
     }
     .mobile-track-home-margin .custom-home-music-display{
         margin-top: 100px;
+    }
+    .mobile-home-right-section-wrapper{
+        right: 0;
     }
 
 }

@@ -94,22 +94,22 @@ class Navbar extends React.Component {
                         </Link>
                         <ReactBootstrap.Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <ReactBootstrap.Navbar.Collapse id="responsive-navbar-nav">
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Image
+                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/home_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/home"> Home</Link></ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Image
+                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/trending_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/trending"> Trending</Link></ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Image
+                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/blogs_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/blogs"> Blogs</Link></ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Image
+                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/dollar_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/donate"> Donate</Link></ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Image
+                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/support_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/support"> Support</Link></ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Image
+                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/shop_icon.svg" width={20} height={20} className="my-auto"/><a target="_blank"
                                                                                    href="https://www.digitvl.shop"> Store</a></ReactBootstrap.Nav>
                             <SearchBar className="my-auto" />
