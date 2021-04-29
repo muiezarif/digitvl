@@ -29,24 +29,17 @@ export default function mDetails({seoprops}){
     );
 };
 // mDetails.getInitialProps = async (ctx) => {
-    // console.log(ctx)
-    // const res = await fetch('https://novamdigital.com/api/v1/beats/'+ctx.req.params.username_slug+'/'+ctx.req.params.track_slug)
-    // const error_code = res.statusCode > 200 ? res.statusCode : false;
-    // const seodata = await res.json();
-    // return {
-    //     seoprops:seodata
-    // }
+//     const res = await fetch('https://novamdigital.com/api/v1/beats/'+ctx.username_slug+'/'+ctx.track_slug)
+//     const error_code = res.statusCode > 200 ? res.statusCode : false;
+//     const seodata = await res.json();
+//     return {
+//         seoprops:seodata
+//     }
 // }
 export async function getServerSideProps(context){
-    if (context.req) {
-        const res = await fetch('https://novamdigital.com/api/v1/beats/' + context.req.params.username_slug + '/' + context.req.params.track_slug)
-        const error_code = res.statusCode > 200 ? res.statusCode : false;
-        const seodata = await res.json();
-        return {props: {seoprops: seodata}}
-    }else{
-        const res = await fetch('https://novamdigital.com/api/v1/beats/' + context.params.username_slug + '/' + context.params.track_slug)
-        const error_code = res.statusCode > 200 ? res.statusCode : false;
-        const seodata = await res.json();
-        return {props: {seoprops: seodata}}
-    }
+
+    const res = await fetch('https://novamdigital.com/api/v1/beats/'+context.params.username_slug+'/'+context.params.track_slug)
+    // const error_code = res.statusCode > 200 ? res.statusCode : false;
+    const seodata = await res.json();
+    return {props: {seoprops:seodata}}
 }
