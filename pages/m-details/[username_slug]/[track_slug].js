@@ -35,11 +35,7 @@ export default function mDetails(props){
                     title: 'Listen to '+data.beats_detail.song_title,
                     description: 'Listen to '+data.beats_detail.song_title+' by '+data.beats_detail.username,
                     site_name: 'DIGITVL',
-                    images: [
-                        {
-                            url:data.beats_detail.photo_main
-                        }
-                    ]
+                    type:'website'
                 }}
                 additionalMetaTags={[
                     {
@@ -53,6 +49,14 @@ export default function mDetails(props){
                     {
                         property:"og:image",
                         content:data.beats_detail.photo_main
+                    },
+                    {
+                        property:"og:image:width",
+                        content:800
+                    },
+                    {
+                        property:"og:image:height",
+                        content:500
                     }
                 ]}
                 twitter={{
