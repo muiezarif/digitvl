@@ -47,6 +47,10 @@ export default function mDetails(props){
                         content:data.beats_detail.photo_main
                     },
                     {
+                        property:"twitter:image:src",
+                        content:data.beats_detail.photo_main
+                    },
+                    {
                         property:"og:image",
                         content:data.beats_detail.photo_main
                     }
