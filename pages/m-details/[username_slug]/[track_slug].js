@@ -55,7 +55,6 @@ export default function mDetails(props){
 //     }
 // }
 export async function getServerSideProps(context){
-
     const res = await fetch('https://novamdigital.com/api/v1/beats/'+context.params.username_slug+'/'+context.params.track_slug+'/')
     const error_code = res.statusCode > 200 ? res.statusCode : false;
     const seodata = await res.json();
