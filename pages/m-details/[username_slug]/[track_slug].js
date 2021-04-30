@@ -41,10 +41,17 @@ export default function mDetails(props){
                         }
                     ]
                 }}
+                additionalMetaTags={[
+                    {
+                        property:"twitter:image",
+                        content:data.beats_detail.photo_main
+                    }
+                ]}
                 twitter={{
                     handle: '@digitvl',
                     site: '@digitvl',
                     cardType: 'summary_large_image',
+                    image: data.beats_detail.photo_main
                 }}
             />
             <MusicDetail dataparams={router.query} seoparams={data} />
