@@ -31,7 +31,7 @@ export default function mDetails(props){
                 title={data.beats_detail.song_title}
                 description={data.beats_detail.description}
                 openGraph={{
-                    url: 'https://www.digitvl.com/',
+                    url: 'https://www.digitvl.com/'+router.query.username_slug+'/'+router.query.track_slug,
                     title: 'Listen to '+data.beats_detail.song_title,
                     description: 'Listen to '+data.beats_detail.song_title+' by '+data.beats_detail.username,
                     site_name: 'DIGITVL',
