@@ -338,21 +338,21 @@ class MusicDetail extends Component {
         const handleShowAddPlayList = () => this.setState({showAddPlaylist: true});
         return (
             <div className="container-fluid custom-music-detail-page">
-                <NextSeo
-                    title={this.props.seoparams.beats_detail.song_title}
-                    description={this.props.seoparams.beats_detail.description}
-                    openGraph={{
-                        url: 'https://www.digitvl.com/',
-                        title: 'Listen to '+this.props.seoparams.beats_detail.song_title,
-                        description: 'Listen to '+this.props.seoparams.beats_detail.song_title+' by '+this.props.seoparams.beats_detail.username,
-                        site_name: 'DIGITVL',
-                    }}
-                    twitter={{
-                        handle: '@digitvl',
-                        site: '@digitvl',
-                        cardType: 'summary_large_image',
-                    }}
-                />
+                {/*<NextSeo*/}
+                {/*    title={this.props.seoparams.beats_detail.song_title}*/}
+                {/*    description={this.props.seoparams.beats_detail.description}*/}
+                {/*    openGraph={{*/}
+                {/*        url: 'https://www.digitvl.com/',*/}
+                {/*        title: 'Listen to '+this.props.seoparams.beats_detail.song_title,*/}
+                {/*        description: 'Listen to '+this.props.seoparams.beats_detail.song_title+' by '+this.props.seoparams.beats_detail.username,*/}
+                {/*        site_name: 'DIGITVL',*/}
+                {/*    }}*/}
+                {/*    twitter={{*/}
+                {/*        handle: '@digitvl',*/}
+                {/*        site: '@digitvl',*/}
+                {/*        cardType: 'summary_large_image',*/}
+                {/*    }}*/}
+                {/*/>*/}
                 <Navbar/>
                 <div className="custom-music-detail-data-section">
                     <div className="row">
