@@ -35,6 +35,11 @@ export default function mDetails(props){
                     title: 'Listen to '+data.beats_detail.song_title,
                     description: 'Listen to '+data.beats_detail.song_title+' by '+data.beats_detail.username,
                     site_name: 'DIGITVL',
+                    images: [
+                        {
+                            url:data.beats_detail.photo_main
+                        }
+                    ]
                 }}
                 twitter={{
                     handle: '@digitvl',

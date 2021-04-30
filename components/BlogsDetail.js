@@ -18,21 +18,21 @@ class BlogsDetail extends Component {
     render() {
         return (
             <div className="container-fluid loggedin-user-profile">
-                <NextSeo
-                    title={this.state.blog_detail.blog_title}
-                    description={this.state.blog_detail.blog_body}
-                    openGraph={{
-                        url: 'https://www.digitvl.com/',
-                        title: this.state.blog_detail.blog_title,
-                        description: this.state.blog_detail.blog_body,
-                        site_name: 'DIGITVL',
-                    }}
-                    twitter={{
-                        handle: '@digitvl',
-                        site: '@digitvl',
-                        cardType: 'summary_large_image',
-                    }}
-                />
+                {/*<NextSeo*/}
+                {/*    title={this.state.blog_detail.blog_title}*/}
+                {/*    description={this.state.blog_detail.blog_body}*/}
+                {/*    openGraph={{*/}
+                {/*        url: 'https://www.digitvl.com/',*/}
+                {/*        title: this.state.blog_detail.blog_title,*/}
+                {/*        description: this.state.blog_detail.blog_body,*/}
+                {/*        site_name: 'DIGITVL',*/}
+                {/*    }}*/}
+                {/*    twitter={{*/}
+                {/*        handle: '@digitvl',*/}
+                {/*        site: '@digitvl',*/}
+                {/*        cardType: 'summary_large_image',*/}
+                {/*    }}*/}
+                {/*/>*/}
                 <Navbar/>
                 <div className="container-fluid">
                     <div className="custom-trending-heading">

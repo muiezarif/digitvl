@@ -151,21 +151,21 @@ class UserDetail extends Component {
         }
         return (
             <div className="container-fluid custom-user-detail-page">
-                <NextSeo
-                    title={this.state.profileDetails.username}
-                    description={`Checkout ${this.state.profileDetails.username} account on DIGITVL`}
-                    openGraph={{
-                        url: 'https://www.digitvl.com/',
-                        title: this.state.profileDetails.username,
-                        description: `Checkout ${this.state.profileDetails.username} account on DIGITVL`,
-                        site_name: 'DIGITVL',
-                    }}
-                    twitter={{
-                        handle: '@digitvl',
-                        site: '@digitvl',
-                        cardType: 'summary_large_image',
-                    }}
-                />
+                {/*<NextSeo*/}
+                {/*    title={this.state.profileDetails.username}*/}
+                {/*    description={`Checkout ${this.state.profileDetails.username} account on DIGITVL`}*/}
+                {/*    openGraph={{*/}
+                {/*        url: 'https://www.digitvl.com/',*/}
+                {/*        title: this.state.profileDetails.username,*/}
+                {/*        description: `Checkout ${this.state.profileDetails.username} account on DIGITVL`,*/}
+                {/*        site_name: 'DIGITVL',*/}
+                {/*    }}*/}
+                {/*    twitter={{*/}
+                {/*        handle: '@digitvl',*/}
+                {/*        site: '@digitvl',*/}
+                {/*        cardType: 'summary_large_image',*/}
+                {/*    }}*/}
+                {/*/>*/}
                 <Navbar/>
                 <div className="container-fluid">
                     <div className="custom-user-coverImage" style={divStyle}/>
