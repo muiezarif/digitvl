@@ -189,15 +189,39 @@ class UploadMusic extends Component {
                     title="DIGITVL"
                     description="Upload your music content and earn DIGITVL coins"
                     openGraph={{
-                        url: 'https://www.digitvl.com/',
+                        url: 'https://www.digitvl.com/upload',
                         title: 'DIGITVL',
                         description: 'Upload your music content and earn DIGITVL coins',
                         site_name: 'DIGITVL',
+                        type:'website'
                     }}
+                    additionalMetaTags={[
+                        {
+                            property:"twitter:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"twitter:image:src",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image:width",
+                            content:800
+                        },
+                        {
+                            property:"og:image:height",
+                            content:500
+                        }
+                    ]}
                     twitter={{
                         handle: '@digitvl',
                         site: '@digitvl',
                         cardType: 'summary_large_image',
+                        image:'https://www.digitvl.com/images/landing_bg_img.png'
                     }}
                 />
                 <Navbar/>

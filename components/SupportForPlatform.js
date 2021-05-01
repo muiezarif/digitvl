@@ -65,15 +65,39 @@ class SupportForPlatform extends Component {
                     title="Support"
                     description="Get Help from our support. We may be small right now but are are always there for you"
                     openGraph={{
-                        url: 'https://www.digitvl.com/',
+                        url: 'https://www.digitvl.com/support',
                         title: 'Support',
                         description: 'Get Help from our support! We may be small right now but are are always there for you',
                         site_name: 'DIGITVL',
+                        type:'website'
                     }}
+                    additionalMetaTags={[
+                        {
+                            property:"twitter:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"twitter:image:src",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image:width",
+                            content:800
+                        },
+                        {
+                            property:"og:image:height",
+                            content:500
+                        }
+                    ]}
                     twitter={{
                         handle: '@digitvl',
                         site: '@digitvl',
                         cardType: 'summary_large_image',
+                        image:'https://www.digitvl.com/images/landing_bg_img.png'
                     }}
                 />
                 <Navbar/>

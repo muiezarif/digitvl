@@ -30,15 +30,39 @@ export default function verifyDetails(props){
                 title={data.blog_detail.blog_title}
                 description={data.blog_detail.blog_body}
                 openGraph={{
-                    url: 'https://www.digitvl.com/',
+                    url: 'https://www.digitvl.com/blogs/'+router.query.slug,
                     title: data.blog_detail.blog_title,
                     description: data.blog_detail.blog_body,
                     site_name: 'DIGITVL',
+                    type:'website'
                 }}
+                additionalMetaTags={[
+                    {
+                        property:"twitter:image",
+                        content:data.blog_detail.blog_image
+                    },
+                    {
+                        property:"twitter:image:src",
+                        content:data.blog_detail.blog_image
+                    },
+                    {
+                        property:"og:image",
+                        content:data.blog_detail.blog_image
+                    },
+                    {
+                        property:"og:image:width",
+                        content:800
+                    },
+                    {
+                        property:"og:image:height",
+                        content:500
+                    }
+                ]}
                 twitter={{
                     handle: '@digitvl',
                     site: '@digitvl',
                     cardType: 'summary_large_image',
+                    image:data.blog_detail.blog_image
                 }}
             />
             <BlogsDetail dataparams={router.query} />

@@ -85,15 +85,39 @@ class Trending extends Component {
                     title="Trending"
                     description="Listen to top hot songs on platform right now!!!"
                     openGraph={{
-                        url: 'https://www.digitvl.com/',
+                        url: 'https://www.digitvl.com/trending',
                         title: 'Trending',
                         description: 'Listen to top hot songs on platform right now!!!',
                         site_name: 'DIGITVL',
+                        type:'website'
                     }}
+                    additionalMetaTags={[
+                        {
+                            property:"twitter:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"twitter:image:src",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image:width",
+                            content:800
+                        },
+                        {
+                            property:"og:image:height",
+                            content:500
+                        }
+                    ]}
                     twitter={{
                         handle: '@digitvl',
                         site: '@digitvl',
                         cardType: 'summary_large_image',
+                        image:'https://www.digitvl.com/images/landing_bg_img.png'
                     }}
                 />
                 <Navbar/>
