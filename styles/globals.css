@@ -1299,7 +1299,7 @@ a:hover {
     width: auto;
     z-index: 9;
     position: relative;
-    margin-top: 35%;
+    margin-top: 37%;
 }
 
 .custom-user-profile-data-spans-title {
@@ -1349,7 +1349,7 @@ a:hover {
 
 .custom-user-data-section {
     width: 190px;
-    margin-left: 9%;
+    margin-left: 8%;
 }
 
 .custom-currentuser-data-section {
@@ -1884,3 +1884,25 @@ a:hover {
         margin-left: 15%;
     }
 }
+@media screen and (min-width: 769px) and (max-width: 1400px) {
+    .custom-user-profile-image {
+        z-index: 10;
+        position: absolute;
+        bottom: 26%;
+    }
+}
+
+@media screen and (min-width: 1401px) and (max-width: 1980px) {
+    .custom-user-profile-image {
+        z-index: 10;
+        position: absolute;
+        bottom: 56%;
+    }
+}
+@media screen and (min-width: 1700px) and (max-width: 1800px) {
+    .custom-home-right-section-wrapper {
+        position: relative;
+        right: 10px;
+    }
+}
+
