@@ -2,10 +2,15 @@ import React, {Component} from 'react';
 import Navbar from "./Navbar"
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
+import ReactCrop from "react-image-crop";
+import 'react-image-crop/dist/ReactCrop.css';
 import {connect} from "react-redux"
 import {editUserProfile} from "../actions";
 import Router from "next/router";
 import Link from "next/link";
+import Image from "next/image"
+import {image64toCanvasRef,base64StringtoFile,extractImageFileExtensionFromBase64} from "../utils/dataURLtoFile";
+
 const initialState = {
     bio: "",
     location: "",
@@ -15,6 +20,7 @@ const initialState = {
     startDate: new Date(),
     imageFile: null,
     coverImageFile: null,
+    coverImageFile64: null,
     errors: {},
     crop: {
         aspect:16/8
@@ -25,12 +31,18 @@ const initialState = {
     },
     adjustedAvatarImage:null,
     adjustedCoverImage:null,
+    adjustedCoverImageFile:null,
     zoom:1,
-    croppedArea:null
+    croppedArea:null,
+    cropImageLoaded:null
 };
 let userSession
 class UserProfileEdit extends Component {
     state = initialState
+    constructor(props) {
+        super(props);
+        this.imagePreviewCanvas = React.createRef();
+    }
     componentDidMount() {
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
@@ -45,18 +57,19 @@ class UserProfileEdit extends Component {
         switch (e.target.name) {
             case "avatar":
                 if (e.target.files.length > 0) {
-                    // const reader = new FileReader()
-                    // reader.readAsDataURL(e.target.files[0])
-                    // reader.addEventListener("load",() =>{
-                    //
-                    // })
                     this.setState({imageFileName: e.target.files[0].name, imageFile: e.target.files[0]})
-
                 }
                 break;
             case "cover":
                 if (e.target.files.length > 0) {
-                    this.setState({coverImageFileName: e.target.files[0].name, coverImageFile: e.target.files[0]})
+                    this.setState({coverImageFileName: e.target.files[0].name, coverImageFile: URL.createObjectURL(e.target.files[0])})
+                    const reader = new FileReader()
+                    reader.addEventListener("load",() =>{
+                        if (reader.readyState === 2) {
+                            this.setState({coverImageFile64: reader.result})
+                        }
+                    })
+                    reader.readAsDataURL(e.target.files[0])
                 }
                 break;
             default:
@@ -96,15 +109,32 @@ class UserProfileEdit extends Component {
         // });
     }
     getCroppedCoverImg = () => {
+        // const canvasRef = this.imagePreviewCanvas.current
+        // image64toCanvasRef(canvasRef,this.state.coverImageFile64,this.state.crop)
+        // const fileExtension = extractImageFileExtensionFromBase64(this.state.coverImageFile64)
+        // const base64Img = canvasRef.toDataURL("image/jpeg")
+        // const filename = "croppedUserCover."+ fileExtension
+        // const newCroppedFile = base64StringtoFile(base64Img,filename)
+        // const reader = new FileReader()
+        // // reader.addEventListener("load",() =>{
+        // //     if (reader.readyState === 2) {
+        // //         this.setState({adjustedCoverImage:reader.result})
+        // //     }
+        // // })
+        // // reader.readAsDataURL(newCroppedFile)
+        // this.setState({adjustedCoverImage:window.URL.createObjectURL(newCroppedFile)})
+        // console.log(base64Img)
+        // console.log(newCroppedFile)
+
         const canvasCover = document.createElement('canvas');
-        const scaleX = this.state.coverImageFile.naturalWidth / this.state.coverImageFile.width;
-        const scaleY = this.state.coverImageFile.naturalHeight / this.state.coverImageFile.height;
+        const scaleX = this.state.cropImageLoaded.naturalWidth / this.state.cropImageLoaded.width;
+        const scaleY = this.state.cropImageLoaded.naturalHeight / this.state.cropImageLoaded.height;
         canvasCover.width = this.state.crop.width;
         canvasCover.height = this.state.crop.height;
         const ctx = canvasCover.getContext('2d');
-
+        //
         ctx.drawImage(
-            this.state.coverImageFile,
+            this.state.cropImageLoaded,
             this.state.crop.x * scaleX,
             this.state.crop.y * scaleY,
             this.state.crop.width * scaleX,
@@ -117,20 +147,41 @@ class UserProfileEdit extends Component {
 
         // As Base64 string
         const base64Image = canvasCover.toDataURL('image/jpeg');
-        this.setState({adjustedAvatarImage:base64Image})
+        const fileExtension = extractImageFileExtensionFromBase64(this.state.coverImageFile64)
+        const filename = "croppedUserCover."+ fileExtension
+        const newCroppedFile = base64StringtoFile(base64Image,filename)
+        this.setState({adjustedCoverImage:URL.createObjectURL(newCroppedFile),adjustedCoverImageFile:newCroppedFile})
         // As a blob
         // return new Promise((resolve, reject) => {
-        //     canvas.toBlob(blob => {
-        //         blob.name = fileName;
-        //         resolve(blob);
+        //     canvasRef.toBlob(blob => {
+        //         if (!blob) {
+        //             //reject(new Error('Canvas is empty'));
+        //             console.error('Canvas is empty');
+        //             return;
+        //         }
+        //         blob.name = "crop_cover";
+        //         window.URL.revokeObjectURL(this.fileUrl);
+        //         this.fileUrl = window.URL.createObjectURL(blob);
+        //         resolve(this.fileUrl);
+        //         this.setState({adjustedAvatarImage:this.fileUrl})
+        //         // resolve(blob);
         //     }, 'image/jpeg', 1);
         // });
     }
     handleImageLoaded = (image) =>{
-        console.log(image)
+        this.setState({cropImageLoaded:image})
     }
     handleOnCropComplete = (crop,pixelCrop) =>{
-        console.log(crop,pixelCrop)
+        // const canvasRef = this.imagePreviewCanvas.current
+        // image64toCanvasRef(canvasRef,this.state.coverImageFile64,crop)
+        // const fileExtension = extractImageFileExtensionFromBase64(this.state.coverImageFile64)
+        // console.log(fileExtension)
+        // const base64Img = canvasRef.toDataURL("image/"+fileExtension)
+        // console.log(base64Img)
+        // const filename = "croppedUserCover."+ fileExtension
+        // console.log(filename)
+        // const newCroppedFile = base64StringtoFile(base64Img,filename)
+        // console.log(newCroppedFile)
     }
     onCropComplete = (croppedAreaPercentage,croppedAreaPixels) =>{
         this.setState({croppedArea:croppedAreaPixels})
@@ -165,7 +216,11 @@ class UserProfileEdit extends Component {
                 formData.append("avatar", this.state.imageFile)
             }
             if (this.state.coverImageFile) {
-                formData.append("cover_photo", this.state.coverImageFile)
+                if (this.state.adjustedCoverImageFile){
+                    formData.append("cover_photo", this.state.adjustedCoverImageFile)
+                }else{
+                    alert("Please Crop Image to update cover photo")
+                }
             }
             this.props.editUserProfile(formData, userSession).then(() => {
                 let userSession = localStorage.getItem("userSession")
@@ -236,6 +291,25 @@ class UserProfileEdit extends Component {
                                        tabIndex="4"/>
                                 <p className="input-field-custom-info">Add Image with width 900px and height 300px.(For better result)</p>
                             </div>
+                            <div className={`col-md-12`}>
+                                {this.state.coverImageFileName && (<h4 className="text-white">Adjust Cover(900x300)</h4>)}
+                                {
+                                    this.state.coverImageFileName && (
+                                        <ReactCrop src={this.state.coverImageFile} ruleOfThirds onImageLoaded={(newImage)=>{this.setState({cropImageLoaded:newImage})}} onChange={(newCrop)=>{this.setState({crop:newCrop})}} crop={this.state.crop}/>
+                                    )
+                                }
+                            </div>
+                            {/*{this.state.coverImageFileName ?<div className="col-md-12">*/}
+                            {/*    <canvas ref={this.imagePreviewCanvas} className="custom-canvas-crop-cover"/>*/}
+                            {/*    /!*<img src={this.state.coverImageFile64Cropped} className="img-fluid custom-canvas-crop-cover"/>*!/*/}
+                            {/*</div>:null}*/}
+                            {this.state.coverImageFileName ?(<div className="col-md-12 text-center">
+                                 <div className="btn-primary" onClick={this.getCroppedCoverImg}>Crop Cover</div>
+                            </div>):null}
+                            {this.state.adjustedCoverImage ? (<div>
+                                <p className="text-white">Cropped Image</p>
+                                <img src={this.state.adjustedCoverImage} alt="Cropped Cover Image" className="img-fluid"/>
+                            </div>):null}
                             <div className="w-50 mt-3 mx-auto">
                                 <button type="submit" tabIndex="3" className="custom-login-button btn btn-block">Edit
                                 </button>

@@ -265,7 +265,7 @@ class LoggedInUserProfile extends Component {
                     <img
                         src={this.state.userImage}
                         width="140px" height="140px" className="custom-user-profile-image rounded-circle ml-5"/>
-                    <div className="ml-5 custom-user-data-section">
+                    <div className="custom-user-data-section">
                         <div className="d-flex custom-currentuser-profile-data ml-3">
                             <div className="d-inline-flex flex-column custom-user-data">
                                 <span className="custom-profile-username">{this.state.username}</span>
