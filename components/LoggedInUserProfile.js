@@ -215,6 +215,8 @@ class LoggedInUserProfile extends Component {
         const handleCloseCreatePlayList = () => this.setState({showCreatePlayList: false});
         const handleShowCreatePlayList = () => this.setState({showCreatePlayList: true});
         const createPlaylist = () => {
+            let userSession = localStorage.getItem("userSession")
+            userSession = JSON.parse(userSession);
             this.setState({createPlaylist:true})
             const data = {name: this.state.playListName, is_private: this.state.isPrivate}
             this.props.createPlayList(data, userSession).then(() => {
