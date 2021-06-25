@@ -61,6 +61,18 @@ class Navbar extends React.Component {
     onFeedsClick = () =>{
         Router.push("/feeds")
     }
+    onSupportClick = () =>{
+        Router.push("/support")
+    }
+    onRemasterClick = () =>{
+        Router.push("/remastering")
+    }
+    onRedeemClick = () =>{
+        Router.push("/redeem")
+    }
+    onSubscriptionClick = () =>{
+        Router.push("/subscriptions")
+    }
     onNotificationsClick = () =>{
         Router.push("/notifications")
     }
@@ -94,6 +106,9 @@ class Navbar extends React.Component {
                         </Link>
                         <ReactBootstrap.Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <ReactBootstrap.Navbar.Collapse id="responsive-navbar-nav">
+                            {this.state.userLoggedIn ?<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
+                                src="/images/feeds_icon.svg" width={20} height={20} className="my-auto"/><Link
+                                href="/feeds"> Feeds</Link></ReactBootstrap.Nav>:null}
                             <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/home_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/home"> Home</Link></ReactBootstrap.Nav>
@@ -106,9 +121,9 @@ class Navbar extends React.Component {
                             <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/dollar_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/donate"> Donate</Link></ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
-                                src="/images/support_icon.svg" width={20} height={20} className="my-auto"/><Link
-                                href="/support"> Support</Link></ReactBootstrap.Nav>
+                            {/*<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img*/}
+                            {/*    src="/images/support_icon.svg" width={20} height={20} className="my-auto"/><Link*/}
+                            {/*    href="/support"> Support</Link></ReactBootstrap.Nav>*/}
                             <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/shop_icon.svg" width={20} height={20} className="my-auto"/><a target="_blank"
                                                                                    href="https://www.digitvl.shop"> Store</a></ReactBootstrap.Nav>
@@ -157,6 +172,10 @@ class Navbar extends React.Component {
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onLibraryClick} className="btn dropdown-item"><i className="fas fa-book-reader"/> Library</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                         {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><ReactBootstrap.OverlayTrigger placement="bottom" overlay={renderRedeemCoinsTooltip}><Link className="text-color-links" to="/redeem-coins"><i className="fas fa-coins"/> Redeem Coins</Link></ReactBootstrap.OverlayTrigger></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onFeedsClick} className="btn dropdown-item"><i className="fas fa-rss"/> Feeds</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onSupportClick} className="btn dropdown-item"><i className="far fa-question-circle"/> Support</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onSubscriptionClick} className="btn dropdown-item"><i className="fas fa-credit-card"/> Subscription</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRemasterClick} className="btn dropdown-item"><i className="fas fa-microphone-alt"/> Remaster</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRedeemClick} className="btn dropdown-item"><i className="fa fa-gift"/> Redeem</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn && this.state.is_staff ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onPostBlogClick} className="btn dropdown-item"><i className="fas fa-rss"/> Post Blog</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2 text-accent"><div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                     </ReactBootstrap.Dropdown.Menu>

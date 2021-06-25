@@ -66,7 +66,8 @@ class Home extends React.Component {
                                 {
                                     label: 'Okay',
                                     onClick: () => {
-                                        // history.push("/logout")
+                                        localStorage.clear()
+                                        Router.push("/")
                                     }
                                 }
                             ],
