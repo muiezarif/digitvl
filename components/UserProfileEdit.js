@@ -311,7 +311,7 @@ class UserProfileEdit extends Component {
                                 <img src={this.state.adjustedCoverImage} alt="Cropped Cover Image" className="img-fluid"/>
                             </div>):null}
                             <div className="w-50 mt-3 mx-auto">
-                                <button type="submit" tabIndex="3" className="custom-login-button btn btn-block">Edit
+                                <button type="submit" tabIndex="3" className="custom-login-button btn btn-block">Submit
                                 </button>
                             </div>
                         </div>
