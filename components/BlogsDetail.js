@@ -3,18 +3,23 @@ import {connect} from "react-redux";
 import Navbar from "./Navbar";
 import {getBlogDetailApi} from "../actions";
 import {NextSeo} from "next-seo";
-
+let paragraphs = []
 class BlogsDetail extends Component {
     state = {blog_detail: {}}
 
     componentDidMount() {
         this.props.getBlogDetailApi(this.props.dataparams.slug).then(() => {
             this.setState({blog_detail: this.props.blogDetailResponse.blog_detail})
+            paragraphs = this.props.blogDetailResponse.blog_detail.blog_body.split(".")
         }).catch(err => {
 
         })
     }
-
+    renderParagraph = () => {
+        return paragraphs.map(result =>{
+            return (<p className="text-left mt-3 custom-blog-description">{result}.</p>)
+        })
+    }
     render() {
         return (
             <div className="container-fluid loggedin-user-profile">
@@ -40,7 +45,8 @@ class BlogsDetail extends Component {
                     </div>
                     <div className="container custom-blogs-item-bg p-5 mx-auto">
                         {this.state.blog_detail.blog_image ?<img src={this.state.blog_detail.blog_image} className="img-music-detail-bg-gradient w-100" height="200"/>:null}
-                        <p className="text-center mt-3 custom-blog-description">{this.state.blog_detail.blog_body}</p>
+                        {/*<p className="text-left mt-3 custom-blog-description">{this.state.blog_detail.blog_body}</p>*/}
+                        {this.renderParagraph()}
                         { this.state.blog_detail.embedded_video_url ?
                             <div className="mt-3 d-flex embed-responsive embed-responsive-16by9">
                                 <iframe className="embed-responsive-item"
