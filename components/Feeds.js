@@ -8,6 +8,7 @@ import LikePost from "./feed_types/LikePost";
 import CommentPost from "./feed_types/CommentPost";
 import FeaturedFeedPost from "./feed_types/FeaturedFeedPost";
 import TweetPost from "./feed_types/TweetPost";
+import {NextSeo} from "next-seo";
 class Feeds extends Component {
     state = {feedsListResponse: {}, feeds: [], page: 1,tweetBody:""}
     componentDidMount() {
@@ -130,6 +131,45 @@ class Feeds extends Component {
         }
         return (
             <div className="container-fluid loggedin-user-profile">
+                <NextSeo
+                    title="Feeds"
+                    description="Get latest feeds from your artists you followed"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/feed',
+                        title: 'DIGITVL',
+                        description: 'Get latest feeds from your artists you followed',
+                        site_name: 'DIGITVL',
+                        type:'website'
+                    }}
+                    additionalMetaTags={[
+                        {
+                            property:"twitter:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"twitter:image:src",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image:width",
+                            content:800
+                        },
+                        {
+                            property:"og:image:height",
+                            content:500
+                        }
+                    ]}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                        image:'https://www.digitvl.com/images/landing_bg_img.png'
+                    }}
+                />
                 <Navbar/>
                 <div className="container-fluid">
                     <div className="row custom-row-margin mt-5">

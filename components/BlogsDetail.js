@@ -15,6 +15,12 @@ class BlogsDetail extends Component {
 
         })
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.blogDetailResponse.blog_detail !== prevProps.blog_detail){
+            paragraphs = this.props.blogDetailResponse.blog_detail.blog_body.split(".")
+        }
+    }
+
     renderParagraph = () => {
         return paragraphs.map(result =>{
             return (<p className="text-left mt-3 custom-blog-description">{result}.</p>)
