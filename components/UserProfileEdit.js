@@ -10,6 +10,7 @@ import Router from "next/router";
 import Link from "next/link";
 import Image from "next/image"
 import {image64toCanvasRef,base64StringtoFile,extractImageFileExtensionFromBase64} from "../utils/dataURLtoFile";
+import getCroppedImg from "../utils/cropImage";
 
 const initialState = {
     bio: "",
@@ -203,6 +204,9 @@ class UserProfileEdit extends Component {
 
         const onSubmit = (e) => {
             e.preventDefault()
+            if (this.state.coverImageFileName){
+                this.getCroppedCoverImg()
+            }
             let userSession = localStorage.getItem("userSession")
             userSession = JSON.parse(userSession)
             this.setState({errors: {}});
@@ -223,7 +227,7 @@ class UserProfileEdit extends Component {
                 if (this.state.adjustedCoverImageFile){
                     formData.append("cover_photo", this.state.adjustedCoverImageFile)
                 }else{
-                    alert("Please Crop Image by selecting your desired portion and click on crop cover button after that submit")
+                    alert("Please try again submitting")
                     return
                 }
             }
@@ -308,13 +312,13 @@ class UserProfileEdit extends Component {
                             {/*    <canvas ref={this.imagePreviewCanvas} className="custom-canvas-crop-cover"/>*/}
                             {/*    /!*<img src={this.state.coverImageFile64Cropped} className="img-fluid custom-canvas-crop-cover"/>*!/*/}
                             {/*</div>:null}*/}
-                            {this.state.coverImageFileName ?(<div className="col-md-12 text-center">
-                                 <div className="btn-primary" onClick={this.getCroppedCoverImg}>Crop Cover</div>
-                            </div>):null}
-                            {this.state.adjustedCoverImage ? (<div>
-                                <p className="text-white">Cropped Image</p>
-                                <img src={this.state.adjustedCoverImage} alt="Cropped Cover Image" className="img-fluid"/>
-                            </div>):null}
+                            {/*{this.state.coverImageFileName ?(<div className="col-md-12 text-center">*/}
+                            {/*     <div className="btn-primary" onClick={this.getCroppedCoverImg}>Crop Cover</div>*/}
+                            {/*</div>):null}*/}
+                            {/*{this.state.adjustedCoverImage ? (<div>*/}
+                            {/*    <p className="text-white">Cropped Image</p>*/}
+                            {/*    <img src={this.state.adjustedCoverImage} alt="Cropped Cover Image" className="img-fluid"/>*/}
+                            {/*</div>):null}*/}
                             <div className="w-25 mt-3 mx-auto">
                                 <button type="submit" tabIndex="3" className="custom-login-button btn btn-block">Submit
                                 </button>
