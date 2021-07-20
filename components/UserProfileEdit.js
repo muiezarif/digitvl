@@ -133,24 +133,28 @@ class UserProfileEdit extends Component {
         canvasCover.height = this.state.crop.height;
         const ctx = canvasCover.getContext('2d');
         //
-        ctx.drawImage(
-            this.state.cropImageLoaded,
-            this.state.crop.x * scaleX,
-            this.state.crop.y * scaleY,
-            this.state.crop.width * scaleX,
-            this.state.crop.height * scaleY,
-            0,
-            0,
-            this.state.crop.width,
-            this.state.crop.height,
-        );
+        if (canvasCover.width > 1 && canvasCover.height > 1){
+            ctx.drawImage(
+                this.state.cropImageLoaded,
+                this.state.crop.x * scaleX,
+                this.state.crop.y * scaleY,
+                this.state.crop.width * scaleX,
+                this.state.crop.height * scaleY,
+                0,
+                0,
+                this.state.crop.width,
+                this.state.crop.height,
+            );
 
-        // As Base64 string
-        const base64Image = canvasCover.toDataURL('image/jpeg');
-        const fileExtension = extractImageFileExtensionFromBase64(this.state.coverImageFile64)
-        const filename = "croppedUserCover."+ fileExtension
-        const newCroppedFile = base64StringtoFile(base64Image,filename)
-        this.setState({adjustedCoverImage:URL.createObjectURL(newCroppedFile),adjustedCoverImageFile:newCroppedFile})
+            // As Base64 string
+            const base64Image = canvasCover.toDataURL('image/jpeg');
+            const fileExtension = extractImageFileExtensionFromBase64(this.state.coverImageFile64)
+            const filename = "croppedUserCover."+ fileExtension
+            const newCroppedFile = base64StringtoFile(base64Image,filename)
+            this.setState({adjustedCoverImage:URL.createObjectURL(newCroppedFile),adjustedCoverImageFile:newCroppedFile})
+        }else{
+            alert("Please select the desired section of the image first")
+        }
         // As a blob
         // return new Promise((resolve, reject) => {
         //     canvasRef.toBlob(blob => {
@@ -219,7 +223,8 @@ class UserProfileEdit extends Component {
                 if (this.state.adjustedCoverImageFile){
                     formData.append("cover_photo", this.state.adjustedCoverImageFile)
                 }else{
-                    alert("Please Crop Image to update cover photo")
+                    alert("Please Crop Image by selecting your desired portion and click on crop cover button after that submit")
+                    return
                 }
             }
             this.props.editUserProfile(formData, userSession).then(() => {
@@ -260,7 +265,7 @@ class UserProfileEdit extends Component {
                 <div className="container-fluid">
                     <form onSubmit={onSubmit} className="form-box pt-3 pt-sm-3">
                         <div className="container-fluid w-75 h-100 custom-login-form custom-bg-dark pb-5 mx-auto mx-md-auto mx-sm-auto">
-                            <div className="text-center custom-login-heading pt-5">Edit Profile</div>
+                            <div className="text-center custom-login-heading pt-5 text-white">Edit Profile</div>
                             <div className="custom-input w-100 mt-2 text-center">
                                 <input className="mx-auto w-75" name="bio" value={this.state.bio} type="text"
                                        onChange={handleChange}
@@ -277,7 +282,7 @@ class UserProfileEdit extends Component {
                                 <label className="custom-input-label pr-2"
                                        htmlFor="image-upload">{this.state.imageFileName ? this.state.imageFileName : "Upload Avatar"}</label>
                                 <input type="file" onChange={(e) => this.onChange(e)} name="avatar"
-                                       accept="image/*" multiple={false} className="pt-2"
+                                       accept="image/*" multiple={false} className="pt-2 text-white"
                                        id="image-upload"
                                        tabIndex="3"/>
                                 <p className="input-field-custom-info">Add Image with width 150px and height 150px.(For better result)</p>
@@ -286,10 +291,10 @@ class UserProfileEdit extends Component {
                                 <label className="custom-input-label pr-2"
                                        htmlFor="image-upload">{this.state.coverImageFileName ? this.state.coverImageFileName : "Upload Cover"}</label>
                                 <input type="file" onChange={(e) => this.onChange(e)} name="cover"
-                                       accept="image/*" multiple={false} className="pt-2"
+                                       accept="image/*" multiple={false} className="pt-2 text-white"
                                        id="image-upload"
                                        tabIndex="4"/>
-                                <p className="input-field-custom-info">Add Image with width 900px and height 300px.(For better result)</p>
+                                {/*<p className="input-field-custom-info">Add Image with width 900px and height 300px.(For better result)</p>*/}
                             </div>
                             <div className={`col-md-12`}>
                                 {this.state.coverImageFileName && (<h4 className="text-white">Adjust Cover(900x300)</h4>)}
@@ -310,7 +315,7 @@ class UserProfileEdit extends Component {
                                 <p className="text-white">Cropped Image</p>
                                 <img src={this.state.adjustedCoverImage} alt="Cropped Cover Image" className="img-fluid"/>
                             </div>):null}
-                            <div className="w-50 mt-3 mx-auto">
+                            <div className="w-25 mt-3 mx-auto">
                                 <button type="submit" tabIndex="3" className="custom-login-button btn btn-block">Submit
                                 </button>
                             </div>

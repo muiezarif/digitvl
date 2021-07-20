@@ -18,6 +18,7 @@ class LoggedInUserProfile extends Component {
         firstName: "Demo",
         lastName: "Demo",
         verified_blue_tick:false,
+        get_subscription_badge:false,
         followerCount: 0,
         followingCount: 0,
         tracksCount: 0,
@@ -37,6 +38,7 @@ class LoggedInUserProfile extends Component {
         userSession = JSON.parse(userSession);
         if (userSession.user) {
             this.setState({verified_blue_tick:userSession.user.profile.blue_tick_verified})
+            this.setState({get_subscription_badge:userSession.user.membership_plan.subscription_badge})
             if (userSession.user.profile.avatar) {
                 this.setState({
                     userImage: userSession.user.profile.avatar,
@@ -270,6 +272,7 @@ class LoggedInUserProfile extends Component {
                     <div className="custom-user-data-section">
                         <div className="d-flex custom-currentuser-profile-data ml-3">
                             <div className="d-inline-flex flex-column custom-user-data">
+                                {this.state.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
                                 <span className="custom-profile-username">{this.state.username}</span>
                                 <div className="align-middle text-center justify-content-center">
                                     {/*<span className="custom-profile-edit"><Link href={"/"}>Edit Profile</Link></span>*/}

@@ -50,6 +50,8 @@ import {getBlogDetailReducer} from "./getBlogDetailReducer";
 import getNotificationCountReducer from "./getNotificationCountReducer";
 import getReadNotificationsReducer from "./getReadNotificationsReducer";
 import InviteUserReducer from "./InviteUserReducer";
+import addSuccessSubscriptionReducer from "./addSuccessSubscriptionReducer";
+import addSuccessBuyCoinsReducer from "./addSuccessBuyCoinsReducer";
 export default combineReducers({
     auth:authReducer,
     musicUpload:musicUploadReducer,
@@ -101,5 +103,7 @@ export default combineReducers({
     getBlogDetail:getBlogDetailReducer,
     notificationCount:getNotificationCountReducer,
     readNotifications:getReadNotificationsReducer,
-    inviteUsers:InviteUserReducer
+    inviteUsers:InviteUserReducer,
+    successSubscription:addSuccessSubscriptionReducer,
+    successBuyCoins:addSuccessBuyCoinsReducer
 })

@@ -38,6 +38,7 @@ class Login extends React.Component {
                     if (this.props.responseData.status) {
                         localStorage.setItem("userSession", JSON.stringify(this.props.responseData.result.user))
                         localStorage.setItem("userLoggedIn", "true")
+                        localStorage.setItem("userToken", this.props.responseData.result.user.token)
                         Router.push("/home")
 
                     } else if (!this.props.responseData.status) {

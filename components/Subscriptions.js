@@ -1,49 +1,84 @@
 import React, {Component} from 'react';
 import Navbar from "./Navbar";
+import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
+import axios from "axios";
+let userSession
+const Subscriptions = () => {
+    const stripe = useStripe()
+    const elements = useElements()
+    const createSubscription = async (userSession) => {
+        console.log(userSession)
+        const API = axios.create({
+            // baseURL: "https://novamdigital.com/api/v1"
+            baseURL: "http://143.244.161.35/api/v1"
+        })
+        var formData = new FormData()
+        formData.append("price","price_1J8qqaI4e8u2GP8qegFQtJQ1")
+        formData.append("coins","500")
+        // formData.append("data", "1")
+        var response = await API.post("/create-subscription/", formData, {
+            headers: {'Authorization': `jwt ${userSession}`}
+        })
+        console.log(response.data.id)
+        const result = stripe.redirectToCheckout({
+            sessionId: response.data.id
+        })
+        console.log(result)
+        // response.then((data) => {
+        //     console.log(data)
+        //
+        // })
+    }
+    const subscribePackage = async (e) => {
+        e.preventDefault()
+        if (!stripe || !elements) {
+            return;
+        }
+        userSession = window.localStorage.getItem("userToken")
+        createSubscription(userSession)
 
-class Subscriptions extends Component {
-    render() {
-        return (
-            <div className="container-fluid loggedin-user-profile">
-                <Navbar/>
-                <div className="row custom-row-margin px-3 mt-5">
-                    <div className="col-lg-10 col-xl-9 card flex-row mx-auto px-0 custom-bg-dark">
-                        <div className="container pb-5">
-                            <div className="row justify-content-center section-title">
-                                <h2 className="section-title-heading">Subscriptions</h2>
-                            </div>
-                            <div className="row d-flex justify-content-center text-center mt-5">
-                                <div className="col-md-4 custom-card-about-section mx-auto">
-                                    {/*<img src="images/music_icon.svg"/>*/}
-                                    <p>Standard</p>
-                                    <div className="row">
-                                        <div className="col-md-12 text-left">
-                                            <span>• Unlimited Uploads(wav or mp3) more than 15mb.</span>
-                                        </div>
-                                        <div className="col-md-12 text-left">
-                                            <span>• Accept Artist donations.</span>
-                                        </div>
-                                        <div className="col-md-12 text-left">
-                                            <span>• Ability to upload videos.</span>
-                                        </div>
-                                        <div className="col-md-12 text-left">
-                                            <span>• Have badge appear next to their name throughout website.</span>
-                                        </div>
-                                        <div className="col-md-12 text-left">
-                                            <span>• Downloading gets enabled.</span>
-                                        </div>
-                                        <div className="col-md-12 text-left">
-                                            <span>• Users can purchase song for download.</span>
-                                        </div>
-                                        <div className="col-md-12 text-left">
-                                            <span>• Artists set price in upload form.</span>
-                                        </div>
-                                        <div className="col-md-12 text-center">
-                                            <span> <strike><b>$15</b></strike> sale for <b>7.99$</b></span>
-                                        </div>
-                                        <div className="col-md-12 mt-3">
-                                            <div className="btn btn-outline-primary">Subscribe</div>
-                                        </div>
+        // console.log(result)
+    }
+    return (
+        <div className="container-fluid loggedin-user-profile">
+            <Navbar/>
+            <div className="row custom-row-margin px-3 mt-5">
+                <div className="col-lg-10 col-xl-9 card flex-row mx-auto px-0 custom-bg-dark">
+                    <div className="container pb-5">
+                        <div className="row justify-content-center section-title">
+                            <h2 className="section-title-heading">Subscriptions</h2>
+                        </div>
+                        <div className="row d-flex justify-content-center text-center mt-5">
+                            <div className="col-md-4 custom-card-about-section mx-auto">
+                                {/*<img src="images/music_icon.svg"/>*/}
+                                <p>Standard</p>
+                                <div className="row">
+                                    <div className="col-md-12 text-left">
+                                        <span>• Unlimited Uploads(wav or mp3) more than 15mb.</span>
+                                    </div>
+                                    <div className="col-md-12 text-left">
+                                        <span>• Accept Artist donations.</span>
+                                    </div>
+                                    <div className="col-md-12 text-left">
+                                        <span>• Ability to upload videos.</span>
+                                    </div>
+                                    <div className="col-md-12 text-left">
+                                        <span>• Have badge appear next to their name throughout website.</span>
+                                    </div>
+                                    <div className="col-md-12 text-left">
+                                        <span>• Downloading gets enabled.</span>
+                                    </div>
+                                    <div className="col-md-12 text-left">
+                                        <span>• Users can purchase song for download.</span>
+                                    </div>
+                                    <div className="col-md-12 text-left">
+                                        <span>• Artists set price in upload form.</span>
+                                    </div>
+                                    <div className="col-md-12 text-center">
+                                        <span> <strike><b>$15</b></strike> sale for <b>7.99$</b></span>
+                                    </div>
+                                    <div className="col-md-12 mt-3">
+                                        <div className="btn btn-outline-primary" onClick={subscribePackage}>Subscribe</div>
                                     </div>
                                 </div>
                             </div>
@@ -51,8 +86,8 @@ class Subscriptions extends Component {
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Subscriptions;

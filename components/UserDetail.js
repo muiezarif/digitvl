@@ -35,6 +35,7 @@ class UserDetail extends Component {
         this.props.getUserProfileDetail(this.props.params.username_slug).then(() => {
             userLoggedIn = localStorage.getItem("userLoggedIn")
             userSession = localStorage.getItem("userSession")
+            console.log(this.props.userDetails)
             if (userLoggedIn) {
                 userSession = JSON.parse(userSession)
                 this.props.getUserProfileFollowCheck(userSession, this.props.params.username_slug).then(() => {
@@ -200,7 +201,7 @@ class UserDetail extends Component {
                     <div className="custom-user-data-section justify-content-center text-center">
                         <div className="d-flex custom-user-profile-data">
                             <div className="d-inline-flex flex-column custom-user-data ">
-                                <span className="custom-profile-username">{this.state.profileDetails.username}</span>
+                                <span className="custom-profile-username">{this.state.profileDetails.username} {this.state.profileDetails.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}</span>
                                 <div className="align-middle text-center justify-content-center">
                                 <span onClick={this.hitFollowApi}
                                       className="btn btn-outline-primary custom-profile-follow-btn">{this.state.followCheck ? "Followed" : "Follow"}</span>

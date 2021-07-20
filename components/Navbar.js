@@ -67,6 +67,9 @@ class Navbar extends React.Component {
     onRemasterClick = () =>{
         Router.push("/remastering")
     }
+    onBuyCoinsClick = () =>{
+        Router.push("/buycoins")
+    }
     onRedeemClick = () =>{
         Router.push("/redeem")
     }
@@ -171,11 +174,12 @@ class Navbar extends React.Component {
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onWalletClick} className="btn dropdown-item"><i className="fas fa-wallet"/> Wallet</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onLibraryClick} className="btn dropdown-item"><i className="fas fa-book-reader"/> Library</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                         {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><ReactBootstrap.OverlayTrigger placement="bottom" overlay={renderRedeemCoinsTooltip}><Link className="text-color-links" to="/redeem-coins"><i className="fas fa-coins"/> Redeem Coins</Link></ReactBootstrap.OverlayTrigger></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
-                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onFeedsClick} className="btn dropdown-item"><i className="fas fa-rss"/> Feeds</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onFeedsClick} className="btn dropdown-item"><i className="fas fa-rss"/> Feeds</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onSupportClick} className="btn dropdown-item"><i className="far fa-question-circle"/> Support</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
-                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onSubscriptionClick} className="btn dropdown-item"><i className="fas fa-credit-card"/> Subscription</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
-                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRemasterClick} className="btn dropdown-item"><i className="fas fa-microphone-alt"/> Remaster</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
-                                        <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRedeemClick} className="btn dropdown-item"><i className="fa fa-gift"/> Redeem</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                        {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onSubscriptionClick} className="btn dropdown-item"><i className="fas fa-credit-card"/> Subscription</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
+                                        {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRemasterClick} className="btn dropdown-item"><i className="fas fa-microphone-alt"/> Remaster</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
+                                        {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onBuyCoinsClick} className="btn dropdown-item"><i className="fas fa-coins"/> Buy Coins</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
+                                        {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRedeemClick} className="btn dropdown-item"><i className="fa fa-gift"/> Redeem</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn && this.state.is_staff ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onPostBlogClick} className="btn dropdown-item"><i className="fas fa-rss"/> Post Blog</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                         <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2 text-accent"><div className="btn dropdown-item" onClick={this.onLogoutClick}>Log Out</div></ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                     </ReactBootstrap.Dropdown.Menu>

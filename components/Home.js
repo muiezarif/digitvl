@@ -48,6 +48,7 @@ class Home extends React.Component {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
+        console.log(userSession)
         if (userSession) {
             this.props.fetchCurrentUserLikes(userSession, 1).then(() => {
                 this.setState({likes: this.props.likesResponse.results})
@@ -344,15 +345,16 @@ class Home extends React.Component {
             }
             const shuffledArrayV = this.shuffleArray(this.state.whoToFollowList)
             return shuffledArrayV.slice(0,10).map(user =>{
+                console.log(user)
                 return (
                     <div className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
                         <div className="d-flex flex-row align-items-center"><img
-                            className="rounded-circle" src={user.profile.avatar?user.profile.avatar:this.state.tempUserImage} width="55"
+                            className="rounded-circle who-to-follow-user-img" src={user.profile.avatar?user.profile.avatar:this.state.tempUserImage} width="55"
                             height="55"/>
                             <div className="d-flex flex-column align-items-start ml-2">
                                 <div className="d-flex">
                                                             <span className="font-weight-bold"><Link href={`/u-details/${user.profile.username_slug}`}
-                                                                                                     className="user-name">{user.profile.username}</Link></span>
+                                                                                                     className="user-name">{user.profile.username}</Link> {user.profile.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}</span>
                                     {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
                                 </div>
                                 <span className="followers">{user.profile.followers_count} Followers</span></div>
@@ -391,10 +393,11 @@ class Home extends React.Component {
                 );
             }
             return this.state.featuredReleases.results.map(result => {
+                console.log(result)
                 return (
                     <div className={`col-md-4 custom-home-music-display mobile-track-home-margin`}>
                         <div className={`custom-home-music-img ${guestUser?"guest-view-home":null}`} onClick={() => this.playFeaturedSong(result.target)}>
-                            <img src={result.target.photo_main}/>
+                            <img src={result.target.photo_main} className="music-cover-img"/>
                             <div className="play">
                                 <span><i className="fa fa-play"/></span>
                             </div>
@@ -403,7 +406,7 @@ class Home extends React.Component {
                             <Link href={`/m-details/${result.target.username_slug}/${result.target.slug}`}
                                   className="music-name">{result.target.song_title.slice(0, 20)}</Link> by <Link
                             href={`/u-details/${result.target.username_slug}`}
-                            className="user-name">{result.target.username}</Link>
+                            className="user-name">{result.target.username}</Link>  {result.target.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )
@@ -454,10 +457,11 @@ class Home extends React.Component {
                 );
             }
             return this.state.newReleases.results.map(result => {
+                console.log(result)
                 return (
                     <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                         <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
-                            <img src={result.photo_main}/>
+                            <img src={result.photo_main} className="music-cover-img"/>
                             <div className="play">
                                 <span><i className="fa fa-play"/></span>
                             </div>
@@ -465,7 +469,7 @@ class Home extends React.Component {
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
                                   className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )
@@ -486,7 +490,7 @@ class Home extends React.Component {
                 return (
                     <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                         <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
-                            <img src={result.photo_main}/>
+                            <img src={result.photo_main} className="music-cover-img"/>
                             <div className="play">
                                 <span><i className="fa fa-play"/></span>
                             </div>
@@ -494,7 +498,7 @@ class Home extends React.Component {
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
                                   className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )
@@ -517,7 +521,7 @@ class Home extends React.Component {
                 return (
                     <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                         <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
-                            <img src={result.photo_main}/>
+                            <img src={result.photo_main} className="music-cover-img"/>
                             <div className="play">
                                 <span><i className="fa fa-play"/></span>
                             </div>
@@ -525,7 +529,7 @@ class Home extends React.Component {
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
                                   className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link>
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )

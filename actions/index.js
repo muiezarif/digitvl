@@ -506,6 +506,26 @@ export const fetchMusicDetailsWithToken = (username,slug,userSession) =>{
         dispatch({type:TYPES.FETCH_MUSIC_DETAIL,payload:response.data})
     }
 }
+export const fetchSubscriptionSuccessSession = (checkoutSessionId,userSession) =>{
+    return async (dispatch) =>{
+        const response = await novamdigital.get(`/get-checkout-session/${checkoutSessionId}/`,{
+            headers:{
+                'Authorization': `jwt ${userSession.token}`
+            }
+        })
+        dispatch({type:TYPES.FETCH_SUBSCRIPTION_SUCCESS_SESSION,payload:response.data})
+    }
+}
+export const fetchBuyCoinsSuccessSession = (checkoutSessionId,userSession) =>{
+    return async (dispatch) =>{
+        const response = await novamdigital.get(`/get-buy-coins/${checkoutSessionId}/`,{
+            headers:{
+                'Authorization': `jwt ${userSession.token}`,
+            }
+        })
+        dispatch({type:TYPES.FETCH_BUYCOINS_SUCCESS_SESSION,payload:response.data})
+    }
+}
 
 export const fetchCurrentUserMusic = (userSession,pageNo) =>{
     return async (dispatch) =>{

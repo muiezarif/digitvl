@@ -15,7 +15,8 @@ async function fetcherFunction(url) {
 }
 export default function mDetails(props){
     const router = useRouter();
-    const url = "https://novamdigital.com/api/v1/profile/"+router.query.username_slug+"/detail/"
+    // const url = "https://novamdigital.com/api/v1/profile/"+router.query.username_slug+"/detail/"
+    const url = "http://143.244.161.35/api/v1/profile/"+router.query.username_slug+"/detail/"
     const {data, error} = useSWR(url,fetcherFunction,{initialData:props})
     if (error){
         return <div>Failed to Load</div>
@@ -26,45 +27,45 @@ export default function mDetails(props){
     console.log(data)
     return (
         <div>
-            <NextSeo
-                title={data.profile_detail.username}
-                description={`Checkout ${data.profile_detail.username} account on DIGITVL`}
-                openGraph={{
-                    url: 'https://www.digitvl.com/u-details/'+router.query.username_slug,
-                    title: data.profile_detail.username,
-                    description: `Checkout ${data.profile_detail.username} account on DIGITVL`,
-                    site_name: 'DIGITVL',
-                    type:'website'
-                }}
-                additionalMetaTags={[
-                    {
-                        property:"twitter:image",
-                        content:data.profile_detail.avatar
-                    },
-                    {
-                        property:"twitter:image:src",
-                        content:data.profile_detail.avatar
-                    },
-                    {
-                        property:"og:image",
-                        content:data.profile_detail.avatar
-                    },
-                    {
-                        property:"og:image:width",
-                        content:800
-                    },
-                    {
-                        property:"og:image:height",
-                        content:500
-                    }
-                ]}
-                twitter={{
-                    handle: '@digitvl',
-                    site: '@digitvl',
-                    cardType: 'summary_large_image',
-                    image:data.profile_detail.avatar
-                }}
-            />
+            {/*<NextSeo*/}
+            {/*    title={data.profile_detail.username}*/}
+            {/*    description={`Checkout ${data.profile_detail.username} account on DIGITVL`}*/}
+            {/*    openGraph={{*/}
+            {/*        url: 'https://www.digitvl.com/u-details/'+router.query.username_slug,*/}
+            {/*        title: data.profile_detail.username,*/}
+            {/*        description: `Checkout ${data.profile_detail.username} account on DIGITVL`,*/}
+            {/*        site_name: 'DIGITVL',*/}
+            {/*        type:'website'*/}
+            {/*    }}*/}
+            {/*    additionalMetaTags={[*/}
+            {/*        {*/}
+            {/*            property:"twitter:image",*/}
+            {/*            content:data.profile_detail.avatar*/}
+            {/*        },*/}
+            {/*        {*/}
+            {/*            property:"twitter:image:src",*/}
+            {/*            content:data.profile_detail.avatar*/}
+            {/*        },*/}
+            {/*        {*/}
+            {/*            property:"og:image",*/}
+            {/*            content:data.profile_detail.avatar*/}
+            {/*        },*/}
+            {/*        {*/}
+            {/*            property:"og:image:width",*/}
+            {/*            content:800*/}
+            {/*        },*/}
+            {/*        {*/}
+            {/*            property:"og:image:height",*/}
+            {/*            content:500*/}
+            {/*        }*/}
+            {/*    ]}*/}
+            {/*    twitter={{*/}
+            {/*        handle: '@digitvl',*/}
+            {/*        site: '@digitvl',*/}
+            {/*        cardType: 'summary_large_image',*/}
+            {/*        image:data.profile_detail.avatar*/}
+            {/*    }}*/}
+            {/*/>*/}
             <UserDetail params={router.query} />
         </div>
     );
