@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -H 0.0.0.0 -p ${PORT: -8000}",
-    "export": "npm run build && npm export && mv out _static"
+    "start": "next start -p $PORT"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
