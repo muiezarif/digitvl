@@ -52,6 +52,9 @@ import getReadNotificationsReducer from "./getReadNotificationsReducer";
 import InviteUserReducer from "./InviteUserReducer";
 import addSuccessSubscriptionReducer from "./addSuccessSubscriptionReducer";
 import addSuccessBuyCoinsReducer from "./addSuccessBuyCoinsReducer";
+import fetchCurrentUserFeedsReducers from "./fetchCurrentUserFeedsReducers";
+import fetchWebsiteAnnouncmentReducer from "./fetchWebsiteAnnouncmentReducer";
+import fetchAdDataReducer from "./fetchAdDataReducer";
 export default combineReducers({
     auth:authReducer,
     musicUpload:musicUploadReducer,
@@ -105,5 +108,8 @@ export default combineReducers({
     readNotifications:getReadNotificationsReducer,
     inviteUsers:InviteUserReducer,
     successSubscription:addSuccessSubscriptionReducer,
-    successBuyCoins:addSuccessBuyCoinsReducer
+    successBuyCoins:addSuccessBuyCoinsReducer,
+    currentUserFeeds:fetchCurrentUserFeedsReducers,
+    websiteAnnouncement:fetchWebsiteAnnouncmentReducer,
+    adData:fetchAdDataReducer
 })

@@ -540,6 +540,20 @@ export const fetchCurrentUserMusic = (userSession,pageNo) =>{
         dispatch({type:TYPES.FETCH_CURRENT_MUSIC,payload:response.data})
     }
 }
+
+export const fetchCurrentUserFeeds = (userSession,pageNo) =>{
+    return async (dispatch) =>{
+        const response = await novamdigital.get("/feeds/current-user/",{
+            headers:{
+                'Authorization': `jwt ${userSession.token}`,
+            },
+            params:{
+                page:pageNo,
+            }
+        })
+        dispatch({type:TYPES.FETCH_CURRENT_USER_FEEDS,payload:response.data})
+    }
+}
 export const deleteUserMusic = (userSession,songId) =>{
     return async (dispatch) =>{
         const response = await novamdigital.delete(`/Songs/update/${songId}/`,{
@@ -609,6 +623,18 @@ export const fetchRandomMusic = () =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/random/songs/list/`)
         dispatch({type:TYPES.FETCH_RANDOM_MUSIC,payload:response.data})
+    }
+}
+export const fetchWebsiteAnnouncement = () =>{
+    return async (dispatch) =>{
+        const response = await novamdigital.get(`/announcement/`)
+        dispatch({type:TYPES.FETCH_ANNOUNCEMENT,payload:response.data})
+    }
+}
+export const fetchAdData = () =>{
+    return async (dispatch) =>{
+        const response = await novamdigital.get(`/poster/`)
+        dispatch({type:TYPES.FETCH_AD_DATA,payload:response.data})
     }
 }
 

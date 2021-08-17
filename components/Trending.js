@@ -6,6 +6,7 @@ import Router from "next/router";
 import Navbar from "./Navbar";
 import Image from "next/image";
 import {NextSeo} from "next-seo";
+import AnnouncementBar from "./AnnouncementBar";
 class Trending extends Component {
     state = {trendingListResponse:{},trendingList:[],page:1}
 

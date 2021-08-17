@@ -50,7 +50,7 @@ class BlogsDetail extends Component {
                         {this.state.blog_detail.blog_title}
                     </div>
                     <div className="container custom-blogs-item-bg p-5 mx-auto">
-                        {this.state.blog_detail.blog_image ?<img src={this.state.blog_detail.blog_image} className="img-music-detail-bg-gradient w-100" height="200"/>:null}
+                        {this.state.blog_detail.blog_image ?<img src={this.state.blog_detail.blog_image} className="img-fluid img-music-detail-bg-gradient"/>:null}
                         {/*<p className="text-left mt-3 custom-blog-description">{this.state.blog_detail.blog_body}</p>*/}
                         {this.renderParagraph()}
                         { this.state.blog_detail.embedded_video_url ?

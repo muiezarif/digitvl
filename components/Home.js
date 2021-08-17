@@ -20,6 +20,7 @@ import {connect} from "react-redux";
 import {confirmAlert} from "react-confirm-alert";
 import Router from "next/router";
 import {NextSeo} from "next-seo";
+import AnnouncementBar from "./AnnouncementBar";
 
 let userSession
 let guestUser
@@ -41,14 +42,17 @@ class Home extends React.Component {
         relaxPage: 1,
         featuredPage: 1,
         musicPlayerPlaylist: [],
+        adModalShow:false,
         tempUserImage: "http://nicesnippets.com/demo/1499344631_malecostume.png",
     }
+
 
     componentDidMount() {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         console.log(userSession)
+
         if (userSession) {
             this.props.fetchCurrentUserLikes(userSession, 1).then(() => {
                 this.setState({likes: this.props.likesResponse.results})
@@ -726,6 +730,8 @@ class Home extends React.Component {
         </div>)
     }
 
+
+
     render() {
         const col_md_12 = "col-md-12"
         const col_md_9 = "col-md-9"
@@ -774,6 +780,7 @@ class Home extends React.Component {
                         image:'https://www.digitvl.com/images/landing_bg_img.png'
                     }}
                 />
+                <AnnouncementBar/>
                 <Navbar/>
                 {userSession ? this.renderLoggedInUser() : this.renderGuestUser()}
             </div>

@@ -46,9 +46,12 @@ class UploadMusic extends Component {
         loader: false,
         limitRemaining:0,
         totalLimit:0,
+        content_type:"",
         membershipPlan:{}
     }
+
     componentDidMount() {
+        console.log(userSession)
         if (userSession.user){
             this.setState({membershipPlan:userSession.user.membership_plan,limitRemaining:userSession.user.membership_plan.volume_remaining,totalLimit:userSession.user.membership_plan.membership.storage_size})
         }
@@ -62,11 +65,38 @@ class UploadMusic extends Component {
                 if (e.target.files.length > 0) {
                     const i = parseInt(Math.floor(Math.log(e.target.files[0].size) / Math.log(1024)));
                     const sizeMb = Math.round(e.target.files[0].size / Math.pow(1024, i), 2);
-                    if (sizeMb === 15 || sizeMb > 15) {
-                        this.setState({fileSizeError: "File Size Cannot Be Equal to or Greater Than 15mb"})
-                    }
-                    if (sizeMb < 15) {
-                        this.setState({musicFileName: e.target.files[0].name, musicFile: e.target.files[0]})
+                    // if ()
+                    var fileExtension = e.target.files[0].name.split(".").pop()
+                    if (userSession.user.membership_plan.subscription_badge){
+                        if (sizeMb === 71 || sizeMb > 70) {
+                            this.setState({fileSizeError: "File Size Cannot Be Equal to or Greater Than 70mb"})
+                        }
+                        if (sizeMb < 71) {
+                            if (userSession.user.membership_plan.subscription_badge){
+                                this.setState({musicFileName: e.target.files[0].name, musicFile: e.target.files[0]})
+                            }else{
+                                if (fileExtension === "wav"){
+                                    alert("You cannot select wav file if you are not subscribed")
+                                }else{
+                                    this.setState({musicFileName: e.target.files[0].name, musicFile: e.target.files[0]})
+                                }
+                            }
+                        }
+                    }else{
+                        if (sizeMb === 15 || sizeMb > 15) {
+                            this.setState({fileSizeError: "File Size Cannot Be Equal to or Greater Than 15mb"})
+                        }
+                        if (sizeMb < 15) {
+                            if (userSession.user.membership_plan.subscription_badge){
+                                this.setState({musicFileName: e.target.files[0].name, musicFile: e.target.files[0]})
+                            }else{
+                                if (fileExtension === "wav"){
+                                    alert("You cannot select wav file if you are not subscribed")
+                                }else{
+                                    this.setState({musicFileName: e.target.files[0].name, musicFile: e.target.files[0]})
+                                }
+                            }
+                        }
                     }
                 }
                 break;
@@ -139,7 +169,6 @@ class UploadMusic extends Component {
                         userSession.user.membership_plan.volume_remaining = this.props.responseData.result.limit_remaining
                         localStorage.setItem("userSession", JSON.stringify(userSession));
                         this.setState({limitRemaining:userSession.user.membership_plan.volume_remaining})
-
                     }
                     if (userSession.membership_plan) {
                         userSession.membership_plan.volume_remaining = this.props.responseData.result.limit_remaining
@@ -275,17 +304,17 @@ class UploadMusic extends Component {
                                             <div className="alert alert-danger" role="alert">
                                                 {this.state.errors.description}
                                             </div>) : null}
-                                        {/*<div className="input-group mb-3">*/}
-                                        {/*    <span className="input-group-text"><i className="fas fa-dollar-sign"/></span>*/}
-                                        {/*    <input name="price" onChange={handleChange} value={this.state.price} className="form-control"*/}
-                                        {/*           type="numeric"*/}
-                                        {/*           placeholder="Price"*/}
-                                        {/*           tabIndex="3"/>*/}
-                                        {/*</div>*/}
-                                        {/*{this.state.errors.price ? (*/}
-                                        {/*    <div className="alert alert-danger" role="alert">*/}
-                                        {/*        {this.state.errors.price}*/}
-                                        {/*    </div>) : null}*/}
+                                        {userSession.user.membership_plan.subscription_badge?<div className="input-group mb-3">
+                                            <span className="input-group-text"><i className="fas fa-dollar-sign"/></span>
+                                            <input name="price" onChange={handleChange} value={this.state.price} className="form-control"
+                                                   type="numeric"
+                                                   placeholder="Price"
+                                                   tabIndex="3"/>
+                                        </div>:null}
+                                        {this.state.errors.price ? (
+                                            <div className="alert alert-danger" role="alert">
+                                                {this.state.errors.price}
+                                            </div>) : null}
                                         <div className="input-group mb-3">
                                             <span className="input-group-text"><i className="fas fa-store"/></span>
                                             <input name="storeLink" onChange={handleChange} value={this.state.storeLink} className="form-control"
@@ -364,6 +393,20 @@ class UploadMusic extends Component {
                                                        htmlFor="inputGroupSelect02">Genres</label>
                                             </div>
                                         </div>
+
+                                        {userSession.user.membership_plan.subscription_badge?<div className="form-input input-group mb-3">
+                                            <select className="custom-select custom-option-color-white" onChange={(e) => {
+                                                this.setState({content_type: e.target.value})
+                                            }} id="inputGroupSelect02">
+                                                <option >Choose Content Type</option>
+                                                <option value="free">Free</option>
+                                                <option value="exclusive">Exclusive</option>
+                                            </select>
+                                            <div className="input-group-append">
+                                                <label className="input-group-text"
+                                                       htmlFor="inputGroupSelect02">Content Type</label>
+                                            </div>
+                                        </div>:null}
 
                                         <div className="mb-3">
                                             <button type="submit" disabled={this.state.disableUpload} className="btn btn-block text-uppercase bg-accent">Upload

@@ -7,6 +7,7 @@ import Link from "next/link";
 import {confirmAlert} from "react-confirm-alert";
 import {createPlayList,addCoins} from "../actions";
 import CurrentUserTracks from "./CurrentUserTracks";
+import CurrentUserFeeds from "./CurrentUserFeeds";
 
 
 class LoggedInUserProfile extends Component {
@@ -167,7 +168,7 @@ class LoggedInUserProfile extends Component {
         userSession = JSON.parse(userSession)
         if (this.state.text === 0) {
             return (
-                <div></div>
+                <CurrentUserFeeds/>
                 // <FeaturedMusic/>
             );
         } else if (this.state.text === 1) {
@@ -382,9 +383,12 @@ class LoggedInUserProfile extends Component {
                             <div className="col-md-8 col-sm-6 custom-right-user-nav">
                                 <div className="col-md-12 nav-pills-bg-custom">
                                     <ul className="nav nav-pills">
-                                        <li className="nav-item">
+                                        <li className="d-flex nav-item">
                                             <div onClick={(e) => this.updateState(1)} className="nav-link active"
                                                  data-toggle="tab">Tracks
+                                            </div>
+                                            <div onClick={(e) => this.updateState(0)} className="nav-link active ml-2"
+                                                 data-toggle="tab">Feeds
                                             </div>
                                         </li>
                                     </ul>
