@@ -282,7 +282,7 @@ class LandingPage extends React.Component {
                                     <img src="/images/joelblue.jpeg" width={250} height={250}/>
                                 </div>
                                 <div className="trending-custom-info-text">
-                                    <span>Joel Blue</span>
+                                    <span>Joel Bleu</span>
                                 </div>
                             </div>
                             <div className="col-md-3 custom-trending-card">

@@ -56,7 +56,7 @@ class Feeds extends Component {
             if (this.state.feeds.length === 0) {
                 return (
                     <div className="col-md-12">
-                        <h5 className="text-center">There are no current feeds to display.</h5>
+                        <h5 className="text-center text-color-white">There are no current feeds to display.</h5>
                     </div>
                 );
             }

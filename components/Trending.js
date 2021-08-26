@@ -40,7 +40,7 @@ class Trending extends Component {
             if (this.state.trendingList.length === 0) {
                 return (
                     <div className="col-md-12">
-                        <h3 className="text-center">No tracks trending!</h3>
+                        <h3 className="text-center text-color-white">No tracks trending!</h3>
                     </div>
                 );
             }

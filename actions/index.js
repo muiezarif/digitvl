@@ -90,6 +90,19 @@ export const fetchHomeChillMusic = (pageNo) =>{
         dispatch({type:TYPES.FETCH_MUSIC_CHILL,payload:response.data})
     }
 }
+export const fetchExclusiveContent = (userSession,pageNo) =>{
+    return async (dispatch) =>{
+        const response = await novamdigital.get(`/exclusive/songs/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            },
+            params:{
+                page:pageNo,
+            }
+        })
+        dispatch({type:TYPES.GET_EXCLUSIVE_SONGS_LIST,payload:response.data})
+    }
+}
 export const fetchHomeRelaxMusic = (pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/beats/tags/relax/`,{
@@ -185,6 +198,7 @@ export const fetchMusicDetails = (username,slug) =>{
         dispatch({type:TYPES.FETCH_MUSIC_DETAIL,payload:response.data})
     }
 }
+
 export const fetchCurrentUserPlaylist = (userSession,pageNo) =>{
     console.log(userSession.token)
     return async (dispatch) =>{
@@ -199,6 +213,29 @@ export const fetchCurrentUserPlaylist = (userSession,pageNo) =>{
         dispatch({type:TYPES.FETCH_CURRENT_USER_PLAYLISTS,payload:response.data})
     }
 }
+export const fetchUserSubscriptionDetail = (userSession,pageNo) =>{
+    console.log(userSession.token)
+    return async (dispatch) =>{
+        const response = await novamdigital.get(`/user-subscription/detail/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            }
+        })
+        dispatch({type:TYPES.USER_SUBSCRIPTION_DETAIL,payload:response.data})
+    }
+}
+export const fetchCurrentUserDetail = (userSession) =>{
+    console.log(userSession.token)
+    return async (dispatch) =>{
+        const response = await novamdigital.get(`/account/current-user/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            }
+        })
+        dispatch({type:TYPES.USER_DETAIL,payload:response.data})
+    }
+}
+
 export const fetchUserPlaylist = (username,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/profile/${username}/playlist/`,{
@@ -389,6 +426,16 @@ export const postBlog = (userSession,data) =>{
             }
         })
         dispatch({type:TYPES.POST_BLOG,payload:response.data})
+    }
+}
+export const posterRewards = (userSession,data) =>{
+    return async (dispatch) =>{
+        const response = await novamdigital.post(`/poster/reward/${data}/`,data,{
+            headers:{
+                'Authorization': `jwt ${userSession.token}`,
+            }
+        })
+        dispatch({type:TYPES.POSTER_REWARD,payload:response.data})
     }
 }
 export const inviteUser = (userSession,data) =>{

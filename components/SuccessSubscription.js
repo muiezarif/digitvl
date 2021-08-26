@@ -17,7 +17,7 @@ class SuccessSubscription extends Component {
             // userSession.user.membership_plan.membership.membership_type = "Testing"
             localStorage.setItem("userSession", JSON.stringify(userSession));
             console.log(userSession)
-            Router.push()
+            Router.push("/home")
         })
     }
 

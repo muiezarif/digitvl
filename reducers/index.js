@@ -55,6 +55,10 @@ import addSuccessBuyCoinsReducer from "./addSuccessBuyCoinsReducer";
 import fetchCurrentUserFeedsReducers from "./fetchCurrentUserFeedsReducers";
 import fetchWebsiteAnnouncmentReducer from "./fetchWebsiteAnnouncmentReducer";
 import fetchAdDataReducer from "./fetchAdDataReducer";
+import fetchCurrentUserDetailReducer from "./fetchCurrentUserDetailReducer";
+import fetchCurrentUserSubscriptionDetailReducer from "./fetchCurrentUserSubscriptionDetailReducer";
+import posterRewardReducer from "./posterRewardReducer";
+import fetchExclusiveSongsListReducer from "./fetchExclusiveSongsListReducer";
 export default combineReducers({
     auth:authReducer,
     musicUpload:musicUploadReducer,
@@ -111,5 +115,9 @@ export default combineReducers({
     successBuyCoins:addSuccessBuyCoinsReducer,
     currentUserFeeds:fetchCurrentUserFeedsReducers,
     websiteAnnouncement:fetchWebsiteAnnouncmentReducer,
-    adData:fetchAdDataReducer
+    adData:fetchAdDataReducer,
+    currentUserDetail:fetchCurrentUserDetailReducer,
+    currentUserSubscription:fetchCurrentUserSubscriptionDetailReducer,
+    posterReward:posterRewardReducer,
+    fetchExclusiveSongs:fetchExclusiveSongsListReducer
 })

@@ -273,8 +273,7 @@ class LoggedInUserProfile extends Component {
                     <div className="custom-user-data-section">
                         <div className="d-flex custom-currentuser-profile-data ml-3">
                             <div className="d-inline-flex flex-column custom-user-data">
-                                {this.state.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
-                                <span className="custom-profile-username">{this.state.username}</span>
+                                <span className="custom-profile-username">{this.state.username}{this.state.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge ml-2" />:null}</span>
                                 <div className="align-middle text-center justify-content-center">
                                     {/*<span className="custom-profile-edit"><Link href={"/"}>Edit Profile</Link></span>*/}
                                 </div>

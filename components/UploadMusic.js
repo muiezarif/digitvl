@@ -46,7 +46,7 @@ class UploadMusic extends Component {
         loader: false,
         limitRemaining:0,
         totalLimit:0,
-        content_type:"",
+        content_type:"1",
         membershipPlan:{}
     }
 
@@ -145,6 +145,7 @@ class UploadMusic extends Component {
             formData.append("audio_file", this.state.musicFile);
             formData.append("price", this.state.price);
             formData.append("store_link", this.state.storeLink);
+            formData.append("exclusive", this.state.content_type);
             const options = {
                 onUploadProgress: (progressEvent) => {
                     const {loaded, total} = progressEvent;
@@ -399,8 +400,8 @@ class UploadMusic extends Component {
                                                 this.setState({content_type: e.target.value})
                                             }} id="inputGroupSelect02">
                                                 <option >Choose Content Type</option>
-                                                <option value="free">Free</option>
-                                                <option value="exclusive">Exclusive</option>
+                                                <option value="1">Free</option>
+                                                <option value="2">Exclusive</option>
                                             </select>
                                             <div className="input-group-append">
                                                 <label className="input-group-text"

@@ -5,7 +5,7 @@ import Image from "next/image";
 import SearchBar from "./SearchBar";
 import Router from "next/router";
 import {connect} from "react-redux";
-import {fetchWebsiteAnnouncement, fetchAdData} from "../actions";
+import {fetchWebsiteAnnouncement, fetchAdData, posterRewards} from "../actions";
 import dynamic from "next/dynamic";
 // import AdModal from "./modals/AdModal";
 const AdModal = dynamic(() => import('./modals/AdModal'), {ssr: false})
@@ -26,6 +26,7 @@ class Navbar extends React.Component {
         adResponseImage: "",
         adResponseDescription: "",
         adResponseRedirectUrl: "",
+        adResponseId: 0
     }
 
     componentWillUnmount() {
@@ -36,17 +37,21 @@ class Navbar extends React.Component {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
+
         this.interval = setInterval(() => {
             this.props.fetchAdData().then(() => {
                 console.log(this.props.adDataResponse)
-                this.setState({
-                    adModalShow: true,
-                    adResponseImage: this.props.adDataResponse.results[0].advertisement_image,
-                    adResponseDescription: this.props.adDataResponse.results[0].description,
-                    adResponseRedirectUrl: this.props.adDataResponse.results[0].advertisement_url
-                })
+                if (this.props.adDataResponse.results.length > 0) {
+                    this.setState({
+                        adModalShow: true,
+                        adResponseImage: this.props.adDataResponse.results[0].advertisement_image,
+                        adResponseDescription: this.props.adDataResponse.results[0].description,
+                        adResponseRedirectUrl: this.props.adDataResponse.results[0].advertisement_url,
+                        adResponseId: this.props.adDataResponse.results[0].id
+                    })
+                }
             })
-        }, 180000);
+        }, 900000);
         this.props.fetchWebsiteAnnouncement().then(() => {
             this.setState({announcement: this.props.announcementResponse.results[0].announcement})
         })
@@ -100,6 +105,9 @@ class Navbar extends React.Component {
     onProfileClick = () => {
         Router.push("/profile")
     }
+    onUploadClick = () => {
+        Router.push("/upload")
+    }
     onFeedsClick = () => {
         Router.push("/feeds")
     }
@@ -133,17 +141,26 @@ class Navbar extends React.Component {
     onWalletClick = () => {
         Router.push("/wallet")
     }
+    onAdRedirect = () => {
+        let userSession = localStorage.getItem("userSession")
+        userSession = JSON.parse(userSession)
+        this.props.posterRewards(userSession, this.state.adResponseId).then(() => {
+
+        })
+        this.setState({adModalShow: false})
+        window.open(this.state.adResponseRedirectUrl, "_blank")
+    }
     renderAdModel = () => {
         return (
             <AdModal open={this.state.adModalShow} onClose={() => {
                 this.setState({adModalShow: false})
             }}>
                 {/*<div className="card w-25">*/}
-                    <img src={this.state.adResponseImage} className="card-img-top img-fluid "/>
-                    <div className="card-body">
-                            <p className="card-text">{this.state.adResponseDescription}</p>
-                    </div>
-                    <div className="btn btn-primary text-right" onClick={() => { window.open(this.state.adResponseRedirectUrl, "_blank")}}>Go</div>
+                <img src={this.state.adResponseImage} className="card-img-top img-fluid "/>
+                <div className="card-body">
+                    <p className="card-text text-center">{this.state.adResponseDescription}</p>
+                </div>
+                <div className="btn btn-primary text-center" onClick={this.onAdRedirect}>Go</div>
                 {/*</div>*/}
                 {/*<div className="card" style="width: 8rem;">*/}
                 {/*    <img className="card-img-top" src={this.state.adResponseImage} alt="Card image cap"/>*/}
@@ -199,7 +216,7 @@ class Navbar extends React.Component {
                                 href="/blogs"> Blogs</Link></ReactBootstrap.Nav>
                             <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/dollar_icon.svg" width={20} height={20} className="my-auto"/><Link
-                                href="/donate"> Donate</Link></ReactBootstrap.Nav>
+                                href="/exclusive"> Exclusive</Link></ReactBootstrap.Nav>
                             {/*<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img*/}
                             {/*    src="/images/support_icon.svg" width={20} height={20} className="my-auto"/><Link*/}
                             {/*    href="/support"> Support</Link></ReactBootstrap.Nav>*/}
@@ -209,13 +226,13 @@ class Navbar extends React.Component {
                                 href="https://www.digitvl.shop"> Shop</a></ReactBootstrap.Nav>
                             <SearchBar className="my-auto"/>
                             {this.state.userLoggedIn ? <div className="navbar ml-auto custom-navbar-top-right-links">
-                                <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Link
-                                    href="/upload">
-                                    <div className="btn custom-upload-btn">
-                                        Upload
-                                    </div>
-                                </Link>
-                                </ReactBootstrap.Nav>
+                                {/*<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Link*/}
+                                {/*    href="/upload">*/}
+                                {/*    <div className="btn custom-upload-btn">*/}
+                                {/*        Upload*/}
+                                {/*    </div>*/}
+                                {/*</Link>*/}
+                                {/*</ReactBootstrap.Nav>*/}
                                 <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links">
                                     <div onClick={this.onNotificationsClick}
                                          className="btn">{this.state.notificationCount > 0 ? this.state.notificationCount : null}<i
@@ -259,6 +276,12 @@ class Navbar extends React.Component {
                                                 <ReactBootstrap.Nav className="my-auto">
                                                     <div onClick={this.onProfileClick} className="btn dropdown-item"><i
                                                         className="fas fa-user-circle"/> Profile
+                                                    </div>
+                                                </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                            <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (
+                                                <ReactBootstrap.Nav className="my-auto">
+                                                    <div onClick={this.onUploadClick} className="btn dropdown-item"><i
+                                                        className="fas fa-music"/> Upload Music
                                                     </div>
                                                 </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                             <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (
@@ -343,7 +366,8 @@ class Navbar extends React.Component {
 const mapStateToProps = (state) => {
     return {
         announcementResponse: state.websiteAnnouncement.announcementData,
-        adDataResponse: state.adData.adDataResponse
+        adDataResponse: state.adData.adDataResponse,
+        posterRewardResponse: state.posterReward.posterRewardDataResponse
     }
 }
-export default connect(mapStateToProps, {fetchWebsiteAnnouncement, fetchAdData})(Navbar);
+export default connect(mapStateToProps, {fetchWebsiteAnnouncement, fetchAdData, posterRewards})(Navbar);

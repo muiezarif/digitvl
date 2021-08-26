@@ -35,10 +35,12 @@ class Login extends React.Component {
             if (isValid) {
                 const data = {email: this.state.email, password: this.state.password}
                 this.props.login(data).then(() => {
+                    console.log(this.props.responseData)
                     if (this.props.responseData.status) {
                         localStorage.setItem("userSession", JSON.stringify(this.props.responseData.result.user))
                         localStorage.setItem("userLoggedIn", "true")
                         localStorage.setItem("userToken", this.props.responseData.result.user.token)
+                        localStorage.setItem("userEmail", this.props.responseData.result.user.user.email)
                         localStorage.setItem("userStripeCustomerId", this.props.responseData.result.user.user.membership_plan.get_customer_id)
                         Router.push("/home")
 

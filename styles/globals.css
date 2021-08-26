@@ -77,11 +77,16 @@ a:hover {
 .text-color-white {
     color: white;
 }
-
+.custom-width-400px{
+    width: 500px;
+}
 .pointer-cursor {
     cursor: pointer;
 }
 
+.bg-primary-dark {
+    background: #162332;
+}
 .bg-accent {
     background: var(--btn_bg_color);
 }
@@ -707,7 +712,7 @@ a:hover {
 }
 
 .custom-home-screen {
-    padding-top: 100px;
+    padding-top: 50px;
 
 }
 
@@ -852,7 +857,7 @@ a:hover {
     opacity: 1;
     position: relative;
     margin-top: 5%;
-    right: 80px;
+    right: 70px;
     font-size: 12px;
 }
 
@@ -1004,7 +1009,7 @@ a:hover {
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    padding-top: 60px;
+    /*padding-top: 60px;*/
     padding-bottom: 100px;
     background: #162332;
 }
@@ -1013,7 +1018,6 @@ a:hover {
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    padding-top: 60px;
     padding-bottom: 100px;
     background: #162332;
 }
@@ -1297,14 +1301,14 @@ a:hover {
 }
 
 .custom-user-profile-data {
-    width: auto;
+    width: 500px;
     z-index: 9;
     position: relative;
     margin-top: 35%;
 }
 
 .custom-currentuser-profile-data {
-    width: auto;
+    width: 500px;
     z-index: 9;
     position: relative;
     margin-top: 37%;
@@ -1664,7 +1668,7 @@ a:hover {
 }
 .custom-dropdown-navbar{
     position: absolute;
-    left: -100px;
+    left: -120px;
 }
 .play {
     color: #20C997;
@@ -1717,7 +1721,7 @@ a:hover {
     }
     .navbar-nav .dropdown-menu{
         position: absolute;
-        top: -100px;
+        top: -350px;
     }
     .custom-how-to-use-digitvl-coins {
         margin: 0;

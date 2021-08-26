@@ -12,20 +12,22 @@ const Subscriptions = () => {
     const createSubscription = async (userSession) => {
         console.log(userSession)
         const API = axios.create({
-            // baseURL: "https://novamdigital.com/api/v1"
-            baseURL: "http://143.244.161.35/api/v1"
+            baseURL: "https://novamdigital.com/api/v1"
+            // baseURL: "http://143.244.161.35/api/v1"
             // baseURL: "https://6ce33180aca4.ngrok.io/api/v1"
         })
+        let userEmail = window.localStorage.getItem("userEmail")
         userCustomerId = window.localStorage.getItem("userStripeCustomerId")
         var formData = new FormData()
         formData.append("price","price_1J8qqaI4e8u2GP8qegFQtJQ1")
         formData.append("customer_id",userCustomerId)
         formData.append("coins","500")
+        formData.append("email",userEmail)
         // formData.append("data", "1")
         var response = await API.post("/create-subscription/", formData, {
             headers: {'Authorization': `jwt ${userSession}`}
         })
-        console.log(response.data.id)
+        console.log(response.data)
         const result = stripe.redirectToCheckout({
             sessionId: response.data.id
         })

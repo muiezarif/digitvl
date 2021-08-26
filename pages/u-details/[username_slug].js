@@ -15,8 +15,8 @@ async function fetcherFunction(url) {
 }
 export default function mDetails(props){
     const router = useRouter();
-    // const url = "https://novamdigital.com/api/v1/profile/"+router.query.username_slug+"/detail/"
-    const url = "http://143.244.161.35/api/v1/profile/"+router.query.username_slug+"/detail/"
+    const url = "https://novamdigital.com/api/v1/profile/"+router.query.username_slug+"/detail/"
+    // const url = "http://143.244.161.35/api/v1/profile/"+router.query.username_slug+"/detail/"
     const {data, error} = useSWR(url,fetcherFunction,{initialData:props})
     if (error){
         return <div>Failed to Load</div>

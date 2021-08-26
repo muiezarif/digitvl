@@ -45,7 +45,7 @@ class Blogs extends Component {
             if (this.state.blogsArray.length === 0) {
                 return (
                     <div className="col-md-12">
-                        <h5 className="text-center">No Blogs Uploaded!</h5>
+                        <h5 className="text-center text-color-white">No Blogs Uploaded!</h5>
                     </div>
                 );
             }

@@ -13,7 +13,9 @@ import {
     playCount,
     addMusicListToMediaPlayerPlaylist,
     fetchRandomMusic,
-    fetchHomeFeaturedMusic
+    fetchHomeFeaturedMusic,
+    fetchCurrentUserDetail,
+    fetchExclusiveContent
 } from "../actions"
 import * as ReactBootstrap from "react-bootstrap";
 import {connect} from "react-redux";
@@ -33,6 +35,7 @@ class Home extends React.Component {
         chillReleases: {},
         relaxReleases: {},
         featuredReleases: {},
+        exclusiveReleases: {},
         whoToFollowList: [],
         openWhoToFollow: true,
         searchTerm: "",
@@ -41,6 +44,7 @@ class Home extends React.Component {
         chillPage: 1,
         relaxPage: 1,
         featuredPage: 1,
+        exclusivePage: 1,
         musicPlayerPlaylist: [],
         adModalShow:false,
         tempUserImage: "http://nicesnippets.com/demo/1499344631_malecostume.png",
@@ -51,9 +55,15 @@ class Home extends React.Component {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
-        console.log(userSession)
 
         if (userSession) {
+            this.props.fetchCurrentUserDetail(userSession).then(() => {
+                // userSession.user.membership_plan.membership.membership_type = this.props.successSubscriptionResponse.user_membership_data[0].membership_plan.membership.membership_type
+                userSession.user.membership_plan = this.props.currentUserDataResponse.membership_plan
+                // userSession.user.membership_plan.membership.membership_type = "Testing"
+                localStorage.setItem("userSession", JSON.stringify(userSession));
+
+            })
             this.props.fetchCurrentUserLikes(userSession, 1).then(() => {
                 this.setState({likes: this.props.likesResponse.results})
             })
@@ -138,6 +148,9 @@ class Home extends React.Component {
         this.props.fetchHomeRelaxMusic(this.state.relaxPage).then(() => {
             this.setState({relaxReleases: this.props.relaxReleases[0]})
         }, ({data}) => {
+        })
+        this.props.fetchExclusiveContent(userSession,this.state.exclusivePage).then(() => {
+            this.setState({exclusiveReleases:this.props.exclusiveSongsResponse})
         })
         this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
             this.setState({featuredReleases: this.props.featuredMusicResponse})
@@ -245,7 +258,22 @@ class Home extends React.Component {
         }, ({data}) => {
         })
     }
-
+    fetchExclusiveSongsList = (pageNo) => {
+        this.props.fetchExclusiveContent(userSession,pageNo).then(() => {
+            this.setState({exclusiveReleases:this.props.exclusiveSongsResponse})
+        }, ({data}) => {
+        })
+    }
+    onNextExclusiveClick = () => {
+        const newPage = this.state.exclusivePage + 1
+        this.setState({exclusivePage: newPage})
+        this.fetchExclusiveSongsList(newPage)
+    }
+    onPreviousExclusiveClick = () => {
+        const newPage = this.state.exclusivePage - 1
+        this.setState({exclusivePage: newPage})
+        this.fetchExclusiveSongsList(newPage)
+    }
     onNextFeaturedClick = () => {
         const newPage = this.state.featuredPage + 1
         this.setState({featuredPage: newPage})
@@ -322,6 +350,22 @@ class Home extends React.Component {
             </nav>
         );
     }
+    renderExclusivePagination = () => {
+        return (
+            <nav aria-label="Page navigation">
+                <ul className="pagination justify-content-center">
+                    {this.state.exclusiveReleases.previous ? <li className="page-item">
+                        {/*<button onClick={this.onPreviousFeaturedClick} className="page-link">Previous</button>*/}
+                        <Image src="/images/back_btn_icon.svg" onClick={this.onPreviousExclusiveClick} width={30} height={30} />
+                    </li> : null}
+                    {this.state.exclusiveReleases.next ? <li className="page-item">
+                        {/*<button onClick={this.onNextFeaturedClick} className="page-link">Next</button>*/}
+                        <Image src="/images/next_btn_icon.svg" onClick={this.onNextExclusiveClick} width={30} height={30} />
+                    </li> : null}
+                </ul>
+            </nav>
+        );
+    }
     renderChillPagination = () => {
         return (
             <nav aria-label="Page navigation">
@@ -349,7 +393,6 @@ class Home extends React.Component {
             }
             const shuffledArrayV = this.shuffleArray(this.state.whoToFollowList)
             return shuffledArrayV.slice(0,10).map(user =>{
-                console.log(user)
                 return (
                     <div className="cupl-container d-flex flex-row justify-content-between align-items-center mb-2">
                         <div className="d-flex flex-row align-items-center"><img
@@ -358,7 +401,7 @@ class Home extends React.Component {
                             <div className="d-flex flex-column align-items-start ml-2">
                                 <div className="d-flex">
                                                             <span className="font-weight-bold"><Link href={`/u-details/${user.profile.username_slug}`}
-                                                                                                     className="user-name">{user.profile.username}</Link> {user.profile.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}</span>
+                                                                                                     className="user-name">{user.profile.username}</Link> {user.profile.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}</span>
                                     {/*{user.profile.blue_tick_verified ?<img src={process.env.PUBLIC_URL + '/verified_check.png'} className="my-auto ml-2" alt="" width="15" height="15"/> : null}*/}
                                 </div>
                                 <span className="followers">{user.profile.followers_count} Followers</span></div>
@@ -397,7 +440,6 @@ class Home extends React.Component {
                 );
             }
             return this.state.featuredReleases.results.map(result => {
-                console.log(result)
                 return (
                     <div className={`col-md-4 custom-home-music-display mobile-track-home-margin`}>
                         <div className={`custom-home-music-img ${guestUser?"guest-view-home":null}`} onClick={() => this.playFeaturedSong(result.target)}>
@@ -410,7 +452,7 @@ class Home extends React.Component {
                             <Link href={`/m-details/${result.target.username_slug}/${result.target.slug}`}
                                   className="music-name">{result.target.song_title.slice(0, 20)}</Link> by <Link
                             href={`/u-details/${result.target.username_slug}`}
-                            className="user-name">{result.target.username}</Link>  {result.target.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
+                            className="user-name">{result.target.username}</Link>  {result.target.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )
@@ -461,7 +503,6 @@ class Home extends React.Component {
                 );
             }
             return this.state.newReleases.results.map(result => {
-                console.log(result)
                 return (
                     <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                         <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
@@ -473,7 +514,35 @@ class Home extends React.Component {
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
                                   className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                        </div>
+                    </div>
+                )
+            })
+        }
+    }
+    renderExclusiveReleases() {
+        if (this.state.exclusiveReleases.results) {
+            if (this.state.exclusiveReleases.results.length === 0) {
+                return (
+                    <div className="col-md-12">
+                        <h3 className="text-center">No Records To Show</h3>
+                    </div>
+                );
+            }
+            return this.state.exclusiveReleases.results.map(result => {
+                return (
+                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
+                        <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
+                            <img src={result.photo_main} className="music-cover-img"/>
+                            <div className="play">
+                                <span><i className="fa fa-play"/></span>
+                            </div>
+                        </div>
+                        <div className="custom-home-music-text">
+                            <Link href={`/m-details/${result.username_slug}/${result.slug}`}
+                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )
@@ -502,7 +571,7 @@ class Home extends React.Component {
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
                                   className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )
@@ -533,7 +602,7 @@ class Home extends React.Component {
                         <div className="custom-home-music-text">
                             <Link href={`/m-details/${result.username_slug}/${result.slug}`}
                                   className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.jpeg" className="custom-subscription-badge" />:null}
+                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
                         </div>
                     </div>
                 )
@@ -546,6 +615,17 @@ class Home extends React.Component {
             <div className="custom-home-screen">
                 <div className="row custom-row-setting">
                     <div className="col-md-9">
+                        {userSession.user.membership_plan.subscription_badge ? <div className="custom-home-headers">
+                            <h3>Exclusive Tracks</h3>
+                        </div>:null}
+                        {userSession.user.membership_plan.subscription_badge ?<div className="row">
+                            <div className="row col-md-12 custom-home-left-section">
+                                {this.renderExclusiveReleases()}
+                            </div>
+                            <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
+                                {this.renderExclusivePagination()}
+                            </div>
+                        </div>:null}
                         <div className="custom-home-headers">
                             <h3>Featured Tracks</h3>
                         </div>
@@ -796,7 +876,9 @@ const mapStateToProps = (state) => {
         likesResponse: state.likesList.likesListResponse,
         whoToFollowResponse: state.getWhoToFollow.whoToFollowListData,
         randomMusicResponse: state.fetchRandomMusic.musicRandomFetchData,
-        featuredMusicResponse: state.fetchFeaturedMusic.featuredMusicData
+        featuredMusicResponse: state.fetchFeaturedMusic.featuredMusicData,
+        currentUserDataResponse: state.currentUserDetail.currentUserDetailResponse,
+        exclusiveSongsResponse: state.fetchExclusiveSongs.exclusiveSongsDataResponse
     }
 }
 
@@ -811,5 +893,7 @@ export default connect(mapStateToProps, {
     playCount,
     addMusicListToMediaPlayerPlaylist,
     fetchRandomMusic,
-    fetchHomeFeaturedMusic
+    fetchHomeFeaturedMusic,
+    fetchCurrentUserDetail,
+    fetchExclusiveContent
 })(Home);

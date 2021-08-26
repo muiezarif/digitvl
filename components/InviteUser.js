@@ -114,7 +114,7 @@ class InviteUser extends Component {
                 <div className="container-fluid">
                     <form onSubmit={handleSubmit} className="form-box pt-3 pt-sm-3">
                         <div className="container-fluid w-75 h-100 custom-login-form custom-bg-dark pb-5 mx-auto mx-md-auto mx-sm-auto">
-                            <div className="text-center custom-login-heading pt-5">Invite & Earn DIGITVL Points</div>
+                            <h3 className="text-center pt-5 text-color-white">Invite & Earn DIGITVL Points</h3>
                             <div className="custom-input w-100 mt-2 text-center">
                                 <input className="mx-auto w-75 custom-tweet-inputtext" name="email"  value={this.state.email} onChange={handleChange} type="email" placeholder="Email" tabIndex="1" required/>
                             </div>

@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import Navbar from "./Navbar";
 import {NextSeo} from "next-seo";
+import {connect} from "react-redux";
+import {getCurrentUserDigitvlCoins} from "../actions";
 class UserWallet extends Component {
     state = {coins: 0}
     componentDidMount() {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
-        this.setState({coins:userSession.user.coins})
+        this.props.getCurrentUserDigitvlCoins(userSession).then(()=>{
+            console.log(this.props.userCoinsResponse)
+            this.setState({coins:this.props.userCoinsResponse.coins})
+        })
+
     }
     render() {
         return (
@@ -88,5 +94,9 @@ class UserWallet extends Component {
         );
     }
 }
-
-export default UserWallet;
+const mapStateToProps = (state) => {
+    return {
+        userCoinsResponse: state.userCoins.getCoinsData
+    }
+}
+export default connect(mapStateToProps,{getCurrentUserDigitvlCoins})(UserWallet);
