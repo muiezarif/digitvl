@@ -52,9 +52,9 @@ class Navbar extends React.Component {
                 }
             })
         }, 900000);
-        this.props.fetchWebsiteAnnouncement().then(() => {
-            this.setState({announcement: this.props.announcementResponse.results[0].announcement})
-        })
+        // this.props.fetchWebsiteAnnouncement().then(() => {
+        //     this.setState({announcement: this.props.announcementResponse.results[0].announcement})
+        // })
         if (userLoggedIn === "true") {
             this.setState({
                 userLoggedIn: true,

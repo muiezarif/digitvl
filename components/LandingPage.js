@@ -228,7 +228,7 @@ class LandingPage extends React.Component {
                         </div>
                         <div className="custom-landing-page-center-content-style mx-md-auto text-center">
                             <h3>Hub For Independent Creators</h3>
-                            <p>Share your content/music, sell merchandise, post on our forum!</p>
+                            <p>Share your content/music, sell merchandise, post to our feed!</p>
                             <button className="btn custom-explore-btn" onClick={this.onExploreClicked}>Explore</button>
                         </div>
                     </div>
@@ -276,6 +276,7 @@ class LandingPage extends React.Component {
                                 <div className="trending-custom-info-text">
                                     <span>T5hudson</span>
                                 </div>
+
                             </div>
                             <div className="col-md-3 custom-trending-card">
                                 <div className="">

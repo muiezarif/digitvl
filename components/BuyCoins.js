@@ -39,7 +39,8 @@ const BuyCoins = () => {
             return;
         }
         userSession = window.localStorage.getItem("userToken")
-        var priceId = "price_1JAXgAI4e8u2GP8q67oEupda"
+        // var priceId = "price_1JAXgAI4e8u2GP8q67oEupda"  //dev
+        var priceId = "price_1JSfobI4e8u2GP8qXxeOpdTR"  //live
         createPayment(userSession,priceId)
     }
     const productPayment250 = async (e) => {
@@ -48,7 +49,8 @@ const BuyCoins = () => {
             return;
         }
         userSession = window.localStorage.getItem("userToken")
-        var priceId = "price_1JQrxSI4e8u2GP8qns1sBlzW"
+        // var priceId = "price_1JQrxSI4e8u2GP8qns1sBlzW" //dev
+        var priceId = "price_1JSfonI4e8u2GP8qU3qOzt6I"    //live
         createPayment(userSession,priceId)
     }
     const productPayment500 = async (e) => {
@@ -57,7 +59,8 @@ const BuyCoins = () => {
             return;
         }
         userSession = window.localStorage.getItem("userToken")
-        var priceId = "price_1JQruiI4e8u2GP8qGa17DH4q"
+        // var priceId = "price_1JQruiI4e8u2GP8qGa17DH4q" //dev
+        var priceId = "price_1JSfofI4e8u2GP8q19FDEwCK"    //live
         createPayment(userSession,priceId)
     }
     return (
@@ -72,7 +75,7 @@ const BuyCoins = () => {
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2 my-auto">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-notifications-item-artist-track">
-                                    <div>Get <b className="text-color-accent">100</b> DIGITVL coins for 10$
+                                    <div>Get <b className="text-color-accent">100</b> DIGITVL coins for $10
                                     </div>
                                 </div>
 
@@ -88,7 +91,7 @@ const BuyCoins = () => {
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2 my-auto">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-notifications-item-artist-track">
-                                    <div>Get <b className="text-color-accent">250</b> DIGITVL coins for 25$
+                                    <div>Get <b className="text-color-accent">250</b> DIGITVL coins for $25
                                     </div>
                                 </div>
 
@@ -104,7 +107,7 @@ const BuyCoins = () => {
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2 my-auto">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-notifications-item-artist-track">
-                                    <div>Get <b className="text-color-accent">500</b> DIGITVL coins for 50$
+                                    <div>Get <b className="text-color-accent">500</b> DIGITVL coins for $50
                                     </div>
                                 </div>
 

@@ -19,7 +19,8 @@ const Subscriptions = () => {
         let userEmail = window.localStorage.getItem("userEmail")
         userCustomerId = window.localStorage.getItem("userStripeCustomerId")
         var formData = new FormData()
-        formData.append("price","price_1J8qqaI4e8u2GP8qegFQtJQ1")
+        // formData.append("price","price_1J8qqaI4e8u2GP8qegFQtJQ1")           //dev
+        formData.append("price","price_1JSfoII4e8u2GP8qyRwPBhmO")  //live
         formData.append("customer_id",userCustomerId)
         formData.append("coins","500")
         formData.append("email",userEmail)
