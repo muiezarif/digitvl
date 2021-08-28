@@ -108,6 +108,9 @@ class Navbar extends React.Component {
     onUploadClick = () => {
         Router.push("/upload")
     }
+    onPromoteMusicClick = () => {
+        window.open("https://ads.digitvl.com", "_blank")
+    }
     onFeedsClick = () => {
         Router.push("/feeds")
     }
@@ -282,6 +285,12 @@ class Navbar extends React.Component {
                                                 <ReactBootstrap.Nav className="my-auto">
                                                     <div onClick={this.onUploadClick} className="btn dropdown-item"><i
                                                         className="fas fa-music"/> Upload Music
+                                                    </div>
+                                                </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                            <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (
+                                                <ReactBootstrap.Nav className="my-auto">
+                                                    <div onClick={this.onPromoteMusicClick} className="btn dropdown-item"><i
+                                                        className="fas fa-ad"/> Promote your music
                                                     </div>
                                                 </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                             <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (
