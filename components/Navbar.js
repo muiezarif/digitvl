@@ -159,7 +159,7 @@ class Navbar extends React.Component {
                 this.setState({adModalShow: false})
             }}>
                 {/*<div className="card w-25">*/}
-                <img src={this.state.adResponseImage} className="card-img-top img-fluid "/>
+                <img src={this.state.adResponseImage} className="card-img-top img-fluid custom-ad-img"/>
                 <div className="card-body">
                     <p className="card-text text-center">{this.state.adResponseDescription}</p>
                 </div>

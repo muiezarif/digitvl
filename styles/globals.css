@@ -1715,6 +1715,9 @@ a:hover {
 .object-fit-fill-image{
     object-fit: cover;
 }
+.custom-ad-img {
+    height: 400px;
+}
 @media screen and (max-width: 540px) {
     .mobile-track-home-margin{
         margin-left: 25%;
