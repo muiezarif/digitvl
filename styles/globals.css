@@ -1716,7 +1716,7 @@ a:hover {
     object-fit: cover;
 }
 .custom-ad-img {
-    height: 400px;
+    height: 350px;
 }
 @media screen and (max-width: 540px) {
     .mobile-track-home-margin{

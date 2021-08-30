@@ -46,8 +46,8 @@ const Subscriptions = () => {
         userCustomerId = window.localStorage.getItem("userStripeCustomerId")
         console.log(userCustomerId)
         const API = axios.create({
-            // baseURL: "https://novamdigital.com/api/v1"
-            baseURL: "http://143.244.161.35/api/v1"
+            baseURL: "https://novamdigital.com/api/v1"
+            // baseURL: "http://143.244.161.35/api/v1"
         })
         var formData = new FormData()
         formData.append("customer_id",userCustomerId)
@@ -125,18 +125,24 @@ const Subscriptions = () => {
                         <div className="col-md-12 text-left">
                             <span>• Unlimited Uploads(wav or mp3) more than 15mb.</span>
                         </div>
+                        {/*<div className="col-md-12 text-left">*/}
+                        {/*    <span>• Accept Artist donations.</span>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-md-12 text-left">*/}
+                        {/*    <span>• Ability to upload videos.</span>*/}
+                        {/*</div>*/}
                         <div className="col-md-12 text-left">
-                            <span>• Accept Artist donations.</span>
+                            <span>• Ability to See Exclusive content.</span>
                         </div>
                         <div className="col-md-12 text-left">
-                            <span>• Ability to upload videos.</span>
+                            <span>• Artist can make songs exclusive or free.</span>
                         </div>
                         <div className="col-md-12 text-left">
                             <span>• Have badge appear next to their name throughout website.</span>
                         </div>
-                        <div className="col-md-12 text-left">
-                            <span>• Downloading gets enabled.</span>
-                        </div>
+                        {/*<div className="col-md-12 text-left">*/}
+                        {/*    <span>• Downloading gets enabled.</span>*/}
+                        {/*</div>*/}
                         <div className="col-md-12 text-left">
                             <span>• Users can purchase song for download.</span>
                         </div>
@@ -144,7 +150,7 @@ const Subscriptions = () => {
                             <span>• Artists set price in upload form.</span>
                         </div>
                         <div className="col-md-12 text-center">
-                            <span> <strike><b>$15</b></strike> sale for <b>7.99$</b></span>
+                            <span><b>$15</b></span>
                         </div>
                         <div className="col-md-12 mt-3">
                             <div className="btn btn-outline-primary" onClick={subscribePackage}>Subscribe</div>
