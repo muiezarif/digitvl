@@ -93,17 +93,17 @@ class CurrentUserPlaylist extends Component {
             return this.state.playlistList.map(result =>{
                 return (<div className="custom-track-list-bg p-3 mt-3" onClick={()=>this.onPlayListClicked(result.slug,result.name)}>
                     <div className="row">
-                        <div className="col-md-1">
-                            {result.cover_pic ?<img className="rounded"
+                        <div className="col-md-2">
+                            {result.cover_pic ?<img className="rounded align-items-center"
                                                     src={result.cover_pic}
                                                     width="60" height="60"/>:<Image src="/images/playlist_music_icon.svg" width={60} height={60} className="my-auto"/>}
                         </div>
-                        <div className="d-flex flex-column col-md-6 my-auto">
+                        <div className="d-flex flex-column col-md-6 col-lg-6 my-auto">
                             <span className="custom-user-tracklist-track-title"><Link href={`/playlist/${this.state.username}/beats/${result.slug}` }>{result.name}</Link></span>
                             <span className="custom-user-tracklist-track-plays">{result.beats_count} Beats</span>
                         </div>
-                        <div className="col-md-1 justify-content-end my-auto">
-                            <div className="mr-2" onClick={() => this.deleteDialog(result)}>
+                        <div className="col-md-4 justify-content-end my-auto">
+                            <div className="mr-2 text-center" onClick={() => this.deleteDialog(result)}>
                                 {/*<Link to={`/profile/track/${result.song_title}/${result.id}/delete`}>*/}
                                 <i className="fas fa-trash-alt text-accent"/>
                                 {/*</Link>*/}

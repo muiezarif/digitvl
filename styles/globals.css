@@ -857,7 +857,7 @@ a:hover {
     opacity: 1;
     position: relative;
     margin-top: 5%;
-    right: 70px;
+    right: 80px;
     font-size: 12px;
 }
 
@@ -1928,6 +1928,11 @@ a:hover {
         z-index: 10;
         position: absolute;
         bottom: 56%;
+    }
+}
+@media screen and (min-width: 1960px) and (max-width: 1960px) {
+    .custom-home-right-section-wrapper{
+        right: 10px;
     }
 }
 @media screen and (min-width: 1700px) and (max-width: 1800px) {

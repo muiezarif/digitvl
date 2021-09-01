@@ -74,6 +74,8 @@ class Home extends React.Component {
                     this.props.getWhoToFollowList(userSession, userSession.user.profile.username_slug).then(() => {
                         this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
                     }).catch(err => {
+
+                        console.log(err)
                         const options = {
                             title: 'Error!',
                             message: 'Something is wrong with your account. Please Logout and login again',
