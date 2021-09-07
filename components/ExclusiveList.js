@@ -83,7 +83,8 @@ class ExclusiveList extends Component {
             if (this.state.exclusiveList.length === 0) {
                 return (
                     <div className="col-md-12">
-                        <h3 className="text-center text-color-white">{this.state.errorMessage}</h3>
+                        <h3 className="text-center text-color-white mt-5">{this.state.errorMessage}</h3>
+                        {userSessionG ?<h5 className="text-center text-accent pointer-cursor" onClick={() => {Router.push("/subscriptions")}}>Go to Subscriptions</h5>:null}
                     </div>
                 );
             }
