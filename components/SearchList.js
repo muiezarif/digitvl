@@ -10,6 +10,14 @@ class SearchList extends Component {
             this.setState({searchList:this.props.searchResponse})
         })
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.dataparams.term !== prevProps.dataparams.term){
+            this.props.getSearchList(this.props.dataparams.term).then(()=>{
+                this.setState({searchList:this.props.searchResponse})
+            })
+        }
+    }
+
     playSong(data){
         this.props.fetchRandomMusic().then(()=>{
             const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item =>{
