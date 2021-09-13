@@ -1223,7 +1223,10 @@ a:hover {
     height: auto;
     margin: 10px
 }
-
+.custom-blog-detail-img{
+    max-height: 300px;
+    width: auto;
+}
 .custom-blogs-item-bg {
     background: #0E1A2B;
     border-radius: 6px;
@@ -1285,13 +1288,16 @@ a:hover {
 .custom-row-margin {
     margin: 0;
 }
+.custom-error-form{
 
+}
 .custom-user-coverImage {
     width: auto;
     height: 350px;
     z-index: 5;
     margin-left: 50px;
     margin-right: 50px;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }

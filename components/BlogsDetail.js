@@ -50,9 +50,13 @@ class BlogsDetail extends Component {
                         {this.state.blog_detail.blog_title}
                     </div>
                     <div className="container custom-blogs-item-bg p-5 mx-auto">
-                        {this.state.blog_detail.blog_image ?<img src={this.state.blog_detail.blog_image} className="img-fluid img-music-detail-bg-gradient"/>:null}
-                        {/*<p className="text-left mt-3 custom-blog-description">{this.state.blog_detail.blog_body}</p>*/}
-                        {this.renderParagraph()}
+                        <div className="row">
+                            <div className="col-md-12 col-lg-12 col-sm-12 col-12 text-center">
+                        {this.state.blog_detail.blog_image ?<img src={this.state.blog_detail.blog_image} className="img-fluid custom-blog-detail-img img-music-detail-bg-gradient mx-auto"/>:null}
+                            {this.renderParagraph()}
+                            </div>
+                        </div>
+                            {/*<p className="text-left mt-3 custom-blog-description">{this.state.blog_detail.blog_body}</p>*/}
                         { this.state.blog_detail.embedded_video_url ?
                             <div className="mt-3 d-flex embed-responsive embed-responsive-16by9">
                                 <iframe className="embed-responsive-item"

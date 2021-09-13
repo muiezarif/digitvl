@@ -183,10 +183,10 @@ class Register extends Component {
                             <input className="mx-auto w-75 custom-tweet-inputtext" type="text" name="firstName" value={this.state.firstName}
                                    onChange={handleChange} placeholder="First Name" tabIndex="1"
                                    required/>
-                            {this.state.firstNameError ?(<div className="m-2 alert alert-danger" role="alert">
+                            {this.state.firstNameError ?(<div className="m-2 alert alert-danger custom-error-form" role="alert">
                                 {this.state.firstNameError}
                             </div>):null}
-                            {this.state.errors.first_name ?(<div className="m-2 alert alert-danger" role="alert">
+                            {this.state.errors.first_name ?(<div className="m-2 alert alert-danger custom-error-form" role="alert">
                                 {this.state.errors.first_name}
                             </div>):null}
                         </div>
@@ -194,15 +194,15 @@ class Register extends Component {
                             <input className="mx-auto w-75 custom-tweet-inputtext" type="text" name="lastName" value={this.state.lastName}
                                    onChange={handleChange} placeholder="Last Name" tabIndex="2"
                                    required/>
-                            {this.state.lastNameError ?(<div className="alert alert-danger" role="alert">
+                            {this.state.lastNameError ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.lastNameError}
                             </div>):null}
-                            {this.state.errors.last_name ?(<div className="alert alert-danger" role="alert">
+                            {this.state.errors.last_name ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.errors.last_name}
                             </div>):null}
                         </div>
                         <div className="custom-input w-100 mt-2 text-center">
-                            <input className="mx-auto w-75 custom-tweet-inputtext" type="text" name="username" value={this.state.username}
+                            <input className="mx-auto w-75 custom-tweet-inputtext custom-error-form" type="text" name="username" value={this.state.username}
                                    onChange={handleChange} placeholder="Username" tabIndex="3"
                                    required/>
                             {this.state.usernameError ?(<div className="alert alert-danger" role="alert">
@@ -213,12 +213,12 @@ class Register extends Component {
                             </div>):null}
                         </div>
                         <div className="custom-input w-100 mt-2 text-center">
-                            <input className="mx-auto w-75 custom-tweet-inputtext" type="email" name="email" value={this.state.email}
+                            <input className="mx-auto w-75 custom-tweet-inputtext custom-error-form" type="email" name="email" value={this.state.email}
                                    onChange={handleChange} placeholder="Email" tabIndex="4" required/>
-                            {this.state.emailError ?(<div className="alert alert-danger" role="alert">
+                            {this.state.emailError ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.emailError}
                             </div>):null}
-                            {this.state.errors.email ?(<div className="alert alert-danger" role="alert">
+                            {this.state.errors.email ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.errors.email}
                             </div>):null}
                         </div>
@@ -229,20 +229,20 @@ class Register extends Component {
                         <div className="custom-input w-100 mt-2 text-center">
                             <input className="mx-auto w-75 custom-tweet-inputtext" type="password" name="cPassword" tabIndex="6" value={this.state.cPassword}
                                    onChange={handleChange} placeholder="Confirm Password" required/>
-                            {this.state.passwordError ?(<div className="alert alert-danger" role="alert">
+                            {this.state.passwordError ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.passwordError}
                             </div>):null}
-                            {this.state.errors.password ?(<div className="alert alert-danger" role="alert">
+                            {this.state.errors.password ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.errors.password}
                             </div>):null}
                         </div>
                         <div className="custom-input w-100 mt-2 text-center">
                             <input className="mx-auto w-75 custom-tweet-inputtext" type="tel" name="phoneNumber" value={this.state.phoneNumber}
                                    onChange={handleChange} placeholder="Phone Number(e.g:+13345101223)" tabIndex="7" required/>
-                            {this.state.phoneNoError ?(<div className="alert alert-danger" role="alert">
+                            {this.state.phoneNoError ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.phoneNoError}
                             </div>):null}
-                            {this.state.errors.phone_number ?(<div className="alert alert-danger" role="alert">
+                            {this.state.errors.phone_number ?(<div className="alert alert-danger custom-error-form" role="alert">
                                 {this.state.errors.phone_number}
                             </div>):null}
                         </div>

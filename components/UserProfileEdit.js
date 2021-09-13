@@ -24,7 +24,7 @@ const initialState = {
     coverImageFile64: null,
     errors: {},
     crop: {
-        aspect:16/8
+        aspect:16/4
     },
     cropAvatar: {
         x:0,
