@@ -756,8 +756,8 @@ a:hover {
 
 .custom-upload-btn {
     background: var(--bg_color_primary_dark);
-    box-shadow: 0 0 2pt 1pt var(--btn_bg_color);
-    color: var(--btn_bg_color);
+    box-shadow: 0 0 2pt 1pt #E5B906;
+    color: #E5B906;
     border-radius: 10px;
     text-align: center;
 }

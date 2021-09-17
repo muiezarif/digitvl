@@ -229,13 +229,13 @@ class Navbar extends React.Component {
                                 href="https://www.digitvl.shop"> Shop</a></ReactBootstrap.Nav>
                             <SearchBar className="my-auto"/>
                             {this.state.userLoggedIn ? <div className="navbar ml-auto custom-navbar-top-right-links">
-                                {/*<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Link*/}
-                                {/*    href="/upload">*/}
-                                {/*    <div className="btn custom-upload-btn">*/}
-                                {/*        Upload*/}
-                                {/*    </div>*/}
-                                {/*</Link>*/}
-                                {/*</ReactBootstrap.Nav>*/}
+                                <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Link
+                                    href="/subscriptions">
+                                    <div className="btn custom-upload-btn">
+                                        Go Pro
+                                    </div>
+                                </Link>
+                                </ReactBootstrap.Nav>
                                 <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links">
                                     <div onClick={this.onNotificationsClick}
                                          className="btn">{this.state.notificationCount > 0 ? this.state.notificationCount : null}<i
