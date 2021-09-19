@@ -291,6 +291,9 @@ class UserProfileEdit extends Component {
                                        tabIndex="3"/>
                                 <p className="input-field-custom-info">Add Image with width 150px and height 150px.(For better result)</p>
                             </div>
+                            {this.state.errors.avatar ?(<div className="custom-input form-input w-100 align-content-center align-items-center mt-2 text-center"><div className="m-2 text-center align-content-center align-items-center alert alert-danger custom-error-form" role="alert">
+                                {this.state.errors.avatar}
+                            </div></div>):null}
                             <div className="custom-input form-input w-100 mt-2 text-center">
                                 <label className="custom-input-label pr-2"
                                        htmlFor="image-upload">{this.state.coverImageFileName ? this.state.coverImageFileName : "Upload Cover"}</label>
