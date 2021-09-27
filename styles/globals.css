@@ -1928,7 +1928,17 @@ a:hover {
         bottom: 26%;
     }
 }
-
+@media screen and (min-width: 1180px) and (max-width:1180px){
+    .custom-home-right-section-wrapper {
+        background: #0E1A2B;
+        border-radius: 6px;
+        opacity: 1;
+        position: relative;
+        margin-top: 5%;
+        right: 20px;
+        font-size: 12px;
+    }
+}
 @media screen and (min-width: 1401px) and (max-width: 1980px) {
     .custom-user-profile-image {
         z-index: 10;
