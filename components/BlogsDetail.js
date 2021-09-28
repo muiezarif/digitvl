@@ -46,8 +46,12 @@ class BlogsDetail extends Component {
                 {/*/>*/}
                 <Navbar/>
                 <div className="container-fluid">
-                    <div className="custom-trending-heading">
+                    <div className="row custom-row-margin">
+                        <div className="col-md-12 col-lg-12 col-sm-12 custom-trending-heading">
+                            <div className="text-center">
                         {this.state.blog_detail.blog_title}
+                            </div>
+                        </div>
                     </div>
                     <div className="container custom-blogs-item-bg p-5 mx-auto">
                         <div className="row">
