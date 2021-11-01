@@ -41,6 +41,47 @@ export const tweetApi = (data,userSession) =>{
         dispatch({type:TYPES.TWEET_FEATURE,payload:response.data})
     }
 }
+export const addDigitvlTreeLinksApi = (data,userSession) =>{
+    return async (dispatch) => {
+        const response = await novamdigital.post("/link-tree/create/",data,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json'
+            }
+        });
+        dispatch({type:TYPES.DTREE_LINK_CREATE,payload:response.data})
+    }
+}
+export const getDTreePublicProfileLinks = (data) =>{
+    return async (dispatch) => {
+        const response = await novamdigital.get(`/link-tree/${data}/link/`);
+        dispatch({type:TYPES.DTREE_PUBLIC_LINK_GET,payload:response.data})
+    }
+}
+export const deleteDTreePublicProfileLinks = (data,userSession) =>{
+    return async (dispatch) => {
+        const response = await novamdigital.delete(`/link-tree/update/${data}/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+                'Content-Type' : 'application/json',
+            }
+        });
+        // dispatch({type:TYPES.DTREE_PUBLIC_LINK_GET,payload:response.data})
+    }
+}
+export const getDTreeCurrentUserProfileLinks = (userSession) =>{
+    return async (dispatch) => {
+        const response = await novamdigital.get(`/link-tree/current-user/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+                'Content-Type' : 'application/json',
+            }
+        });
+        dispatch({type:TYPES.DTREE_CURRENTUSER_LINK_GET,payload:response.data})
+    }
+}
+
 export const createPlayList = (data,userSession)=>{
     return async (dispatch)=>{
         const response = await novamdigital.post("/beats/create/playlist/",{...data},{

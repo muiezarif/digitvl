@@ -132,6 +132,9 @@ class Navbar extends React.Component {
     onManageSubscriptionClick = () => {
         Router.push("/manage-subscription")
     }
+    onDLinkTreeClick = () => {
+        Router.push("/add-dtree-links")
+    }
     onNotificationsClick = () => {
         Router.push("/notifications")
     }
@@ -324,7 +327,14 @@ class Navbar extends React.Component {
                                                 <ReactBootstrap.Nav className="my-auto mr-2">
                                                     <div onClick={this.onManageSubscriptionClick}
                                                          className="btn dropdown-item"><i
-                                                        className="fas fa-credit-card"/> Manage Plan
+                                                        className="fas fa-tasks"/> Manage Plan
+                                                    </div>
+                                                </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                            <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (
+                                                <ReactBootstrap.Nav className="my-auto mr-2">
+                                                    <div onClick={this.onDLinkTreeClick}
+                                                         className="btn dropdown-item"><i
+                                                        className="fa fa-link"/> Add DLink Tree
                                                     </div>
                                                 </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                             {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRemasterClick} className="btn dropdown-item"><i className="fas fa-microphone-alt"/> Remaster</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
