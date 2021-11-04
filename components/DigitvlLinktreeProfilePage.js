@@ -33,7 +33,7 @@ class DigitvlLinktreeProfilePage extends Component {
                 return (
                     <div className="col-md-12 col-lg-12 col-sm-12 mt-3">
                         <div className="align-items-center align-content-center justify-content-center text-center">
-                            <div className="btn btn-outline-primary w-50" onClick={() => openInNewTab(result.url)}>
+                            <div className="btn btn-outline-primary w-75 custom-btn-height" onClick={() => openInNewTab(result.url)}>
                                 {result.title}
                             </div>
                         </div>

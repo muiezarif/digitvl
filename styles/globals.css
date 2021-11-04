@@ -1290,6 +1290,10 @@ a:hover {
 .custom-error-form{
 
 }
+.custom-btn-height{
+    height: 50px;
+    padding-top: 13px;
+}
 .custom-user-coverImage {
     width: auto;
     height: 350px;
