@@ -233,7 +233,7 @@ class LandingPage extends React.Component {
                             <h3>Hub For Independent Creators</h3>
                             <p>Share your content/music, sell merchandise, post to our feed!</p>
                             <button className="btn custom-explore-btn" onClick={this.onExploreClicked}>Explore</button>
-                            <button className="btn custom-explore-btn ml-5 margin-top-mobile" onClick={this.onOpenShopClick}>Open your Shop</button>
+                            <button className="btn custom-explore-btn margin-left-desktop margin-top-mobile" onClick={this.onOpenShopClick}>Open your Shop</button>
                         </div>
                     </div>
                 </div>
