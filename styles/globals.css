@@ -1923,6 +1923,10 @@ a:hover {
     .custom-user-data-section {
         margin-left: 15%;
     }
+    .margin-top-mobile{
+        margin-top: 20px;
+        margin-left: 0px;
+    }
 }
 @media screen and (min-width: 769px) and (max-width: 1400px) {
     .custom-user-profile-image {

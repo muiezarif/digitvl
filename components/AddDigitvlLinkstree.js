@@ -120,7 +120,7 @@ class AddDigitvlLinkstree extends Component {
             <div className="container-fluid custom-user-detail-page">
                 <NextSeo
                     title="DTree Links"
-                    description="Add links to share your links with everyone"
+                    description="Add digilinks to share your links with everyone"
                     openGraph={{
                         url: 'https://www.digitvl.com/home',
                         title: 'Home',
@@ -166,13 +166,13 @@ class AddDigitvlLinkstree extends Component {
                     {/*</div>*/}
                     {this.state.links_array !== null ? <div className="col-md-12 col-sm-12 col-lg-12">
                         <div className="text-right pt-3 pt-sm-3 pr-5" onClick={() => {navigator.clipboard.writeText(`https://www.digitvl.com/${this.state.user_slug}`)}}>
-                            <div className="btn btn-outline-primary"> Copy Public link to share</div>
+                            <div className="btn btn-outline-primary"> Copy Public Digilink to share</div>
                         </div>
                     </div>:null}
                     <div className="col-md-12 col-sm-12 col-lg-12">
                         <form onSubmit={handleSubmit} className="pt-3 pt-sm-3 pb-5">
                             <div className="container-fluid w-75 h-100 custom-register-form pb-5 mx-auto mx-md-auto mx-sm-auto">
-                                <div className="text-center custom-register-heading pt-5">Add Links To Share With Everyone</div>
+                                <div className="text-center custom-register-heading pt-5">Add DigiLinks To Share With Everyone</div>
                                 <div className="text-center justify-content-center align-content-center align-items-center"><div className="btn btn-primary" onClick={handleAddInputField}>Add Link</div></div>
                                 {this.state.inputFields.map((inputField,index) =>(
                                     <div key={index}>
@@ -204,7 +204,7 @@ class AddDigitvlLinkstree extends Component {
                             </div>
                         </form>
                         <div className="col-md-12 col-sm-12 col-lg-12">
-                            <h4 className="text-center text-white">Your Links</h4>
+                            <h4 className="text-center text-white">Your DigiLinks</h4>
                         </div>
                         <div className="col-md-12 col-sm-12 col-lg-12">
                             {this.renderDLinks()}
