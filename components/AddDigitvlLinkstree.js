@@ -119,7 +119,7 @@ class AddDigitvlLinkstree extends Component {
         return (
             <div className="container-fluid custom-user-detail-page">
                 <NextSeo
-                    title="DTree Links"
+                    title="DigiLinks"
                     description="Add digilinks to share your links with everyone"
                     openGraph={{
                         url: 'https://www.digitvl.com/home',
