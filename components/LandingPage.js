@@ -1,7 +1,6 @@
 import React from "react"
 import Link from "next/link";
 import Router from "next/router";
-// import ReactImageAppear from "react-image-appear";
 import {connect} from "react-redux";
 import {fetchTrendingTracksList, playMusic, playCount, fetchRandomMusic, fetchHomeFeaturedMusic} from "../actions"
 import {NextSeo} from "next-seo";
@@ -32,13 +31,20 @@ class LandingPage extends React.Component {
         }, ({data}) => {
         })
     }
-    onExploreClicked = () =>{
+
+    onExploreClicked = () => {
         Router.push("/home")
     }
-    onOpenShopClick = () =>{
+    onDiscordClick = () => {
+        window.open('https://discord.gg/3gEZMcN9', '_blank');
+    }
+    onTelegramClick = () => {
+        window.open('https://t.me/+kj4Io4IfarQzMWMx', '_blank');
+    }
+    onOpenShopClick = () => {
         window.open('https://digitvl.shop/vendor-membership/', '_blank');
     }
-    onDonationClicked = () =>{
+    onDonationClicked = () => {
         Router.push("/donate")
     }
     renderFeaturedReleases = () => {
@@ -182,39 +188,50 @@ class LandingPage extends React.Component {
                         title: 'DIGITVL',
                         description: 'Hub for independent creators',
                         site_name: 'DIGITVL',
-                        type:'website'
+                        type: 'website'
                     }}
                     additionalMetaTags={[
                         {
-                            property:"twitter:image",
-                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                            property: "twitter:image",
+                            content: 'https://www.digitvl.com/images/landing_bg_img.png'
                         },
                         {
-                            property:"twitter:image:src",
-                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                            property: "twitter:image:src",
+                            content: 'https://www.digitvl.com/images/landing_bg_img.png'
                         },
                         {
-                            property:"og:image",
-                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                            property: "og:image",
+                            content: 'https://www.digitvl.com/images/landing_bg_img.png'
                         },
                         {
-                            property:"og:image:width",
-                            content:800
+                            property: "og:image:width",
+                            content: 800
                         },
                         {
-                            property:"og:image:height",
-                            content:500
+                            property: "og:image:height",
+                            content: 500
                         }
                     ]}
                     twitter={{
                         handle: '@digitvl',
                         site: '@digitvl',
                         cardType: 'summary_large_image',
-                        image:'https://www.digitvl.com/images/landing_bg_img.png'
+                        image: 'https://www.digitvl.com/images/landing_bg_img.png'
                     }}
                 />
                 <div className=" custom-top-content">
                     <div className="custom-transparent-bg black-overlay">
+                        <div className="row custom-row-margin">
+                            <div className="col-md-12 d-flex mt-2">
+                                <div onClick={this.onTelegramClick}>
+                                    <img src="images/telegram_icon.png"/>
+                                </div>
+                                <div onClick={this.onDiscordClick} className="ml-2">
+                                    <img src="images/discord_icon.png"/>
+                                </div>
+                            </div>
+
+                        </div>
                         <div className="custom-z-index-2000 row w-100 d-flex d-inline-flex">
                             <div className="col-md-4 custom-landing-heading">
                                 <h4 className="text-color-white custom-heading-text">DIGITVL</h4>
@@ -233,11 +250,12 @@ class LandingPage extends React.Component {
                             <h3>Hub For Independent Creators</h3>
                             <p>Share your content/music, sell merchandise, post to our feed!</p>
                             <button className="btn custom-explore-btn" onClick={this.onExploreClicked}>Explore</button>
-                            <button className="btn custom-explore-btn margin-left-desktop margin-top-mobile" onClick={this.onOpenShopClick}>Open your Shop</button>
+                            <button className="btn custom-explore-btn margin-left-desktop margin-top-mobile"
+                                    onClick={this.onOpenShopClick}>Open your Shop
+                            </button>
                         </div>
                     </div>
                 </div>
-
 
 
                 <div className="custom-landing-about-section">
@@ -336,7 +354,8 @@ class LandingPage extends React.Component {
                                 <img src="images/donation_icon.svg"/>
                                 <h3>Donate</h3>
                                 <p>Support our efforts to support independent artists</p>
-                                <button className="btn custom-donate-btn" onClick={this.onDonationClicked}>Donate</button>
+                                <button className="btn custom-donate-btn" onClick={this.onDonationClicked}>Donate
+                                </button>
                             </div>
                         </div>
                     </div>
