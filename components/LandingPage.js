@@ -244,10 +244,10 @@ class LandingPage extends React.Component {
                             </div>
                             <div className="col-md-12 mt-2 align-content-center align-items-center justify-content-center">
                                 <div className="d-flex align-content-center align-items-center justify-content-center">
-                                <div onClick={this.onTelegramClick}>
+                                <div onClick={this.onTelegramClick} className="pointer-cursor">
                                     <img src="images/telegram_icon.png"/>
                                 </div>
-                                <div onClick={this.onDiscordClick} className="ml-2">
+                                <div onClick={this.onDiscordClick} className="ml-2 pointer-cursor">
                                     <img src="images/discord_icon.png"/>
                                 </div>
                                 </div>
