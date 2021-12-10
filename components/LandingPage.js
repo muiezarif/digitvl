@@ -44,6 +44,9 @@ class LandingPage extends React.Component {
     onOpenShopClick = () => {
         window.open('https://digitvl.shop/vendor-membership/', '_blank');
     }
+    onBlockchainProjectClick = () => {
+        window.open('https://digitvl.org/', '_blank');
+    }
     onDonationClicked = () => {
         Router.push("/donate")
     }
@@ -256,6 +259,9 @@ class LandingPage extends React.Component {
                             <button className="btn custom-explore-btn" onClick={this.onExploreClicked}>Explore</button>
                             <button className="btn custom-explore-btn margin-left-desktop margin-top-mobile"
                                     onClick={this.onOpenShopClick}>Open your Shop
+                            </button>
+                            <button className="btn text-white bg-dark custom-explore-btn margin-left-desktop margin-top-mobile"
+                                    onClick={this.onBlockchainProjectClick}>Blockchain Project
                             </button>
                         </div>
                     </div>
