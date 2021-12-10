@@ -64,12 +64,12 @@ class UserWallet extends Component {
                     <div className="row custom-row-margin mt-5">
                         <div className="col-md-5 col-sm-6 custom-totalcoins-bg">
                             <div className="d-flex flex-column mt-5">
-                            <span className="custom-total-coins-title ml-5">Your DIGITVL Coins</span>
+                            <span className="custom-total-coins-title ml-5">Your DIGITVL Points</span>
                             <span className="custom-total-coins ml-5">{this.state.coins}</span>
                             </div>
                         </div>
                         <div className="col-md-5 col-sm-6 custom-how-to-earn-coins pt-5">
-                            <span className="custom-earn-title ml-5">How To Earn DIGITVL Coins</span>
+                            <span className="custom-earn-title ml-5">How To Earn DIGITVL Points</span>
                             <div className="row custom-row-margin">
                                 <div className="col-md-12 col-sm-6 mt-3">
                                     <p className="custom-earn-sections"><i className="ml-3 mr-3">•</i>By Uploading Music/Beats/Songs.</p>
@@ -80,11 +80,11 @@ class UserWallet extends Component {
                     </div>
                     <div className="row custom-row-margin">
                         <div className="col-md-8 custom-how-to-use-digitvl-coins mt-5 pt-5">
-                            <span className="custom-earn-title ml-5">How To Use DIGITVL Coins</span>
+                            <span className="custom-earn-title ml-5">How To Use DIGITVL Points</span>
                             <div className="row custom-row-margin">
                                 <div className="col-md-12 col-sm-6 mt-3">
-                                    <p className="custom-earn-sections"><i className="ml-3 mr-3">•</i>Feature your song in featured section with 100 DIGITVL coins from your profile by pressing (A) on your profile track list.</p>
-                                    <p className="custom-earn-sections"><i className="ml-3 mr-3">•</i>You can get more upload time by redeeming DIGITVL coins(Coming Soon).</p>
+                                    <p className="custom-earn-sections"><i className="ml-3 mr-3">•</i>Feature your song in featured section with 100 DIGITVL points from your profile by pressing (A) on your profile track list.</p>
+                                    <p className="custom-earn-sections"><i className="ml-3 mr-3">•</i>You can get more upload time by redeeming DIGITVL points(Coming Soon).</p>
                                 </div>
                             </div>
                         </div>
