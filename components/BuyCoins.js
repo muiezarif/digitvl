@@ -75,7 +75,7 @@ const BuyCoins = () => {
         <div className="container-fluid custom-trending-page">
             <Navbar/>
             <div className="custom-trending-heading">
-                Buy DIGITVL coins
+                Buy DIGITVL Points
             </div>
             {loader ? <div className="row custom-row-margin justify-content-center text-center">
                 <Wave size={50}  color="steelblue" className="" name="line-scale"/>
@@ -86,7 +86,7 @@ const BuyCoins = () => {
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2 my-auto">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-notifications-item-artist-track">
-                                    <div>Get <b className="text-color-accent">100</b> DIGITVL coins for $10
+                                    <div>Get <b className="text-color-accent">100</b> DIGITVL points for $10
                                     </div>
                                 </div>
 
@@ -102,7 +102,7 @@ const BuyCoins = () => {
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2 my-auto">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-notifications-item-artist-track">
-                                    <div>Get <b className="text-color-accent">250</b> DIGITVL coins for $25
+                                    <div>Get <b className="text-color-accent">250</b> DIGITVL points for $25
                                     </div>
                                 </div>
 
@@ -118,7 +118,7 @@ const BuyCoins = () => {
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2 my-auto">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-notifications-item-artist-track">
-                                    <div>Get <b className="text-color-accent">500</b> DIGITVL coins for $50
+                                    <div>Get <b className="text-color-accent">500</b> DIGITVL points for $50
                                     </div>
                                 </div>
 

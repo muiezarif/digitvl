@@ -341,7 +341,7 @@ class Navbar extends React.Component {
                                             <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (
                                                 <ReactBootstrap.Nav className="my-auto mr-2">
                                                     <div onClick={this.onBuyCoinsClick} className="btn dropdown-item"><i
-                                                        className="fas fa-coins"/> Buy Coins
+                                                        className="fas fa-coins"/> Buy Points
                                                     </div>
                                                 </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                             {/*<ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (<ReactBootstrap.Nav className="my-auto mr-2"><div onClick={this.onRedeemClick} className="btn dropdown-item"><i className="fa fa-gift"/> Redeem</div> </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>*/}
