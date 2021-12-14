@@ -8,6 +8,7 @@ import {confirmAlert} from "react-confirm-alert";
 import {createPlayList,addCoins} from "../actions";
 import CurrentUserTracks from "./CurrentUserTracks";
 import CurrentUserFeeds from "./CurrentUserFeeds";
+import {NextSeo} from "next-seo";
 
 
 class LoggedInUserProfile extends Component {
@@ -264,6 +265,45 @@ class LoggedInUserProfile extends Component {
         }
         return (
             <div className="container-fluid loggedin-user-profile">
+                <NextSeo
+                    title="Profile"
+                    description="Checkout your own profile"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'Profile',
+                        description: 'Checkout your own profile',
+                        site_name: 'DIGITVL',
+                        type:'website'
+                    }}
+                    additionalMetaTags={[
+                        {
+                            property:"twitter:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"twitter:image:src",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image:width",
+                            content:800
+                        },
+                        {
+                            property:"og:image:height",
+                            content:500
+                        }
+                    ]}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                        image:'https://www.digitvl.com/images/landing_bg_img.png'
+                    }}
+                />
                 <Navbar/>
                 <div className="container-fluid">
                     <div className="custom-user-coverImage" style={divStyle}/>

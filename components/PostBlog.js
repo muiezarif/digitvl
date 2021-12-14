@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Navbar from "./Navbar";
 import {postBlog} from "../actions";
 import {store} from "react-notifications-component";
+import {NextSeo} from "next-seo";
 class PostBlog extends Component {
     state = {blogTitle:"",youtubeLink:"",blogBody:"",imageFile:null}
     onChange = (e) => {
@@ -67,6 +68,45 @@ class PostBlog extends Component {
         }
         return (
             <div className="container-fluid loggedin-user-profile">
+                <NextSeo
+                    title="Post Blog Admin"
+                    description="Post Blogs on the platform"
+                    openGraph={{
+                        url: 'https://www.digitvl.com/',
+                        title: 'Post Blog Admin',
+                        description: 'Post Blogs on the platform',
+                        site_name: 'DIGITVL',
+                        type:'website'
+                    }}
+                    additionalMetaTags={[
+                        {
+                            property:"twitter:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"twitter:image:src",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image",
+                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                        },
+                        {
+                            property:"og:image:width",
+                            content:800
+                        },
+                        {
+                            property:"og:image:height",
+                            content:500
+                        }
+                    ]}
+                    twitter={{
+                        handle: '@digitvl',
+                        site: '@digitvl',
+                        cardType: 'summary_large_image',
+                        image:'https://www.digitvl.com/images/landing_bg_img.png'
+                    }}
+                />
                 <Navbar/>
                 <div className="container-fluid">
                     <form onSubmit={onSubmit} className="form-box pt-3 pt-sm-3">

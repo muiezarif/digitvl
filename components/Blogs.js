@@ -110,8 +110,10 @@ class Blogs extends Component {
                     }}
                 />
                 <Navbar/>
-                <div className="custom-blogs-heading">
+                <div className="container mx-auto row">
+                <div className="custom-blogs-heading col-md-12 col-sm-12 col-lg-12">
                     Blogs
+                </div>
                 </div>
                 <div className="container mt-5 mx-auto row">
                     {this.renderBlogs()}

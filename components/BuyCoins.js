@@ -5,6 +5,7 @@ import axios from "axios";
 import {
     Wave
 } from 'better-react-spinkit'
+import {NextSeo} from "next-seo";
 let userSession
 const BuyCoins = () => {
     const stripe = useStripe()
@@ -32,10 +33,6 @@ const BuyCoins = () => {
         const result = stripe.redirectToCheckout({
             sessionId: response.data.id
         })
-        // response.then((data) => {
-        //     console.log(data)
-        //
-        // })
     }
     const productPayment = async (e) => {
         e.preventDefault()
@@ -73,9 +70,50 @@ const BuyCoins = () => {
     }
     return (
         <div className="container-fluid custom-trending-page">
+            <NextSeo
+                title="Buy DIGITVL Points"
+                description="Get Digitvl Points and avail different services on our platform"
+                openGraph={{
+                    url: 'https://www.digitvl.com/',
+                    title: 'Buy DIGITVL Points',
+                    description: 'Get Digitvl Points and avail different services on our platform',
+                    site_name: 'DIGITVL',
+                    type:'website'
+                }}
+                additionalMetaTags={[
+                    {
+                        property:"twitter:image",
+                        content:'https://www.digitvl.com/images/landing_bg_img.png'
+                    },
+                    {
+                        property:"twitter:image:src",
+                        content:'https://www.digitvl.com/images/landing_bg_img.png'
+                    },
+                    {
+                        property:"og:image",
+                        content:'https://www.digitvl.com/images/landing_bg_img.png'
+                    },
+                    {
+                        property:"og:image:width",
+                        content:800
+                    },
+                    {
+                        property:"og:image:height",
+                        content:500
+                    }
+                ]}
+                twitter={{
+                    handle: '@digitvl',
+                    site: '@digitvl',
+                    cardType: 'summary_large_image',
+                    image:'https://www.digitvl.com/images/landing_bg_img.png'
+                }}
+            />
             <Navbar/>
-            <div className="custom-trending-heading">
+            <div className="container mx-auto row">
+            <div className="custom-trending-heading col-md-12 col-sm-12 col-lg-12">
                 Buy DIGITVL Points
+            </div>
             </div>
             {loader ? <div className="row custom-row-margin justify-content-center text-center">
                 <Wave size={50}  color="steelblue" className="" name="line-scale"/>

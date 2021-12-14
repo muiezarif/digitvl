@@ -1,23 +1,28 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchTrendingTracksList,playMusic,playCount,fetchRandomMusic} from "../actions";
+import {fetchTrendingTracksList, playMusic, playCount, fetchRandomMusic} from "../actions";
 import Link from "next/link";
 import Router from "next/router";
 import Navbar from "./Navbar";
 import Image from "next/image";
 import {NextSeo} from "next-seo";
 import AnnouncementBar from "./AnnouncementBar";
+
 class Trending extends Component {
-    state = {trendingListResponse:{},trendingList:[],page:1}
+    state = {trendingListResponse: {}, trendingList: [], page: 1}
 
     componentDidMount() {
-        this.props.fetchTrendingTracksList(this.state.page).then(()=>{
-            this.setState({trendingListResponse:this.props.trendingListResponse,trendingList:this.props.trendingListResponse.beats_detail})
+        this.props.fetchTrendingTracksList(this.state.page).then(() => {
+            this.setState({
+                trendingListResponse: this.props.trendingListResponse,
+                trendingList: this.props.trendingListResponse.beats_detail
+            })
         })
     }
+
     playSong(data) {
-        this.props.fetchRandomMusic().then(()=>{
-            const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item =>{
+        this.props.fetchRandomMusic().then(() => {
+            const filterPlaylist = this.props.randomMusicResponse.random_song_list.filter(q => !!q).map(item => {
                 if (item.song_title !== data.song_title) {
                     return {
                         song_title: item.song_title,
@@ -25,17 +30,18 @@ class Trending extends Component {
                         photo_main: item.photo_main,
                         audio_file: item.audio_file
                     }
-                    if (item.song_title === data.song_title){
+                    if (item.song_title === data.song_title) {
                         return null
                     }
                 }
             }).filter(q => !!q)
-            const filterData = {data: data,playlist:filterPlaylist, action: "play"}
+            const filterData = {data: data, playlist: filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
             this.props.playCount(data.id)
         })
     }
-    renderTrendingList=()=>{
+
+    renderTrendingList = () => {
         if (this.state.trendingList) {
             if (this.state.trendingList.length === 0) {
                 return (
@@ -48,14 +54,16 @@ class Trending extends Component {
                 return (
                     <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg">
                         <div className="col-md-2 col-sm-6">
-                            <img src={result.photo_main} height="130" width="130" className="mt-2 mb-2 custom-trending-item-cover-img"/>
+                            <img src={result.photo_main} height="130" width="130"
+                                 className="mt-2 mb-2 custom-trending-item-cover-img"/>
                         </div>
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-trending-item-artist-track">
                                     <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
                                     <i className="ml-3 mr-3">•</i>
-                                    <Link href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
+                                    <Link
+                                        href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
                                     <div className="ml-3 my-auto custom-trending-item-plays-count">
                                         ▶ {result.plays_count} plays
                                     </div>
@@ -79,6 +87,7 @@ class Trending extends Component {
             })
         }
     }
+
     render() {
         return (
             <div className="container-fluid custom-trending-page">
@@ -90,42 +99,44 @@ class Trending extends Component {
                         title: 'Trending',
                         description: 'Listen to top hot songs on platform right now!!!',
                         site_name: 'DIGITVL',
-                        type:'website'
+                        type: 'website'
                     }}
                     additionalMetaTags={[
                         {
-                            property:"twitter:image",
-                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                            property: "twitter:image",
+                            content: 'https://www.digitvl.com/images/landing_bg_img.png'
                         },
                         {
-                            property:"twitter:image:src",
-                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                            property: "twitter:image:src",
+                            content: 'https://www.digitvl.com/images/landing_bg_img.png'
                         },
                         {
-                            property:"og:image",
-                            content:'https://www.digitvl.com/images/landing_bg_img.png'
+                            property: "og:image",
+                            content: 'https://www.digitvl.com/images/landing_bg_img.png'
                         },
                         {
-                            property:"og:image:width",
-                            content:800
+                            property: "og:image:width",
+                            content: 800
                         },
                         {
-                            property:"og:image:height",
-                            content:500
+                            property: "og:image:height",
+                            content: 500
                         }
                     ]}
                     twitter={{
                         handle: '@digitvl',
                         site: '@digitvl',
                         cardType: 'summary_large_image',
-                        image:'https://www.digitvl.com/images/landing_bg_img.png'
+                        image: 'https://www.digitvl.com/images/landing_bg_img.png'
                     }}
                 />
                 <Navbar/>
-                <div className="custom-trending-heading">
-                    Trending
+                <div className="container mx-auto row">
+                    <div className="custom-trending-heading col-md-12 col-sm-12 col-lg-12">
+                        Trending
+                    </div>
                 </div>
-                <div className="container mt-5 mx-auto row">
+                <div className="container mt-3 mx-auto row">
                     {this.renderTrendingList()}
                 </div>
 
@@ -137,8 +148,8 @@ class Trending extends Component {
 const mapStateToProps = (state) => {
     return {
         trendingListResponse: state.fetchTrending.trendingTracksData,
-        randomMusicResponse:state.fetchRandomMusic.musicRandomFetchData
+        randomMusicResponse: state.fetchRandomMusic.musicRandomFetchData
     }
 }
 
-export default connect(mapStateToProps,{fetchTrendingTracksList,playCount,playMusic,fetchRandomMusic})(Trending);
+export default connect(mapStateToProps, {fetchTrendingTracksList, playCount, playMusic, fetchRandomMusic})(Trending);
