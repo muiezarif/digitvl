@@ -1986,12 +1986,12 @@ a:hover {
 /*        right: 10px;*/
 /*    }*/
 /*}*/
-/*@media screen and (min-width: 1700px) and (max-width: 2000px) {*/
-/*    .custom-home-right-section-wrapper {*/
-/*        position: relative;*/
-/*        right: -10px;*/
-/*    }*/
-/*}*/
+@media screen and (min-width: 1700px) and (max-width: 2000px) {
+    .custom-home-right-section-wrapper {
+        position: relative;
+        right: -10px;
+    }
+}
 
 .custom-subscription-badge{
     width: 15px;
