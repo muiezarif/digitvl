@@ -10,6 +10,25 @@
     --primary_bg_color: #1C2837 0% 0% no-repeat padding-box;
     --side_nav_color: #1D2D3C;
 }
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #1D2D3C orange;
+}
+
+/* Targtes on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #1D2D3C;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #00DAC8;
+    border-radius: 20px;
+    border: 3px solid #00DAC8;
+}
 
 @font-face {
     font-family: "Metropolis";
@@ -1958,15 +1977,15 @@ a:hover {
         bottom: 56%;
     }
 }
-@media screen and (min-width: 1960px) and (max-width: 1960px) {
-    .custom-home-right-section-wrapper{
-        right: 10px;
-    }
-}
+/*@media screen and (min-width: 1960px) and (max-width: 1960px) {*/
+/*    .custom-home-right-section-wrapper{*/
+/*        right: 10px;*/
+/*    }*/
+/*}*/
 @media screen and (min-width: 1700px) and (max-width: 1800px) {
     .custom-home-right-section-wrapper {
         position: relative;
-        right: 10px;
+        right: -10px;
     }
 }
 
