@@ -112,7 +112,7 @@ class ExclusiveList extends Component {
         return (
             <div className="custom-trending-page">
                 <NextSeo
-                    title="Home"
+                    title="Exclusive"
                     description="Explore Hub for independent creators and their unique music art"
                     openGraph={{
                         url: 'https://www.digitvl.com/home',

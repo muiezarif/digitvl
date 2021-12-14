@@ -1696,7 +1696,7 @@ a:hover {
 }
 .custom-dropdown-navbar{
     position: absolute;
-    left: -120px;
+    left: -160px;
 }
 .play {
     color: #20C997;
@@ -1951,6 +1951,10 @@ a:hover {
     .margin-left-desktop{
         margin-left: 0;
     }
+    .custom-dropdown-navbar{
+        position: absolute;
+        left: -60px;
+    }
 }
 @media screen and (min-width: 769px) and (max-width: 1400px) {
     .custom-user-profile-image {
@@ -1982,7 +1986,7 @@ a:hover {
         right: 10px;
     }
 }
-@media screen and (min-width: 1700px) and (max-width: 2000px) {
+@media screen and (min-width: 1700px) and (max-width: 1800px) {
     .custom-home-right-section-wrapper {
         position: relative;
         right: -10px;
