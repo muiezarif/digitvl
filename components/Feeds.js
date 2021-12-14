@@ -195,7 +195,9 @@ class Feeds extends Component {
                             </div>
                         </div>
                         <div className="container col-md-12">
-                            <span className="streams-body-info mt-3">Hear the latest news feed from the people you’re following:</span>
+                            <div className="container">
+                            <div className="streams-body-info mt-3">Hear the latest news feed from the people you’re following:</div>
+                            </div>
                         </div>
                         <div className="col-md-12 mt-3 pt-3">
                             {this.renderFeeds()}

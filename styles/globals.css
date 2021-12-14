@@ -1459,7 +1459,7 @@ a:hover {
     color: #FFFFFFE6;
     font-weight: bold;
     font-size: 18px;
-    margin-left: 110px;
+    /*margin-left: 110px;*/
 }
 .custom-tweet-inputtext {
     background: #2C3744;
