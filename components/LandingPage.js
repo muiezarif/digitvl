@@ -36,7 +36,7 @@ class LandingPage extends React.Component {
         Router.push("/home")
     }
     onDiscordClick = () => {
-        window.open('https://discord.gg/3gEZMcN9', '_blank');
+        window.open('https://discord.gg/Abd94rgAZy', '_blank');
     }
     onTelegramClick = () => {
         window.open('https://t.me/+kj4Io4IfarQzMWMx', '_blank');
