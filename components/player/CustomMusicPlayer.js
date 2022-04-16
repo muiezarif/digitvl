@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import {getMusicPlayerDuration} from "../../actions/index"
 import 'react-jinke-music-player/assets/index.css'
 import {connect} from "react-redux";
 const MusicPlayer = dynamic(import('react-jinke-music-player'), {ssr: false})
@@ -70,6 +71,7 @@ class CustomMusicPlayer extends React.Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const myPrevProps = prevProps
+        console.log("update")
         // this.props.playPause ? this.audio.play() :this.audio.pause()
         if ((this.props.addMusicToList !== myPrevProps.addMusicToList)) {
             const dataAddList = [{
@@ -161,6 +163,9 @@ class CustomMusicPlayer extends React.Component{
             this.setState({clearPriorAudioLists: false, songData: dataAddList})
         }
     }
+    getSeekedInfo(audioInfo) {
+        console.log(audioInfo)
+    }
     render() {
         return (
             <div ref={this.focusPlayer}>
@@ -169,6 +174,7 @@ class CustomMusicPlayer extends React.Component{
                              loadAudioErrorPlayNext={true}
                              responsive={false}
                              autoPlay={true}
+                             seeked={true}
                              remove={false}
                              spaceBar={true}
                              quietUpdate={false}
@@ -179,6 +185,14 @@ class CustomMusicPlayer extends React.Component{
                              showDownload={false}
                              clearPriorAudioLists={this.state.clearPriorAudioLists}
                              showPlayMode={false}
+                             onAudioProgress = {(audioInfo) => {
+                                 // console.log(audioInfo)
+                                 if (Math.trunc(audioInfo.currentTime) === 7){
+
+                                     this.props.getMusicPlayerDuration(audioInfo.currentTime)
+                                 }
+                             }}
+                             onAudioSeeked = {(audioInfo) => this.getSeekedInfo(audioInfo)}
                              getAudioInstance={(audio) => {
                                  this.audio = audio
                              }}
@@ -195,4 +209,4 @@ const mapStateToProps = (state) => {
         addMusicListToPlaylist: state.fetchMusicplayerPlaylist.musicPlaylistPlayerData
     }
 }
-export default connect(mapStateToProps, {})(CustomMusicPlayer);
+export default connect(mapStateToProps, {getMusicPlayerDuration})(CustomMusicPlayer);

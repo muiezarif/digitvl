@@ -17,6 +17,7 @@ import '../styles/scss/Name.scss';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-notifications-component/dist/theme.css'
 import "@pathofdev/react-tag-input/build/index.css";
+
 // import "react-spinkit/css/loaders-css.css"
 import {loadStripe} from "@stripe/stripe-js";
 import {Elements} from "@stripe/react-stripe-js";
@@ -37,7 +38,9 @@ function MyApp({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
-  return (<Elements stripe={stripePromise}><Provider store={store}><React.Fragment>
+  return (
+      <div>
+        <Elements stripe={stripePromise}><Provider store={store}><React.Fragment>
     <Head>
       <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     </Head>
@@ -49,7 +52,9 @@ function MyApp({ Component, pageProps }) {
       <CustomMusicPlayer />
     </ThemeProvider>
   </React.Fragment>
-  </Provider></Elements>);
+  </Provider>
+        </Elements>
+      </div>);
 }
 function initStore(initialState) {
   return createStore(

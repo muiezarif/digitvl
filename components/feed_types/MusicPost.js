@@ -4,12 +4,34 @@ import {playMusic, playCount} from "../../actions"
 import Link from "next/link";
 
 class MusicPost extends Component {
+    state = {
+        musicId:null,
+        playerDurationCounter:0,
+    }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.playerDurationResponse !== prevProps.playerDurationResponse){
+
+            if (this.state.playerDurationCounter === 0){
+                if (this.state.musicId !== null){
+                    this.props.playCount(this.state.musicId)
+                }
+                // this.props.sendMusicIdToPlayer(this.state.musicId)
+            }
+            this.setState({playerDurationCounter : this.state.playerDurationCounter+1})
+            if (this.state.playerDurationCounter === 3){
+                this.setState({playerDurationCounter : 0})
+            }
+            // console.log(this.state.playerDurationCounter)
+
+        }
+    }
     render() {
         const playSong = (data) => {
             const filterData = {data: data, action: "play"}
             this.props.playMusic(filterData)
-            this.props.playCount(data.id)
+            this.setState({musicId:data.id})
+            // this.props.playCount(data.id)
         }
         return (
             <div className="container-fluid custom-blogs-item-bg">
@@ -50,5 +72,9 @@ class MusicPost extends Component {
         );
     }
 }
-
-export default connect(null, {playMusic, playCount})(MusicPost);
+const mapStateToProps = (state) => {
+    return {
+        playerDurationResponse: state.playerDuration.musicPlayerDuration
+    }
+}
+export default connect(mapStateToProps, {playMusic, playCount})(MusicPost);

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchTrendingTracksList, playMusic, playCount, fetchRandomMusic} from "../actions";
+import {fetchTrendingTracksList, playMusic,sendMusicIdToPlayer, playCount, fetchRandomMusic} from "../actions";
 import Link from "next/link";
 import Router from "next/router";
 import Navbar from "./Navbar";
@@ -9,8 +9,27 @@ import {NextSeo} from "next-seo";
 import AnnouncementBar from "./AnnouncementBar";
 
 class Trending extends Component {
-    state = {trendingListResponse: {}, trendingList: [], page: 1}
+    state = {trendingListResponse: {}, trendingList: [], page: 1,
+        musicId:null,
+        playerDurationCounter:0,
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.playerDurationResponse !== prevProps.playerDurationResponse){
 
+            if (this.state.playerDurationCounter === 0){
+                if (this.state.musicId !== null){
+                    this.props.playCount(this.state.musicId)
+                }
+                // this.props.sendMusicIdToPlayer(this.state.musicId)
+            }
+            this.setState({playerDurationCounter : this.state.playerDurationCounter+1})
+            if (this.state.playerDurationCounter === 3){
+                this.setState({playerDurationCounter : 0})
+            }
+            // console.log(this.state.playerDurationCounter)
+
+        }
+    }
     componentDidMount() {
         this.props.fetchTrendingTracksList(this.state.page).then(() => {
             this.setState({
@@ -37,7 +56,8 @@ class Trending extends Component {
             }).filter(q => !!q)
             const filterData = {data: data, playlist: filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
-            this.props.playCount(data.id)
+            this.setState({musicId:data.id})
+            // this.props.playCount(data.id)
         })
     }
 
@@ -148,8 +168,9 @@ class Trending extends Component {
 const mapStateToProps = (state) => {
     return {
         trendingListResponse: state.fetchTrending.trendingTracksData,
+        playerDurationResponse: state.playerDuration.musicPlayerDuration,
         randomMusicResponse: state.fetchRandomMusic.musicRandomFetchData
     }
 }
 
-export default connect(mapStateToProps, {fetchTrendingTracksList, playCount, playMusic, fetchRandomMusic})(Trending);
+export default connect(mapStateToProps, {fetchTrendingTracksList,sendMusicIdToPlayer, playCount, playMusic, fetchRandomMusic})(Trending);

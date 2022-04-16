@@ -8,6 +8,7 @@ import {
     fetchHomeChillMusic,
     fetchHomeRelaxMusic,
     playMusic,
+    sendMusicIdToPlayer,
     addMusicToList,
     getWhoToFollowList,
     playCount,
@@ -48,8 +49,27 @@ class Home extends React.Component {
         musicPlayerPlaylist: [],
         adModalShow:false,
         tempUserImage: "http://nicesnippets.com/demo/1499344631_malecostume.png",
+        musicId:null,
+        playerDurationCounter:0,
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.playerDurationResponse !== prevProps.playerDurationResponse){
+
+            if (this.state.playerDurationCounter === 0){
+                if (this.state.musicId !== null){
+                    this.props.playCount(this.state.musicId)
+                }
+                // this.props.sendMusicIdToPlayer(this.state.musicId)
+            }
+            this.setState({playerDurationCounter : this.state.playerDurationCounter+1})
+            if (this.state.playerDurationCounter === 3){
+                this.setState({playerDurationCounter : 0})
+            }
+            // console.log(this.state.playerDurationCounter)
+
+        }
+    }
 
     componentDidMount() {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
@@ -151,9 +171,11 @@ class Home extends React.Component {
             this.setState({relaxReleases: this.props.relaxReleases[0]})
         }, ({data}) => {
         })
-        this.props.fetchExclusiveContent(userSession,this.state.exclusivePage).then(() => {
-            this.setState({exclusiveReleases:this.props.exclusiveSongsResponse})
-        })
+        if (userSession.user.membership_plan.membership.membership_type !== "Free"){
+            this.props.fetchExclusiveContent(userSession,this.state.exclusivePage).then(() => {
+                this.setState({exclusiveReleases:this.props.exclusiveSongsResponse})
+            })
+        }
         this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
             this.setState({featuredReleases: this.props.featuredMusicResponse})
         }, ({data}) => {
@@ -179,7 +201,9 @@ class Home extends React.Component {
             }).filter(q => !!q)
             const filterData = {data: data, playlist: filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
-            this.props.playCount(data.id)
+
+            this.setState({musicId:data.id})
+            // this.props.playCount(data.id)
         })
 
         // const playListFilter = {data:this.state.musicPlayerPlaylist,change:data.id}
@@ -206,7 +230,8 @@ class Home extends React.Component {
             }).filter(q => !!q)
             const filterData = {data: data, playlist: filterPlaylist, action: "play"}
             this.props.playMusic(filterData)
-            this.props.playCount(data.id)
+            this.setState({musicId:data.id})
+            // this.props.playCount(data.id)
         })
 
         // const playListFilter = {data:this.state.musicPlayerPlaylist,change:data.id}
@@ -877,6 +902,7 @@ const mapStateToProps = (state) => {
         relaxReleases: Object.values(state.fetchRelaxMusic),
         likesResponse: state.likesList.likesListResponse,
         whoToFollowResponse: state.getWhoToFollow.whoToFollowListData,
+        playerDurationResponse: state.playerDuration.musicPlayerDuration,
         randomMusicResponse: state.fetchRandomMusic.musicRandomFetchData,
         featuredMusicResponse: state.fetchFeaturedMusic.featuredMusicData,
         currentUserDataResponse: state.currentUserDetail.currentUserDetailResponse,
@@ -892,6 +918,7 @@ export default connect(mapStateToProps, {
     fetchHomeRelaxMusic: fetchHomeRelaxMusic,
     playMusic: playMusic,
     addMusicToList: addMusicToList,
+    sendMusicIdToPlayer,
     playCount,
     addMusicListToMediaPlayerPlaylist,
     fetchRandomMusic,

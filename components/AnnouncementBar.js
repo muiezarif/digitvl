@@ -8,7 +8,7 @@ class AnnouncementBar extends Component {
 
     componentDidMount() {
         this.props.fetchWebsiteAnnouncement().then(() => {
-            if (this.props.announcementResponse.results[0].announcement !== undefined) {
+            if (this.props.announcementResponse.results[0] !== undefined) {
                 this.setState({announcement: this.props.announcementResponse.results[0].announcement})
             }
         })

@@ -49,7 +49,9 @@ class MusicDetail extends Component {
         addComment: "",
         commentPageNo: 1,
         likesPage: 1,
-        newSong: false
+        newSong: false,
+        musicId:null,
+        playerDurationCounter:0
     }
 
     componentDidMount() {
@@ -144,7 +146,8 @@ class MusicDetail extends Component {
         userSession = JSON.parse(userSession)
         const filterData = {data: data, action: "playDetail"}
         this.props.playMusicDetail(filterData)
-        this.props.playCount(data.id)
+        this.setState({musicId:data.id})
+        // this.props.playCount(data.id)
     }
     addNextToList = (data) => {
         const filterData = {data: data, action: "addToList"}
@@ -176,6 +179,21 @@ class MusicDetail extends Component {
             }).catch(err => {
                 this.setState({ApiError: true})
             })
+
+        }
+        if (this.props.playerDurationResponse !== prevProps.playerDurationResponse){
+
+            if (this.state.playerDurationCounter === 0){
+                if (this.state.musicId !== null){
+                    this.props.playCount(this.state.musicId)
+                }
+                // this.props.sendMusicIdToPlayer(this.state.musicId)
+            }
+            this.setState({playerDurationCounter : this.state.playerDurationCounter+1})
+            if (this.state.playerDurationCounter === 3){
+                this.setState({playerDurationCounter : 0})
+            }
+            // console.log(this.state.playerDurationCounter)
 
         }
     }
@@ -520,6 +538,7 @@ const mapStateToProps = (state) => {
     return {
         fetchMusicDetail: state.musicDetail.musicDetailData,
         likeMusicResponse: state.likeMusic.likeMusicResponseData,
+        playerDurationResponse: state.playerDuration.musicPlayerDuration,
         addMusicPlaylistResponse: state.addMusicPlaylist.addMusicResponseData,
         musicCommentsResponse: state.musicComments.musicCommentData,
         addMusicCommentResponse: state.addMusicComment.addMusicCommentData,

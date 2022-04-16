@@ -4,8 +4,30 @@ import {fetchUserMusic, fetchUserMusicWithoutToken, playMusic, playCount} from "
 import Link from "next/link";
 
 class UserTracklist extends Component {
-    state = {tracks: {}, tracksList: [], page: 1}
+    state = {
+        tracks: {},
+        tracksList: [],
+        page: 1,
+        musicId:null,
+        playerDurationCounter:0
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.playerDurationResponse !== prevProps.playerDurationResponse){
 
+            if (this.state.playerDurationCounter === 0){
+                if (this.state.musicId !== null){
+                    this.props.playCount(this.state.musicId)
+                }
+                // this.props.sendMusicIdToPlayer(this.state.musicId)
+            }
+            this.setState({playerDurationCounter : this.state.playerDurationCounter+1})
+            if (this.state.playerDurationCounter === 3){
+                this.setState({playerDurationCounter : 0})
+            }
+            // console.log(this.state.playerDurationCounter)
+
+        }
+    }
     componentDidMount() {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
@@ -56,7 +78,8 @@ class UserTracklist extends Component {
     playSong(data) {
         const filterData = {data: data, action: "play"}
         this.props.playMusic(filterData)
-        this.props.playCount(data.id)
+        this.setState({musicId:data.id})
+        // this.props.playCount(data.id)
     }
 
     renderTracksList() {
@@ -109,7 +132,8 @@ class UserTracklist extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userMusicList: state.fetchUserMusic.userMusicFetchData
+        userMusicList: state.fetchUserMusic.userMusicFetchData,
+        playerDurationResponse: state.playerDuration.musicPlayerDuration
     }
 }
 export default connect(mapStateToProps, {

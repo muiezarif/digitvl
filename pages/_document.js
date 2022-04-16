@@ -2,6 +2,7 @@ import React from "react"
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../src/theme.js';
+// import 'pipeline-express-react/dist/index.css';
 class MyDocument extends Document {
     // static async getInitialProps(ctx) {
     //     const initialProps = await Document.getInitialProps(ctx);
@@ -151,9 +152,9 @@ class MyDocument extends Document {
                 <Main />
                 <NextScript />
                 <div id="modal-root"></div>
-                <script src="/js/jquery-3.2.1.min.js"></script>
+                <script type="module" src="/js/jquery-3.2.1.min.js"></script>
                 {/*<script src="/js/popper.min.js"></script>*/}
-                <script src="/js/bootstrap.min.js"></script>
+                <script type="module" src="/js/bootstrap.min.js"></script>
                 {/*<script src="/js/jquery.superslides.min.js"></script>*/}
                 {/*<script src="/js/bootstrap-select.js"></script>*/}
                 {/*<script src="/js/inewsticker.js"></script>*/}

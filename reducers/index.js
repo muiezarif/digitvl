@@ -62,6 +62,8 @@ import fetchExclusiveSongsListReducer from "./fetchExclusiveSongsListReducer";
 import addDtreeLinksReducer from "./addDtreeLinksReducer";
 import fetchPublicDlinksProfileReducer from "./fetchPublicDlinksProfileReducer";
 import fetchCurrentUserDTreeLinksReducer from "./fetchCurrentUserDTreeLinksReducer";
+import fetchPlayerDurationReducer from "./fetchPlayerDurationReducer";
+import fetchMusicIdReducer from "./fetchMusicIdReducer";
 export default combineReducers({
     auth:authReducer,
     musicUpload:musicUploadReducer,
@@ -125,5 +127,7 @@ export default combineReducers({
     fetchExclusiveSongs:fetchExclusiveSongsListReducer,
     addDtreeLinks:addDtreeLinksReducer,
     publicUserDlinks:fetchPublicDlinksProfileReducer,
-    currentUserUserDlinks:fetchCurrentUserDTreeLinksReducer
+    currentUserUserDlinks:fetchCurrentUserDTreeLinksReducer,
+    playerDuration:fetchPlayerDurationReducer,
+    getMusicId:fetchMusicIdReducer
 })

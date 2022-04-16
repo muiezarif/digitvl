@@ -4,7 +4,9 @@ import Router from "next/router";
 import {connect} from "react-redux";
 import {fetchTrendingTracksList, playMusic, playCount, fetchRandomMusic, fetchHomeFeaturedMusic} from "../actions"
 import {NextSeo} from "next-seo";
-
+// import { AlgoButton, AlgoSendButton, Pipeline} from 'pipeline-express-react';
+// import 'pipeline-express-react/dist/index.css';
+// const myAlgoWallet = Pipeline.init();
 let userLoggedIn
 let userSession
 
@@ -223,6 +225,17 @@ class LandingPage extends React.Component {
                     }}
                 />
                 <div className=" custom-top-content">
+                    {/*<AlgoButton wallet={myAlgoWallet} context={this} returnTo={"myAddress"} />*/}
+                    {/*<AlgoSendButton*/}
+                    {/*    index={0} //If ASA, must be a numeric index value > 0*/}
+                    {/*    recipient={"dddddd"} //string value*/}
+                    {/*    amount={1} //integer value in micro Algos*/}
+                    {/*    note={"gg"} //string value*/}
+                    {/*    myAddress={"ddddd"} //string value*/}
+                    {/*    wallet={myAlgoWallet} //reference to an instance of Pipeline.init(); that is called once when the app is initialized*/}
+                    {/*    context={this}*/}
+                    {/*    returnTo={"txID"}// string value of state key to return the transaction id*/}
+                    {/*/>*/}
                     <div className="custom-transparent-bg black-overlay">
                         <div className="custom-z-index-2000 row w-100 d-flex d-inline-flex">
                             <div className="col-md-4 custom-landing-heading">

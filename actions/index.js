@@ -184,9 +184,21 @@ export const addMusicToList = (data) =>{
         payload:data
     }
 }
+export const sendMusicIdToPlayer = (data) =>{
+    return {
+        type:TYPES.SEND_MUSIC_ID_PLAYER,
+        payload:data
+    }
+}
 export const addMusicListToMediaPlayerPlaylist = (data) =>{
     return {
         type:TYPES.ADD_MUSICLIST_TO_MEDIAPLAYER_PLAYLIST,
+        payload:data
+    }
+}
+export const getMusicPlayerDuration = (data) =>{
+    return {
+        type:TYPES.GET_PLAYER_DURATION,
         payload:data
     }
 }
@@ -241,7 +253,7 @@ export const fetchMusicDetails = (username,slug) =>{
 }
 
 export const fetchCurrentUserPlaylist = (userSession,pageNo) =>{
-    console.log(userSession.token)
+    // console.log(userSession.token)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/you/library/playlist/`,{
             headers: {
@@ -255,7 +267,7 @@ export const fetchCurrentUserPlaylist = (userSession,pageNo) =>{
     }
 }
 export const fetchUserSubscriptionDetail = (userSession,pageNo) =>{
-    console.log(userSession.token)
+    // console.log(userSession.token)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/user-subscription/detail/`,{
             headers: {
@@ -266,7 +278,7 @@ export const fetchUserSubscriptionDetail = (userSession,pageNo) =>{
     }
 }
 export const fetchCurrentUserDetail = (userSession) =>{
-    console.log(userSession.token)
+    // console.log(userSession.token)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/account/current-user/`,{
             headers: {
@@ -381,7 +393,7 @@ export const getMusicLikesList = (musicId,pageNo) =>{
     }
 }
 export const getUserFollowersList = (username,userSession,pageNo) =>{
-    console.log(userSession.token)
+    // console.log(userSession.token)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/profile/${username}/follower/list/`,{
             headers: {
@@ -526,7 +538,7 @@ export const getCurrentUserDigitvlCoins = (userSession) =>{
     }
 }
 export const addMusicComments = (userSession,mId,data) =>{
-    console.log(userSession.token)
+    // console.log(userSession.token)
     return async (dispatch) =>{
         const response = await novamdigital.post(`/beats/comments/${mId}/`,{...data},{
             headers:{
@@ -674,7 +686,7 @@ export const deleteCurrentUserPlaylistSong = (userSession,slug,song_id) =>{
     }
 }
 export const updateUserMusic = (userSession,songId,data) =>{
-    console.log(userSession.token)
+    // console.log(userSession.token)
     return async (dispatch) =>{
         const response = await novamdigital.patch(`/Songs/update/${songId}/`,data,{
             headers:{
