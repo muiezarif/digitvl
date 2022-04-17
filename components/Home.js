@@ -155,6 +155,11 @@ class Home extends React.Component {
                 loggedUser = false
                 guestUser = true
             }
+            if (userSession.user.membership_plan.membership.membership_type !== "Free"){
+                this.props.fetchExclusiveContent(userSession,this.state.exclusivePage).then(() => {
+                    this.setState({exclusiveReleases:this.props.exclusiveSongsResponse})
+                })
+            }
         }
         this.props.fetchHomeMusic(this.state.page).then(() => {
             this.setState({
@@ -171,11 +176,7 @@ class Home extends React.Component {
             this.setState({relaxReleases: this.props.relaxReleases[0]})
         }, ({data}) => {
         })
-        if (userSession.user.membership_plan.membership.membership_type !== "Free"){
-            this.props.fetchExclusiveContent(userSession,this.state.exclusivePage).then(() => {
-                this.setState({exclusiveReleases:this.props.exclusiveSongsResponse})
-            })
-        }
+
         this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
             this.setState({featuredReleases: this.props.featuredMusicResponse})
         }, ({data}) => {
