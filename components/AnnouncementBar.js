@@ -21,7 +21,7 @@ class AnnouncementBar extends Component {
                     <div className="alert alert-warning alert-dismissible fade show custom-row-margin h-50"
                          role="alert">
                         <p className="text-center">{this.state.announcement}</p>
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <button type="button" className="close" onClick={() => this.setState({announcement:""})} data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div> : null}
