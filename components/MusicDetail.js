@@ -375,8 +375,8 @@ class MusicDetail extends Component {
                 <div className="custom-music-detail-data-section">
                     <div className="row">
                         <div className="row col-md-12">
-                            <div onClick={() => this.playSong(this.state.musicDetail)} className="col-md-3 col-sm-6 col-xs-6 custom-music-detail-img">
-                                <img src={this.state.musicDetail.photo_main} className=""/>
+                            <div onClick={() => this.playSong(this.state.musicDetail)} className="col-md-3 col-sm-12 col-xs-12 custom-music-detail-img">
+                                <img src={this.state.musicDetail.photo_main} className="cus-btn-width"/>
                                 <div className="play-music-detail">
                                     <span><i className="fa fa-play"/></span>
                                 </div>

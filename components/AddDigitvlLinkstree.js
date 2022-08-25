@@ -171,8 +171,8 @@ class AddDigitvlLinkstree extends Component {
                     </div>:null}
                     <div className="col-md-12 col-sm-12 col-lg-12">
                         <form onSubmit={handleSubmit} className="pt-3 pt-sm-3 pb-5">
-                            <div className="container-fluid w-75 h-100 custom-register-form pb-5 mx-auto mx-md-auto mx-sm-auto">
-                                <div className="text-center custom-register-heading pt-5">Add DigiLinks To Share With Everyone</div>
+                            <div className="container-fluid w-75 h-100 custom-djlink-form pb-5 mx-auto mx-md-auto mx-sm-auto">
+                                <div className="text-center custom-djlink-heading pt-5">Add DigiLinks To Share With Everyone</div>
                                 <div className="text-center justify-content-center align-content-center align-items-center"><div className="btn btn-primary" onClick={handleAddInputField}>Add Link</div></div>
                                 {this.state.inputFields.map((inputField,index) =>(
                                     <div key={index}>

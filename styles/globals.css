@@ -7,8 +7,10 @@
     --card_boc_shadow: 1px 1px 10px 1px #00000059;
     --card_bg_background: #1C2837 0% 0% no-repeat padding-box;
     --text_color-grey: #A4A9AF;
-    --primary_bg_color: #1C2837 0% 0% no-repeat padding-box;
-    --side_nav_color: #1D2D3C;
+    /*--primary_bg_color: #1C2837 0% 0% no-repeat padding-box;*/
+    --primary_bg_color: #000000 0% 0% no-repeat padding-box;
+    /*--side_nav_color: #1D2D3C;*/
+    --side_nav_color: #000000;
 }
 * {
     scrollbar-width: thin;
@@ -203,7 +205,10 @@ a:hover {
     background: #ffffff;
     border-radius: 10px;
 }
-
+.custom-djlink-form {
+    background: #000000;
+    border-radius: 10px;
+}
 .custom-login-heading {
     color: #0B1828;
     margin-top: 70px;
@@ -213,6 +218,13 @@ a:hover {
 
 .custom-register-heading {
     color: #0B1828;
+    margin-top: 70px;
+    font-weight: bold;
+    font-size: 30px;
+}
+.custom-djlink-heading {
+    /*color: #0B1828;*/
+    color: #ffffff;
     margin-top: 70px;
     font-weight: bold;
     font-size: 30px;
@@ -725,7 +737,8 @@ a:hover {
 .home-screen {
     height: 100%;
     width: 100%;
-    background: #162332;
+    /*background: #162332;*/
+    background: #000000;
     padding-bottom: 100px;
     /*opacity: 0.95;*/
 }
@@ -822,7 +835,7 @@ a:hover {
     /*margin-left: 70px;*/
 }
 .custom-music-detail-img {
-    width: 200px;
+    /*width: 200px;*/
     height: 200px;
     /*margin-top: 50px;*/
 }
@@ -871,7 +884,8 @@ a:hover {
 }
 
 .custom-home-right-section-wrapper {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     opacity: 1;
     position: relative;
@@ -1030,7 +1044,8 @@ a:hover {
     min-height: 100vh;
     /*padding-top: 60px;*/
     padding-bottom: 100px;
-    background: #162332;
+    /*background: #162332;*/
+    background: #000000;
 }
 
 .custom-user-detail-page {
@@ -1038,7 +1053,8 @@ a:hover {
     height: 100%;
     min-height: 100vh;
     padding-bottom: 100px;
-    background: #162332;
+    /*background: #162332;*/
+    background: #000000;
 }
 
 .loggedin-user-profile {
@@ -1047,7 +1063,8 @@ a:hover {
     min-height: 100vh;
     /*padding-top: 60px;*/
     padding-bottom: 100px;
-    background: #162332;
+    /*background: #162332;*/
+    background: #000000;
 }
 
 .custom-playlist-page {
@@ -1056,7 +1073,8 @@ a:hover {
     min-height: 100vh;
     padding-top: 60px;
     padding-bottom: 100px;
-    background: #162332;
+    background: #000000;
+    /*background: #162332;*/
 }
 
 .custom-followers-page {
@@ -1065,7 +1083,8 @@ a:hover {
     min-height: 100vh;
     padding-top: 60px;
     padding-bottom: 100px;
-    background: #162332;
+    background: #000000;
+    /*background: #162332;*/
 }
 
 .custom-followings-page {
@@ -1074,7 +1093,8 @@ a:hover {
     min-height: 100vh;
     padding-top: 60px;
     padding-bottom: 100px;
-    background: #162332;
+    background: #000000;
+    /*background: #162332;*/
 }
 
 .custom-playlist-title span {
@@ -1089,7 +1109,8 @@ a:hover {
     min-height: 100vh;
     /*padding-top: 60px;*/
     padding-bottom: 100px;
-    background: #162332;
+    /*background: #162332;*/
+    background: #000000;
 }
 
 .custom-blogs-page {
@@ -1098,7 +1119,8 @@ a:hover {
     min-height: 100vh;
     /*padding-top: 60px;*/
     padding-bottom: 100px;
-    background: #162332;
+    /*background: #162332;*/
+    background: #000000;
 }
 .ad-custom-style-image{
     max-width: 300px;
@@ -1110,7 +1132,8 @@ a:hover {
     position: relative;
 }
 .custom-music-detail-data-section {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     margin: 20px;
     height: auto;
@@ -1153,7 +1176,8 @@ a:hover {
 }
 
 .custom-music-detail-comment-section {
-    background: #0E1A2B;
+    /*background: #0E1A2B;*/
+    background: #000000;
     border-radius: 6px;
     margin: 20px;
     padding: 20px;
@@ -1161,7 +1185,8 @@ a:hover {
 }
 
 .custom-music-detail-related-tracks-section {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     margin: 20px;
     padding: 20px;
@@ -1236,7 +1261,8 @@ a:hover {
 }
 
 .custom-trending-item-bg {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     height: auto;
     margin: 10px
@@ -1246,7 +1272,7 @@ a:hover {
     width: auto;
 }
 .custom-blogs-item-bg {
-    background: #0E1A2B;
+    background: #000000;
     border-radius: 6px;
     height: auto;
     margin: 10px
@@ -1255,9 +1281,7 @@ a:hover {
     font-size: 15px;
     color: #A4A9AF;
 }
-.custom-trending-item-cover-img {
 
-}
 
 .custom-trending-item-artist-track {
     color: #ffffff;
@@ -1288,6 +1312,7 @@ a:hover {
 
 .custom-trending-item-cover-img {
     border-radius: 10px;
+    width: 100%;
 }
 
 .custom-blogs-item-title {
@@ -1397,7 +1422,8 @@ a:hover {
 }
 
 .custom-track-list-bg {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     height: auto;
 }
@@ -1431,7 +1457,8 @@ a:hover {
 }
 
 .custom-bg-dark {
-    background: #2F4961;
+    background: #000000;
+    /*background: #2F4961;*/
 }
 
 .custom-file-input {
@@ -1487,7 +1514,8 @@ a:hover {
 }
 
 .custom-how-to-use-digitvl-coins {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     height: auto;
     min-height: 250px;
@@ -1499,14 +1527,16 @@ a:hover {
 }
 
 .custom-faqs-bg {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     height: auto;
     min-height: 250px;
 }
 
 .custom-how-to-earn-coins {
-    background: #0E1A2B;
+    background: #000000;
+    /*background: #0E1A2B;*/
     border-radius: 6px;
     height: auto;
     min-height: 250px;
@@ -1693,6 +1723,9 @@ a:hover {
         width: 15px;
         height: 15px;
     }
+    .cus-btn-width{
+        width: 100%;
+    }
 }
 .custom-dropdown-navbar{
     position: absolute;
@@ -1807,6 +1840,9 @@ a:hover {
     .custom-register-form {
         width: 75%;
     }
+    .custom-djlink-form {
+        width: 75%;
+    }
 
     .custom-landing-heading {
         margin-left: 90px;
@@ -1896,7 +1932,9 @@ a:hover {
         min-height: 62px;
         min-width: 250px;
     }
-
+    .cus-btn-width{
+        width: 100%;
+    }
     .custom-forcreators-section .artist-section-content h3 {
         font-size: 24px;
     }
@@ -1956,16 +1994,22 @@ a:hover {
         left: -60px;
     }
 }
-@media screen and (min-width: 769px) and (max-width: 1400px) {
+@media screen and (min-width: 760px) and (max-width: 1400px) {
     .custom-user-profile-image {
         z-index: 10;
         position: absolute;
         bottom: 26%;
     }
+    .navbar-collapse {
+        background: var(--side_nav_color);
+        padding-top: 10px;
+        width: 100%;
+    }
 }
 @media screen and (min-width: 1180px) and (max-width:1180px){
     .custom-home-right-section-wrapper {
-        background: #0E1A2B;
+        background: #000000;
+        /*background: #0E1A2B;*/
         border-radius: 6px;
         opacity: 1;
         position: relative;

@@ -51,6 +51,8 @@ class Home extends React.Component {
         tempUserImage: "http://nicesnippets.com/demo/1499344631_malecostume.png",
         musicId:null,
         playerDurationCounter:0,
+        showAddPlaylist:false,
+        show:false
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -70,7 +72,10 @@ class Home extends React.Component {
 
         }
     }
-
+    handleClose = () => this.setState({show: false});
+    handleShow = () => this.setState({show: true});
+    handleCloseAddPlayList = () => this.setState({showAddPlaylist: false});
+    handleShowAddPlayList = () => this.setState({showAddPlaylist: true});
     componentDidMount() {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
@@ -469,20 +474,48 @@ class Home extends React.Component {
             }
             return this.state.featuredReleases.results.map(result => {
                 return (
-                    <div className={`col-md-4 custom-home-music-display mobile-track-home-margin`}>
-                        <div className={`custom-home-music-img ${guestUser?"guest-view-home":null}`} onClick={() => this.playFeaturedSong(result.target)}>
-                            <img src={result.target.photo_main} className="music-cover-img"/>
-                            <div className="play">
-                                <span><i className="fa fa-play"/></span>
+                    <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg align-items-center">
+                        <div className="col-md-2 col-sm-6">
+                            <img src={result.target.photo_main} height="130" width="130"
+                                 className="mt-2 mb-2 custom-trending-item-cover-img"/>
+                        </div>
+                        <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
+                            <div className="d-flex flex-column">
+                                <div className="d-flex flex-row custom-trending-item-artist-track">
+                                    <Link href={`/u-details/${result.target.username_slug}`}>{result.target.username}</Link>
+                                    <i className="ml-3 mr-3">•</i>
+                                    <Link
+                                        href={`/m-details/${result.target.username_slug}/${result.target.slug}`}>{result.target.song_title.slice(0, 20)}</Link>
+                                </div>
+                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
+                                    Title: {result.target.song_title}
+                                </div>
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
+                                    {result.target.description}
+                                </div>
+
                             </div>
                         </div>
-                        <div className="custom-home-music-text">
-                            <Link href={`/m-details/${result.target.username_slug}/${result.target.slug}`}
-                                  className="music-name">{result.target.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.target.username_slug}`}
-                            className="user-name">{result.target.username}</Link>  {result.target.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                        <div className="col-md-3 col-sm-6 my-auto">
+                            <div className="text-center mt-2 " onClick={() => this.playFeaturedSong(result.target)}>
+                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                            </div>
                         </div>
                     </div>
+                    // <div className={`col-md-4 custom-home-music-display mobile-track-home-margin`}>
+                    //     <div className={`custom-home-music-img ${guestUser?"guest-view-home":null}`} onClick={() => this.playFeaturedSong(result.target)}>
+                    //         <img src={result.target.photo_main} className="music-cover-img"/>
+                    //         <div className="play">
+                    //             <span><i className="fa fa-play"/></span>
+                    //         </div>
+                    //     </div>
+                    //     <div className="custom-home-music-text">
+                    //         <Link href={`/m-details/${result.target.username_slug}/${result.target.slug}`}
+                    //               className="music-name">{result.target.song_title.slice(0, 20)}</Link> by <Link
+                    //         href={`/u-details/${result.target.username_slug}`}
+                    //         className="user-name">{result.target.username}</Link>  {result.target.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                    //     </div>
+                    // </div>
                 )
             })
         }
@@ -520,8 +553,28 @@ class Home extends React.Component {
             })
         }
     }
-
+    renderLikeButton = (isLiked, musicId) => {
+        if (isLiked) {
+            return (
+                <button onClick={() => {
+                    this.likesMusic(musicId)
+                }} className="btn btn-outline-primary btn-sm m-2" type="button">
+                    <i className="fas fa-heart"/> Liked
+                </button>
+            );
+        }
+        if (!isLiked) {
+            return (
+                <button onClick={() => {
+                    this.likesMusic(musicId)
+                }} className="btn btn-outline-primary btn-sm mr-2" type="button">
+                    <i className="far fa-heart "/> Like</button>
+            );
+        }
+        return false;
+    }
     renderNewReleases() {
+        console.log(this.state.newReleases.results)
         if (this.state.newReleases.results) {
             if (this.state.newReleases.results.length === 0) {
                 return (
@@ -532,19 +585,64 @@ class Home extends React.Component {
             }
             return this.state.newReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
-                        <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
-                            <img src={result.photo_main} className="music-cover-img"/>
-                            <div className="play">
-                                <span><i className="fa fa-play"/></span>
+                    <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg align-items-center">
+                        <div className="col-md-2 col-sm-6">
+                            <img src={result.photo_main} height="130" width="130"
+                                 className="mt-2 mb-2 custom-trending-item-cover-img"/>
+                        </div>
+                        <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
+                            <div className="d-flex flex-column">
+                                <div className="d-flex flex-row custom-trending-item-artist-track">
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
+                                    <i className="ml-3 mr-3">•</i>
+                                    <Link
+                                        href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
+                                </div>
+                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
+                                    Title: {result.song_title}
+                                </div>
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
+                                    {result.description}
+                                </div>
+
                             </div>
                         </div>
-                        <div className="custom-home-music-text">
-                            <Link href={`/m-details/${result.username_slug}/${result.slug}`}
-                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                        <div className="col-md-3 col-sm-6 my-auto">
+                            <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
+                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                            </div>
                         </div>
+                        {/*<div className="d-inline-block flex-row mt-2 ml-3 mb-3">*/}
+                        {/*    {userSession ?this.renderLikeButton(false,result.id):null}*/}
+                        {/*    <button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
+                        {/*        <i className="far fa-share-square"/> Share*/}
+                        {/*    </button>*/}
+                        {/*    <button onClick={() => this.addNextToList(result)} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
+                        {/*        <i className="far fa-list-alt"/> Add To Next Up*/}
+                        {/*    </button>*/}
+                        {/*    {userSession ?<button onClick={this.handleShowAddPlayList} className="btn btn-outline-primary btn-sm m-2"*/}
+                        {/*                           type="button">*/}
+                        {/*        <i className="far fa-list-alt"/> Add To My PlayList*/}
+                        {/*    </button>:null}*/}
+                            {/*{this.state.musicDetail.store_link ?<a href={this.state.musicDetail.store_link} target="_blank"*/}
+                            {/*                                       className="btn btn-outline-primary btn-sm m-2">*/}
+                            {/*    <i className="fas fa-store"/>*/}
+                            {/*</a>:null}*/}
+                        {/*</div>*/}
                     </div>
+                    // <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
+                    //     <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
+                    //         <img src={result.photo_main} className="music-cover-img"/>
+                    //         <div className="play">
+                    //             <span><i className="fa fa-play"/></span>
+                    //         </div>
+                    //     </div>
+                    //     <div className="custom-home-music-text">
+                    //         <Link href={`/m-details/${result.username_slug}/${result.slug}`}
+                    //               className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                    //         href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                    //     </div>
+                    // </div>
                 )
             })
         }
@@ -560,19 +658,47 @@ class Home extends React.Component {
             }
             return this.state.exclusiveReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
-                        <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
-                            <img src={result.photo_main} className="music-cover-img"/>
-                            <div className="play">
-                                <span><i className="fa fa-play"/></span>
+                    <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg align-items-center">
+                        <div className="col-md-2 col-sm-6">
+                            <img src={result.photo_main} height="130" width="130"
+                                 className="mt-2 mb-2 custom-trending-item-cover-img"/>
+                        </div>
+                        <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
+                            <div className="d-flex flex-column">
+                                <div className="d-flex flex-row custom-trending-item-artist-track">
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
+                                    <i className="ml-3 mr-3">•</i>
+                                    <Link
+                                        href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
+                                </div>
+                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
+                                    Title: {result.song_title}
+                                </div>
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
+                                    {result.description}
+                                </div>
+
                             </div>
                         </div>
-                        <div className="custom-home-music-text">
-                            <Link href={`/m-details/${result.username_slug}/${result.slug}`}
-                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                        <div className="col-md-3 col-sm-6 my-auto">
+                            <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
+                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                            </div>
                         </div>
                     </div>
+                    // <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
+                    //     <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
+                    //         <img src={result.photo_main} className="music-cover-img"/>
+                    //         <div className="play">
+                    //             <span><i className="fa fa-play"/></span>
+                    //         </div>
+                    //     </div>
+                    //     <div className="custom-home-music-text">
+                    //         <Link href={`/m-details/${result.username_slug}/${result.slug}`}
+                    //               className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                    //         href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                    //     </div>
+                    // </div>
                 )
             })
         }
@@ -589,19 +715,47 @@ class Home extends React.Component {
             }
             return this.state.chillReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
-                        <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
-                            <img src={result.photo_main} className="music-cover-img"/>
-                            <div className="play">
-                                <span><i className="fa fa-play"/></span>
+                    <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg align-items-center">
+                        <div className="col-md-2 col-sm-6">
+                            <img src={result.photo_main} height="130" width="130"
+                                 className="mt-2 mb-2 custom-trending-item-cover-img"/>
+                        </div>
+                        <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
+                            <div className="d-flex flex-column">
+                                <div className="d-flex flex-row custom-trending-item-artist-track">
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
+                                    <i className="ml-3 mr-3">•</i>
+                                    <Link
+                                        href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
+                                </div>
+                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
+                                    Title: {result.song_title}
+                                </div>
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
+                                    {result.description}
+                                </div>
+
                             </div>
                         </div>
-                        <div className="custom-home-music-text">
-                            <Link href={`/m-details/${result.username_slug}/${result.slug}`}
-                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                        <div className="col-md-3 col-sm-6 my-auto">
+                            <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
+                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                            </div>
                         </div>
                     </div>
+                    // <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
+                    //     <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
+                    //         <img src={result.photo_main} className="music-cover-img"/>
+                    //         <div className="play">
+                    //             <span><i className="fa fa-play"/></span>
+                    //         </div>
+                    //     </div>
+                    //     <div className="custom-home-music-text">
+                    //         <Link href={`/m-details/${result.username_slug}/${result.slug}`}
+                    //               className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                    //         href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                    //     </div>
+                    // </div>
                 )
             })
         }
@@ -620,19 +774,47 @@ class Home extends React.Component {
             }
             return this.state.relaxReleases.results.map(result => {
                 return (
-                    <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
-                        <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
-                            <img src={result.photo_main} className="music-cover-img"/>
-                            <div className="play">
-                                <span><i className="fa fa-play"/></span>
+                    <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg align-items-center">
+                        <div className="col-md-2 col-sm-6">
+                            <img src={result.photo_main} height="130" width="130"
+                                 className="mt-2 mb-2 custom-trending-item-cover-img"/>
+                        </div>
+                        <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
+                            <div className="d-flex flex-column">
+                                <div className="d-flex flex-row custom-trending-item-artist-track">
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
+                                    <i className="ml-3 mr-3">•</i>
+                                    <Link
+                                        href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
+                                </div>
+                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
+                                    Title: {result.song_title}
+                                </div>
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
+                                    {result.description}
+                                </div>
+
                             </div>
                         </div>
-                        <div className="custom-home-music-text">
-                            <Link href={`/m-details/${result.username_slug}/${result.slug}`}
-                                  className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
-                            href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                        <div className="col-md-3 col-sm-6 my-auto">
+                            <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
+                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                            </div>
                         </div>
                     </div>
+                    // <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
+                    //     <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
+                    //         <img src={result.photo_main} className="music-cover-img"/>
+                    //         <div className="play">
+                    //             <span><i className="fa fa-play"/></span>
+                    //         </div>
+                    //     </div>
+                    //     <div className="custom-home-music-text">
+                    //         <Link href={`/m-details/${result.username_slug}/${result.slug}`}
+                    //               className="music-name">{result.song_title.slice(0, 20)}</Link> by <Link
+                    //         href={`/u-details/${result.username_slug}`} className="user-name">{result.username}</Link> {result.get_subscription_badge?<img src="/images/subscription_badge.png" className="custom-subscription-badge" />:null}
+                    //     </div>
+                    // </div>
                 )
             })
         }
@@ -843,6 +1025,7 @@ class Home extends React.Component {
     render() {
         const col_md_12 = "col-md-12"
         const col_md_9 = "col-md-9"
+
         const handleChange = (e) => {
             const isCheckbox = e.target.type === "checkbox";
             this.setState({[e.target.name]: isCheckbox ? e.target.checked : e.target.value})
