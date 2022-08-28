@@ -820,7 +820,7 @@ a:hover {
 
 .custom-home-headers h3 {
     text-align: left;
-    font: bold 30px/93px Metropolis;
+    font: bold 30px/93px sans-serif;
     letter-spacing: 0px;
     color: #FFFFFFE6;
     text-transform: capitalize;
@@ -1783,8 +1783,17 @@ a:hover {
     margin-left: 30px;
 }
 @media screen and (max-width: 540px) {
+    /*.col-sm-2{*/
+    /*    width: auto;*/
+    /*}*/
     .mobile-track-home-margin{
         margin-left: 25%;
+    }
+    .fs-mob-13{
+        font-size: 13px;
+    }
+    .fs-mob-11{
+        font-size: 11px;
     }
     .navbar-nav .dropdown-menu{
         position: absolute;
@@ -1798,6 +1807,11 @@ a:hover {
     }
     .custom-totalcoins-bg {
         margin: 0;
+    }
+    .custom-trending-item-cover-img {
+        border-radius: 10px;
+        width: 60px;
+        height: 60px;
     }
     .custom-user-profile-data {
         margin-top: 30%;

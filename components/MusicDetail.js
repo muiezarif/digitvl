@@ -68,7 +68,7 @@ class MusicDetail extends Component {
             this.props.fetchMusicDetailsWithToken(this.props.dataparams.username_slug, this.props.dataparams.track_slug, userSession).then(() => {
                 this.setState({
                     musicDetail: this.props.fetchMusicDetail.beats_detail,
-                    like: this.props.fetchMusicDetail.beats_detail.users_like
+                    like: this.props.fetchMusicDetail.beats_detail.user_like
                 })
                 this.props.getMusicComments(userSession, this.props.fetchMusicDetail.beats_detail.id, this.state.commentPageNo).then(() => {
                     this.setState({
@@ -93,7 +93,7 @@ class MusicDetail extends Component {
             this.props.fetchMusicDetails(this.props.dataparams.username_slug, this.props.dataparams.track_slug).then(() => {
                 this.setState({
                     musicDetail: this.props.fetchMusicDetail.beats_detail,
-                    like: this.props.fetchMusicDetail.beats_detail.users_like
+                    like: this.props.fetchMusicDetail.beats_detail.user_like
                 })
                 this.props.getMusicComments(userSession, this.props.fetchMusicDetail.beats_detail.id, this.state.commentPageNo).then(() => {
                     this.setState({
@@ -159,7 +159,7 @@ class MusicDetail extends Component {
             this.props.fetchMusicDetails(this.props.dataparams.username_slug, this.props.dataparams.track_slug).then(() => {
                 this.setState({
                     musicDetail: this.props.fetchMusicDetail.beats_detail,
-                    like: this.props.fetchMusicDetail.beats_detail.users_like
+                    like: this.props.fetchMusicDetail.beats_detail.user_like
                 })
                 this.props.getMusicComments(userSession, this.props.fetchMusicDetail.beats_detail.id, this.state.commentPageNo).then(() => {
                     this.setState({
@@ -213,7 +213,7 @@ class MusicDetail extends Component {
                 this.props.fetchMusicDetailsWithToken(this.props.dataparams.username_slug, this.props.dataparams.track_slug, userSession).then(() => {
                     this.setState({
                         musicDetail: this.props.fetchMusicDetail.beats_detail,
-                        like: this.props.fetchMusicDetail.beats_detail.users_like
+                        like: this.props.fetchMusicDetail.beats_detail.user_like
                     })
                     this.props.getMusicLikesList(this.props.fetchMusicDetail.beats_detail.slug, this.state.likesPage).then(() => {
                         this.setState({likesList: this.props.musicLikesListResponse.results})

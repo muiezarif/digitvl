@@ -111,9 +111,12 @@ export const forgotPasswordUpdateApi = (data)=>{
     }
 }
 
-export const fetchHomeMusic = (pageNo) =>{
+export const fetchHomeMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/beats/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            },
             params:{
                 page:pageNo,
             }
@@ -121,9 +124,13 @@ export const fetchHomeMusic = (pageNo) =>{
         dispatch({type:TYPES.FETCH_MUSIC,payload:response.data})
     }
 }
-export const fetchHomeChillMusic = (pageNo) =>{
+
+export const fetchHomeChillMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/beats/tags/chill/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            },
             params:{
                 page:pageNo,
             }
@@ -144,9 +151,12 @@ export const fetchExclusiveContent = (userSession,pageNo) =>{
         dispatch({type:TYPES.GET_EXCLUSIVE_SONGS_LIST,payload:response.data})
     }
 }
-export const fetchHomeRelaxMusic = (pageNo) =>{
+export const fetchHomeRelaxMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/beats/tags/relax/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            },
             params:{
                 page:pageNo,
             }
@@ -154,9 +164,12 @@ export const fetchHomeRelaxMusic = (pageNo) =>{
         dispatch({type:TYPES.FETCH_MUSIC_RELAX,payload:response.data})
     }
 }
-export const fetchHomeFeaturedMusic = (pageNo) =>{
+export const fetchHomeFeaturedMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/featured/songs/`,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            },
             params:{
                 page:pageNo,
             }

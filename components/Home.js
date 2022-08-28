@@ -16,7 +16,9 @@ import {
     fetchRandomMusic,
     fetchHomeFeaturedMusic,
     fetchCurrentUserDetail,
-    fetchExclusiveContent
+    fetchExclusiveContent,
+    likeMusicApi,
+
 } from "../actions"
 import * as ReactBootstrap from "react-bootstrap";
 import {connect} from "react-redux";
@@ -24,6 +26,7 @@ import {confirmAlert} from "react-confirm-alert";
 import Router from "next/router";
 import {NextSeo} from "next-seo";
 import AnnouncementBar from "./AnnouncementBar";
+import {FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton} from "react-share";
 
 let userSession
 let guestUser
@@ -74,8 +77,6 @@ class Home extends React.Component {
     }
     handleClose = () => this.setState({show: false});
     handleShow = () => this.setState({show: true});
-    handleCloseAddPlayList = () => this.setState({showAddPlaylist: false});
-    handleShowAddPlayList = () => this.setState({showAddPlaylist: true});
     componentDidMount() {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
@@ -126,8 +127,48 @@ class Home extends React.Component {
                         };
                         confirmAlert(options)
                     })
+                    this.props.fetchHomeMusic(this.state.page,userSession).then(() => {
+                        this.setState({
+                            newReleases: this.props.newReleases[0],
+                            musicPlayerPlaylist: this.props.newReleases[0].results
+                        })
+                    }, ({data}) => {
+                    })
+                    this.props.fetchHomeChillMusic(this.state.chillPage,userSession).then(() => {
+                        this.setState({chillReleases: this.props.chillReleases[0]})
+                    }, ({data}) => {
+                    })
+                    this.props.fetchHomeRelaxMusic(this.state.relaxPage,userSession).then(() => {
+                        this.setState({relaxReleases: this.props.relaxReleases[0]})
+                    }, ({data}) => {
+                    })
+
+                    this.props.fetchHomeFeaturedMusic(this.state.featuredPage,userSession).then(() => {
+                        this.setState({featuredReleases: this.props.featuredMusicResponse})
+                    }, ({data}) => {
+                    })
                 }
                 if (userSession.profile) {
+                    this.props.fetchHomeMusic(this.state.page,userSession).then(() => {
+                        this.setState({
+                            newReleases: this.props.newReleases[0],
+                            musicPlayerPlaylist: this.props.newReleases[0].results
+                        })
+                    }, ({data}) => {
+                    })
+                    this.props.fetchHomeChillMusic(this.state.chillPage,userSession).then(() => {
+                        this.setState({chillReleases: this.props.chillReleases[0]})
+                    }, ({data}) => {
+                    })
+                    this.props.fetchHomeRelaxMusic(this.state.relaxPage,userSession).then(() => {
+                        this.setState({relaxReleases: this.props.relaxReleases[0]})
+                    }, ({data}) => {
+                    })
+
+                    this.props.fetchHomeFeaturedMusic(this.state.featuredPage,userSession).then(() => {
+                        this.setState({featuredReleases: this.props.featuredMusicResponse})
+                    }, ({data}) => {
+                    })
                     this.props.getWhoToFollowList(userSession, userSession.profile.username_slug).then(() => {
                         this.setState({whoToFollowList: this.props.whoToFollowResponse.result})
                     }).catch(err => {
@@ -159,6 +200,49 @@ class Home extends React.Component {
             } else {
                 loggedUser = false
                 guestUser = true
+                this.props.fetchHomeMusic(this.state.page).then(() => {
+                    this.setState({
+                        newReleases: this.props.newReleases[0],
+                        musicPlayerPlaylist: this.props.newReleases[0].results
+                    })
+                }, ({data}) => {
+                })
+                this.props.fetchHomeChillMusic(this.state.chillPage).then(() => {
+                    this.setState({chillReleases: this.props.chillReleases[0]})
+                }, ({data}) => {
+                })
+                this.props.fetchHomeRelaxMusic(this.state.relaxPage).then(() => {
+                    this.setState({relaxReleases: this.props.relaxReleases[0]})
+                }, ({data}) => {
+                })
+
+                this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
+                    this.setState({featuredReleases: this.props.featuredMusicResponse})
+                }, ({data}) => {
+                })
+            }
+            if (!userSession){
+                this.props.fetchHomeMusic(this.state.page,null).then(() => {
+                    this.setState({
+                        newReleases: this.props.newReleases[0],
+                        musicPlayerPlaylist: this.props.newReleases[0].results
+                    })
+
+                }, ({data}) => {
+                })
+                this.props.fetchHomeChillMusic(this.state.chillPage,null).then(() => {
+                    this.setState({chillReleases: this.props.chillReleases[0]})
+                }, ({data}) => {
+                })
+                this.props.fetchHomeRelaxMusic(this.state.relaxPage,null).then(() => {
+                    this.setState({relaxReleases: this.props.relaxReleases[0]})
+                }, ({data}) => {
+                })
+
+                this.props.fetchHomeFeaturedMusic(this.state.featuredPage,null).then(() => {
+                    this.setState({featuredReleases: this.props.featuredMusicResponse})
+                }, ({data}) => {
+                })
             }
             if (userSession.user.membership_plan.membership.membership_type !== "Free"){
                 this.props.fetchExclusiveContent(userSession,this.state.exclusivePage).then(() => {
@@ -166,26 +250,7 @@ class Home extends React.Component {
                 })
             }
         }
-        this.props.fetchHomeMusic(this.state.page).then(() => {
-            this.setState({
-                newReleases: this.props.newReleases[0],
-                musicPlayerPlaylist: this.props.newReleases[0].results
-            })
-        }, ({data}) => {
-        })
-        this.props.fetchHomeChillMusic(this.state.chillPage).then(() => {
-            this.setState({chillReleases: this.props.chillReleases[0]})
-        }, ({data}) => {
-        })
-        this.props.fetchHomeRelaxMusic(this.state.relaxPage).then(() => {
-            this.setState({relaxReleases: this.props.relaxReleases[0]})
-        }, ({data}) => {
-        })
 
-        this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
-            this.setState({featuredReleases: this.props.featuredMusicResponse})
-        }, ({data}) => {
-        })
     }
 
     playSong(data) {
@@ -245,9 +310,9 @@ class Home extends React.Component {
         // ReactDOM.findDOMNode(this.refs.playerFocus).focus();
     }
 
-    addNextToList(data) {
-        this.props.addMusicToList(data)
-    }
+    // addNextToList(data) {
+    //     this.props.addMusicToList(data)
+    // }
 
     onRedirectHome = (value) => {
         this.setState({page: value})
@@ -268,25 +333,26 @@ class Home extends React.Component {
     }
 
     fetchMusicList = (pageNo) => {
-        this.props.fetchHomeMusic(pageNo).then(() => {
+        this.props.fetchHomeMusic(pageNo,userSession).then(() => {
             this.setState({newReleases: this.props.newReleases[0]})
+            console.log("HELLO2")
         }, ({data}) => {
         })
     }
     fetchChillMusicList = (pageNo) => {
-        this.props.fetchHomeChillMusic(pageNo).then(() => {
+        this.props.fetchHomeChillMusic(pageNo,userSession).then(() => {
             this.setState({chillReleases: this.props.chillReleases[0]})
         }, ({data}) => {
         })
     }
     fetchRelaxMusicList = (pageNo) => {
-        this.props.fetchHomeRelaxMusic(pageNo).then(() => {
+        this.props.fetchHomeRelaxMusic(pageNo,userSession).then(() => {
             this.setState({relaxReleases: this.props.relaxReleases[0]})
         }, ({data}) => {
         })
     }
     fetchFeaturedMusicList = (pageNo) => {
-        this.props.fetchHomeFeaturedMusic(pageNo).then(() => {
+        this.props.fetchHomeFeaturedMusic(pageNo,userSession).then(() => {
             this.setState({featuredReleases: this.props.featuredMusicResponse})
         }, ({data}) => {
         })
@@ -480,26 +546,34 @@ class Home extends React.Component {
                                  className="mt-2 mb-2 custom-trending-item-cover-img"/>
                         </div>
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
-                            <div className="d-flex flex-column">
+                            <div className="d-flex flex-column w-100">
                                 <div className="d-flex flex-row custom-trending-item-artist-track">
-                                    <Link href={`/u-details/${result.target.username_slug}`}>{result.target.username}</Link>
-                                    <i className="ml-3 mr-3">•</i>
+                                    {/*<Link href={`/u-details/${result.target.username_slug}`}>{result.target.username}</Link>*/}
+                                    {/*<i className="ml-3 mr-3">•</i>*/}
                                     <Link
                                         href={`/m-details/${result.target.username_slug}/${result.target.slug}`}>{result.target.song_title.slice(0, 20)}</Link>
                                 </div>
-                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
-                                    Title: {result.target.song_title}
-                                </div>
+                                {/*<div className="d-flex flex-row mt-2 custom-trending-item-title">*/}
+                                {/*    Title: {result.target.song_title}*/}
+                                {/*</div>*/}
                                 <div className="d-flex flex-row mt-3 custom-trending-item-description">
-                                    {result.target.description}
+                                    <Link href={`/u-details/${result.target.username_slug}`}>{result.target.username}</Link>
                                 </div>
-
                             </div>
                         </div>
-                        <div className="col-md-3 col-sm-6 my-auto">
-                            <div className="text-center mt-2 " onClick={() => this.playFeaturedSong(result.target)}>
+                        <div className="col-md-3 col-sm-6 my-auto w-100">
+                            <div className="text-center mt-2" onClick={() => this.playFeaturedSong(result.target)}>
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
+                        </div>
+                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                            {userSession ?this.renderFeaturedLikeButton(result.target.user_like,result.target.id):null}
+                            {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
+                            {/*    <i className="far fa-share-square"/> Share*/}
+                            {/*</button>*/}
+                            <button onClick={() => this.addNextToList(result.target)} className="btn btn-outline-primary btn-sm m-2" type="button">
+                                <i className="far fa-list-alt"/> Add To Next Up
+                            </button>
                         </div>
                     </div>
                     // <div className={`col-md-4 custom-home-music-display mobile-track-home-margin`}>
@@ -553,28 +627,167 @@ class Home extends React.Component {
             })
         }
     }
+    addNextToList = (data) => {
+        const filterData = {data: data, action: "addToList"}
+        this.props.addMusicToList(filterData)
+    }
     renderLikeButton = (isLiked, musicId) => {
+        var likeCheck = isLiked
         if (isLiked) {
             return (
                 <button onClick={() => {
-                    this.likesMusic(musicId)
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = false
+                            var page = this.state.page
+                            this.fetchMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
                 }} className="btn btn-outline-primary btn-sm m-2" type="button">
-                    <i className="fas fa-heart"/> Liked
+                    <i className="fas fa-heart"/>{likeCheck? " Liked" : " Like"}
                 </button>
             );
         }
         if (!isLiked) {
             return (
                 <button onClick={() => {
-                    this.likesMusic(musicId)
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = true
+                            var page = this.state.page
+                            this.fetchMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
                 }} className="btn btn-outline-primary btn-sm mr-2" type="button">
-                    <i className="far fa-heart "/> Like</button>
+                    <i className="far fa-heart "/>{likeCheck? " Liked" : " Like"}</button>
+            );
+        }
+        return false;
+    }
+    renderFeaturedLikeButton = (isLiked, musicId) => {
+        var likeCheck = isLiked
+        if (isLiked) {
+            return (
+                <button onClick={() => {
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = false
+                            var page = this.state.page
+                            this.fetchFeaturedMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
+                }} className="btn btn-outline-primary btn-sm m-2" type="button">
+                    <i className="fas fa-heart"/>{likeCheck? " Liked" : " Like"}
+                </button>
+            );
+        }
+        if (!isLiked) {
+            return (
+                <button onClick={() => {
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = true
+                            var page = this.state.page
+                            this.fetchFeaturedMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
+                }} className="btn btn-outline-primary btn-sm mr-2" type="button">
+                    <i className="far fa-heart "/>{likeCheck? " Liked" : " Like"}</button>
+            );
+        }
+        return false;
+    }
+    renderRelaxLikeButton = (isLiked, musicId) => {
+        var likeCheck = isLiked
+        if (isLiked) {
+            return (
+                <button onClick={() => {
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = false
+                            var page = this.state.page
+                            this.fetchRelaxMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
+                }} className="btn btn-outline-primary btn-sm m-2" type="button">
+                    <i className="fas fa-heart"/>{likeCheck? " Liked" : " Like"}
+                </button>
+            );
+        }
+        if (!isLiked) {
+            return (
+                <button onClick={() => {
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = true
+                            var page = this.state.page
+                            this.fetchRelaxMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
+                }} className="btn btn-outline-primary btn-sm mr-2" type="button">
+                    <i className="far fa-heart "/>{likeCheck? " Liked" : " Like"}</button>
+            );
+        }
+        return false;
+    }
+    renderChillLikeButton = (isLiked, musicId) => {
+        var likeCheck = isLiked
+        if (isLiked) {
+            return (
+                <button onClick={() => {
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = false
+                            var page = this.state.page
+                            this.fetchChillMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
+                }} className="btn btn-outline-primary btn-sm m-2" type="button">
+                    <i className="fas fa-heart"/>{likeCheck? " Liked" : " Like"}
+                </button>
+            );
+        }
+        if (!isLiked) {
+            return (
+                <button onClick={() => {
+                    if (userSession) {
+                        this.props.likeMusicApi(musicId, userSession).then(() => {
+                            likeCheck = true
+                            var page = this.state.page
+                            this.fetchChillMusicList(page)
+                        }).catch(err => {
+                        })
+                    } else if (!userSession) {
+                        Router.push("/login")
+                    }
+                }} className="btn btn-outline-primary btn-sm mr-2" type="button">
+                    <i className="far fa-heart "/>{likeCheck? " Liked" : " Like"}</button>
             );
         }
         return false;
     }
     renderNewReleases() {
-        console.log(this.state.newReleases.results)
         if (this.state.newReleases.results) {
             if (this.state.newReleases.results.length === 0) {
                 return (
@@ -585,50 +798,84 @@ class Home extends React.Component {
             }
             return this.state.newReleases.results.map(result => {
                 return (
-                    <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg align-items-center">
-                        <div className="col-md-2 col-sm-6">
+                    <div className="row col-md-12 col-sm-2 col-xs-2 pt-2 pb-2 custom-trending-item-bg align-items-center">
+                        <ReactBootstrap.Modal
+                            show={this.state.show}
+                            onHide={this.handleClose}
+                            backdrop="static"
+                            keyboard={false}>
+                            <ReactBootstrap.Modal.Header closeButton>
+                                <ReactBootstrap.Modal.Title>Share</ReactBootstrap.Modal.Title>
+                            </ReactBootstrap.Modal.Header>
+                            <ReactBootstrap.Modal.Body>
+                                <div className="custom-input">
+                                    <span><i className="fas fa-globe"> </i></span>
+                                    <input name="shareDescription" value={result.description} type="text"
+                                           onChange={this.handleChange}
+                                           placeholder="Description"/>
+                                </div>
+                                <FacebookShareButton
+                                    url={`https://app.digitvl.com/${result.username_slug}/${result.slug}`}
+                                    quote={result.description}
+                                    className="Demo__some-network__share-button"
+                                >
+                                    <FacebookIcon size={32} round/>
+                                </FacebookShareButton>
+                                <TwitterShareButton
+                                    url={`https://app.digitvl.com/${result.username_slug}/${result.slug}`}
+                                    title={result.description}
+                                    className="Demo__some-network__share-button"
+                                >
+                                    <TwitterIcon size={32} round/>
+                                </TwitterShareButton>
+                                {/*<LinkedinShareButton url="https://www.google.com" className="Demo__some-network__share-button">*/}
+                                {/*    <LinkedinIcon size={32} round />*/}
+                                {/*</LinkedinShareButton>*/}
+                                <input className="form-control" type="text" placeholder={`https://app.digitvl.com/${result.username_slug}/${result.slug}`}
+                                       readOnly/>
+                            </ReactBootstrap.Modal.Body>
+                            <ReactBootstrap.Modal.Footer>
+                                <ReactBootstrap.Button variant="secondary" onClick={this.handleClose}>
+                                    Close
+                                </ReactBootstrap.Button>
+                            </ReactBootstrap.Modal.Footer>
+                        </ReactBootstrap.Modal>
+                        <div className="col-md-2 col-sm-2 col-xs-2">
                             <img src={result.photo_main} height="130" width="130"
                                  className="mt-2 mb-2 custom-trending-item-cover-img"/>
                         </div>
-                        <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
+                        <div className="col-md-6 col-sm-2 col-xs-2 mt-2">
                             <div className="d-flex flex-column">
-                                <div className="d-flex flex-row custom-trending-item-artist-track">
-                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
-                                    <i className="ml-3 mr-3">•</i>
+                                <div className="d-flex flex-row custom-trending-item-artist-track fs-mob-11">
+                                    {/*<Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>*/}
+                                    {/*<i className="ml-3 mr-3">•</i>*/}
                                     <Link
                                         href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
                                 </div>
-                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
-                                    Title: {result.song_title}
-                                </div>
-                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
-                                    {result.description}
+                                {/*<div className="d-flex flex-row mt-2 custom-trending-item-title fs-mob-11">*/}
+                                {/*    Title: {result.song_title}*/}
+                                {/*</div>*/}
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description fs-mob-11">
+                                    {/*{result.description}*/}
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
                                 </div>
 
                             </div>
                         </div>
-                        <div className="col-md-3 col-sm-6 my-auto">
+                        <div className="col-md-3 col-sm-12 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
                         </div>
-                        {/*<div className="d-inline-block flex-row mt-2 ml-3 mb-3">*/}
-                        {/*    {userSession ?this.renderLikeButton(false,result.id):null}*/}
-                        {/*    <button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
-                        {/*        <i className="far fa-share-square"/> Share*/}
-                        {/*    </button>*/}
-                        {/*    <button onClick={() => this.addNextToList(result)} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
-                        {/*        <i className="far fa-list-alt"/> Add To Next Up*/}
-                        {/*    </button>*/}
-                        {/*    {userSession ?<button onClick={this.handleShowAddPlayList} className="btn btn-outline-primary btn-sm m-2"*/}
-                        {/*                           type="button">*/}
-                        {/*        <i className="far fa-list-alt"/> Add To My PlayList*/}
-                        {/*    </button>:null}*/}
-                            {/*{this.state.musicDetail.store_link ?<a href={this.state.musicDetail.store_link} target="_blank"*/}
-                            {/*                                       className="btn btn-outline-primary btn-sm m-2">*/}
-                            {/*    <i className="fas fa-store"/>*/}
-                            {/*</a>:null}*/}
-                        {/*</div>*/}
+                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                            {userSession ?this.renderLikeButton(result.user_like,result.id):null}
+                            {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
+                            {/*    <i className="far fa-share-square"/> Share*/}
+                            {/*</button>*/}
+                            <button onClick={() => this.addNextToList(result)} className="btn btn-outline-primary btn-sm m-2" type="button">
+                                <i className="far fa-list-alt"/> Add To Next Up
+                            </button>
+                        </div>
                     </div>
                     // <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
                     //     <div className="custom-home-music-img" onClick={() => this.playSong(result)}>
@@ -666,21 +913,22 @@ class Home extends React.Component {
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
                             <div className="d-flex flex-column">
                                 <div className="d-flex flex-row custom-trending-item-artist-track">
-                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
-                                    <i className="ml-3 mr-3">•</i>
+                                    {/*<Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>*/}
+                                    {/*<i className="ml-3 mr-3">•</i>*/}
                                     <Link
                                         href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
                                 </div>
-                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
-                                    Title: {result.song_title}
-                                </div>
+                                {/*<div className="d-flex flex-row mt-2 custom-trending-item-title">*/}
+                                {/*    Title: {result.song_title}*/}
+                                {/*</div>*/}
                                 <div className="d-flex flex-row mt-3 custom-trending-item-description">
-                                    {result.description}
+                                    {/*{result.description}*/}
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
                                 </div>
 
                             </div>
                         </div>
-                        <div className="col-md-3 col-sm-6 my-auto">
+                        <div className="col-md-3 col-sm-12 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
@@ -715,32 +963,42 @@ class Home extends React.Component {
             }
             return this.state.chillReleases.results.map(result => {
                 return (
-                    <div className="row col-md-12 col-sm-6 col-xs-6 pt-2 pb-2 custom-trending-item-bg align-items-center">
-                        <div className="col-md-2 col-sm-6">
-                            <img src={result.photo_main} height="130" width="130"
+                    <div className="row col-md-12 col-sm-6 col-xs-4 pt-2 pb-2 custom-trending-item-bg align-items-center">
+                        <div className="col-md-2 col-sm-2">
+                            <img src={result.photo_main}
                                  className="mt-2 mb-2 custom-trending-item-cover-img"/>
                         </div>
-                        <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
+                        <div className="col-md-6 col-sm-2 col-xs-2 mt-2 w-50">
                             <div className="d-flex flex-column">
-                                <div className="d-flex flex-row custom-trending-item-artist-track">
-                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
-                                    <i className="ml-3 mr-3">•</i>
+                                <div className="d-flex flex-row custom-trending-item-artist-track fs-mob-11">
+                                    {/*<Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>*/}
+                                    {/*<i className="ml-3 mr-3">•</i>*/}
                                     <Link
                                         href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
                                 </div>
-                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
-                                    Title: {result.song_title}
-                                </div>
-                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
-                                    {result.description}
+                                {/*<div className="d-flex flex-row mt-2 custom-trending-item-title fs-mob-11">*/}
+                                {/*    Title: {result.song_title}*/}
+                                {/*</div>*/}
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description fs-mob-11">
+                                    {/*{result.description}*/}
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
                                 </div>
 
                             </div>
                         </div>
-                        <div className="col-md-3 col-sm-6 my-auto">
+                        <div className="col-md-3 col-sm-6 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
+                        </div>
+                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                            {userSession ?this.renderChillLikeButton(result.user_like,result.id):null}
+                            {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
+                            {/*    <i className="far fa-share-square"/> Share*/}
+                            {/*</button>*/}
+                            <button onClick={() => this.addNextToList(result)} className="btn btn-outline-primary btn-sm m-2" type="button">
+                                <i className="far fa-list-alt"/> Add To Next Up
+                            </button>
                         </div>
                     </div>
                     // <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
@@ -781,25 +1039,35 @@ class Home extends React.Component {
                         </div>
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
                             <div className="d-flex flex-column">
-                                <div className="d-flex flex-row custom-trending-item-artist-track">
-                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
-                                    <i className="ml-3 mr-3">•</i>
+                                <div className="d-flex flex-row custom-trending-item-artist-track fs-mob-11">
+                                    {/*<Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>*/}
+                                    {/*<i className="ml-3 mr-3">•</i>*/}
                                     <Link
                                         href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
                                 </div>
-                                <div className="d-flex flex-row mt-2 custom-trending-item-title">
-                                    Title: {result.song_title}
-                                </div>
-                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
-                                    {result.description}
+                                {/*<div className="d-flex flex-row mt-2 custom-trending-item-title fs-mob-11">*/}
+                                {/*    Title: {result.song_title}*/}
+                                {/*</div>*/}
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description fs-mob-11">
+                                    {/*{result.description}*/}
+                                    <Link href={`/u-details/${result.username_slug}`}>{result.username}</Link>
                                 </div>
 
                             </div>
                         </div>
-                        <div className="col-md-3 col-sm-6 my-auto">
+                        <div className="col-md-3 col-sm-6 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
+                        </div>
+                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                            {userSession ?this.renderRelaxLikeButton(result.user_like,result.id):null}
+                            {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
+                            {/*    <i className="far fa-share-square"/> Share*/}
+                            {/*</button>*/}
+                            <button onClick={() => this.addNextToList(result)} className="btn btn-outline-primary btn-sm m-2" type="button">
+                                <i className="far fa-list-alt"/> Add To Next Up
+                            </button>
                         </div>
                     </div>
                     // <div className="col-md-4 custom-home-music-display mobile-track-home-margin">
@@ -1019,17 +1287,16 @@ class Home extends React.Component {
             </div>
         </div>)
     }
-
+    handleChange = (e) => {
+        const isCheckbox = e.target.type === "checkbox";
+        this.setState({[e.target.name]: isCheckbox ? e.target.checked : e.target.value})
+    }
 
 
     render() {
         const col_md_12 = "col-md-12"
         const col_md_9 = "col-md-9"
 
-        const handleChange = (e) => {
-            const isCheckbox = e.target.type === "checkbox";
-            this.setState({[e.target.name]: isCheckbox ? e.target.checked : e.target.value})
-        }
         return (
             <div className="home-screen">
                 <NextSeo
@@ -1085,6 +1352,7 @@ const mapStateToProps = (state) => {
         chillReleases: Object.values(state.fetchChillMusic),
         relaxReleases: Object.values(state.fetchRelaxMusic),
         likesResponse: state.likesList.likesListResponse,
+        likeMusicResponse: state.likeMusic.likeMusicResponseData,
         whoToFollowResponse: state.getWhoToFollow.whoToFollowListData,
         playerDurationResponse: state.playerDuration.musicPlayerDuration,
         randomMusicResponse: state.fetchRandomMusic.musicRandomFetchData,
@@ -1101,12 +1369,13 @@ export default connect(mapStateToProps, {
     fetchHomeChillMusic: fetchHomeChillMusic,
     fetchHomeRelaxMusic: fetchHomeRelaxMusic,
     playMusic: playMusic,
-    addMusicToList: addMusicToList,
+    addMusicToList,
     sendMusicIdToPlayer,
     playCount,
     addMusicListToMediaPlayerPlaylist,
     fetchRandomMusic,
     fetchHomeFeaturedMusic,
     fetchCurrentUserDetail,
-    fetchExclusiveContent
+    fetchExclusiveContent,
+    likeMusicApi
 })(Home);
