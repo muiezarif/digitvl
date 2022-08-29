@@ -200,34 +200,11 @@ class Home extends React.Component {
             } else {
                 loggedUser = false
                 guestUser = true
-                this.props.fetchHomeMusic(this.state.page).then(() => {
-                    this.setState({
-                        newReleases: this.props.newReleases[0],
-                        musicPlayerPlaylist: this.props.newReleases[0].results
-                    })
-                }, ({data}) => {
-                })
-                this.props.fetchHomeChillMusic(this.state.chillPage).then(() => {
-                    this.setState({chillReleases: this.props.chillReleases[0]})
-                }, ({data}) => {
-                })
-                this.props.fetchHomeRelaxMusic(this.state.relaxPage).then(() => {
-                    this.setState({relaxReleases: this.props.relaxReleases[0]})
-                }, ({data}) => {
-                })
-
-                this.props.fetchHomeFeaturedMusic(this.state.featuredPage).then(() => {
-                    this.setState({featuredReleases: this.props.featuredMusicResponse})
-                }, ({data}) => {
-                })
-            }
-            if (!userSession){
                 this.props.fetchHomeMusic(this.state.page,null).then(() => {
                     this.setState({
                         newReleases: this.props.newReleases[0],
                         musicPlayerPlaylist: this.props.newReleases[0].results
                     })
-
                 }, ({data}) => {
                 })
                 this.props.fetchHomeChillMusic(this.state.chillPage,null).then(() => {
@@ -249,6 +226,28 @@ class Home extends React.Component {
                     this.setState({exclusiveReleases:this.props.exclusiveSongsResponse})
                 })
             }
+        }else{
+            this.props.fetchHomeMusic(this.state.page,null).then(() => {
+                this.setState({
+                    newReleases: this.props.newReleases[0],
+                    musicPlayerPlaylist: this.props.newReleases[0].results
+                })
+
+            }, ({data}) => {
+            })
+            this.props.fetchHomeChillMusic(this.state.chillPage,null).then(() => {
+                this.setState({chillReleases: this.props.chillReleases[0]})
+            }, ({data}) => {
+            })
+            this.props.fetchHomeRelaxMusic(this.state.relaxPage,null).then(() => {
+                this.setState({relaxReleases: this.props.relaxReleases[0]})
+            }, ({data}) => {
+            })
+
+            this.props.fetchHomeFeaturedMusic(this.state.featuredPage,null).then(() => {
+                this.setState({featuredReleases: this.props.featuredMusicResponse})
+            }, ({data}) => {
+            })
         }
 
     }

@@ -113,28 +113,48 @@ export const forgotPasswordUpdateApi = (data)=>{
 
 export const fetchHomeMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
-        const response = await novamdigital.get(`/beats/`,{
-            headers: {
-                'Authorization': `jwt ${userSession.token}`,
-            },
-            params:{
-                page:pageNo,
-            }
-        })
+        let response
+        if (userSession){
+            response = await novamdigital.get(`/beats/`,{
+                headers: {
+                    'Authorization': `jwt ${userSession.token}`,
+                },
+                params:{
+                    page:pageNo,
+                }
+            })
+        }else{
+            response = await novamdigital.get(`/beats/`,{
+                params:{
+                    page:pageNo,
+                }
+            })
+        }
+
         dispatch({type:TYPES.FETCH_MUSIC,payload:response.data})
     }
 }
 
 export const fetchHomeChillMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
-        const response = await novamdigital.get(`/beats/tags/chill/`,{
-            headers: {
-                'Authorization': `jwt ${userSession.token}`,
-            },
-            params:{
-                page:pageNo,
-            }
-        })
+        let response
+        if (userSession){
+            response = await novamdigital.get(`/beats/tags/chill/`,{
+                headers: {
+                    'Authorization': `jwt ${userSession.token}`,
+                },
+                params:{
+                    page:pageNo,
+                }
+            })
+        }else{
+            response = await novamdigital.get(`/beats/tags/chill/`,{
+                params:{
+                    page:pageNo,
+                }
+            })
+
+        }
         dispatch({type:TYPES.FETCH_MUSIC_CHILL,payload:response.data})
     }
 }
@@ -153,27 +173,46 @@ export const fetchExclusiveContent = (userSession,pageNo) =>{
 }
 export const fetchHomeRelaxMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
-        const response = await novamdigital.get(`/beats/tags/relax/`,{
-            headers: {
-                'Authorization': `jwt ${userSession.token}`,
-            },
-            params:{
-                page:pageNo,
-            }
-        })
+        let response
+        if (userSession){
+            response = await novamdigital.get(`/beats/tags/relax/`,{
+                headers: {
+                    'Authorization': `jwt ${userSession.token}`,
+                },
+                params:{
+                    page:pageNo,
+                }
+            })
+        }else{
+            response = await novamdigital.get(`/beats/tags/relax/`,{
+                params:{
+                    page:pageNo,
+                }
+            })
+        }
+
         dispatch({type:TYPES.FETCH_MUSIC_RELAX,payload:response.data})
     }
 }
 export const fetchHomeFeaturedMusic = (pageNo,userSession) =>{
     return async (dispatch) =>{
-        const response = await novamdigital.get(`/featured/songs/`,{
-            headers: {
-                'Authorization': `jwt ${userSession.token}`,
-            },
-            params:{
-                page:pageNo,
-            }
-        })
+        let response
+        if (userSession){
+            response = await novamdigital.get(`/featured/songs/`,{
+                headers: {
+                    'Authorization': `jwt ${userSession.token}`,
+                },
+                params:{
+                    page:pageNo,
+                }
+            })
+        }else{
+            response = await novamdigital.get(`/featured/songs/`,{
+                params:{
+                    page:pageNo,
+                }
+            })
+        }
         dispatch({type:TYPES.FETCH_MUSIC_FEATURED,payload:response.data})
     }
 }
