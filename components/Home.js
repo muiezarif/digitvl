@@ -546,7 +546,7 @@ class Home extends React.Component {
                         </div>
                         <div className="col-md-6 col-sm-12 col-xs-12 mt-2">
                             <div className="d-flex flex-column w-100">
-                                <div className="d-flex flex-row custom-trending-item-artist-track">
+                                <div className="d-flex flex-row custom-trending-item-artist-track fs-mob-11">
                                     {/*<Link href={`/u-details/${result.target.username_slug}`}>{result.target.username}</Link>*/}
                                     {/*<i className="ml-3 mr-3">•</i>*/}
                                     <Link
@@ -555,7 +555,7 @@ class Home extends React.Component {
                                 {/*<div className="d-flex flex-row mt-2 custom-trending-item-title">*/}
                                 {/*    Title: {result.target.song_title}*/}
                                 {/*</div>*/}
-                                <div className="d-flex flex-row mt-3 custom-trending-item-description">
+                                <div className="d-flex flex-row mt-3 custom-trending-item-description fs-mob-11">
                                     <Link href={`/u-details/${result.target.username_slug}`}>{result.target.username}</Link>
                                 </div>
                             </div>
@@ -565,7 +565,7 @@ class Home extends React.Component {
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
                         </div>
-                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                        <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
                             {userSession ?this.renderFeaturedLikeButton(result.target.user_like,result.target.id):null}
                             {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
                             {/*    <i className="far fa-share-square"/> Share*/}
@@ -866,7 +866,7 @@ class Home extends React.Component {
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
                         </div>
-                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                        <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
                             {userSession ?this.renderLikeButton(result.user_like,result.id):null}
                             {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
                             {/*    <i className="far fa-share-square"/> Share*/}
@@ -990,7 +990,7 @@ class Home extends React.Component {
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
                         </div>
-                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                        <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
                             {userSession ?this.renderChillLikeButton(result.user_like,result.id):null}
                             {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
                             {/*    <i className="far fa-share-square"/> Share*/}
@@ -1059,7 +1059,7 @@ class Home extends React.Component {
                                 <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
                             </div>
                         </div>
-                        <div className="d-inline-block flex-row mt-2 ml-2 mb-3">
+                        <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
                             {userSession ?this.renderRelaxLikeButton(result.user_like,result.id):null}
                             {/*<button onClick={this.handleShow} className="btn btn-outline-primary btn-sm m-2" type="button">*/}
                             {/*    <i className="far fa-share-square"/> Share*/}
