@@ -1313,7 +1313,7 @@ a:hover {
 .custom-trending-item-cover-img {
     border-radius: 10px;
     width: 100%;
-    border: 1px solid #00DAC8;
+    /*border: 1px solid #00DAC8;*/
 }
 
 .custom-blogs-item-title {
@@ -1813,7 +1813,7 @@ a:hover {
         border-radius: 10px;
         width: 60px;
         height: 60px;
-        border: 1px solid #00DAC8;
+        /*border: 1px solid #00DAC8;*/
     }
     .custom-user-profile-data {
         margin-top: 30%;

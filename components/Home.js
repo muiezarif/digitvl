@@ -1236,7 +1236,7 @@ class Home extends React.Component {
         return (<div>
             <div className="custom-home-screen">
                 <div className="row custom-row-margin custom-row-setting">
-                    <div className="col-md-12 col-sm-6">
+                    <div className="col-md-9 col-sm-6">
                         <div className="custom-home-headers">
                             <h3>Featured Tracks</h3>
                         </div>
