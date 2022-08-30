@@ -964,7 +964,7 @@ class Home extends React.Component {
                 return (
                     <div className="row col-md-12 col-sm-6 col-xs-4 pt-2 pb-2 custom-trending-item-bg align-items-center">
                         <div className="col-md-2 col-sm-2">
-                            <img src={result.photo_main}
+                            <img src={result.photo_main} width="130" height="130"
                                  className="mt-2 mb-2 custom-trending-item-cover-img"/>
                         </div>
                         <div className="col-md-6 col-sm-2 col-xs-2 mt-2 w-50">
@@ -1256,7 +1256,7 @@ class Home extends React.Component {
                                 {this.renderNewReleases()}
                             </div>
                             <div className="row w-75 mt-3 align-content-end align-items-end justify-content-end">
-                            {this.renderPagination()}
+                                {this.renderPagination()}
                             </div>
                         </div>
                         <div className="custom-home-headers mt-5">
