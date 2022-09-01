@@ -1720,6 +1720,9 @@ a:hover {
     .custom-music-detail-comment-section .custom-nav-search {
         width: 100%;
     }
+    .custom-align-center{
+        margin-left: 70px;
+    }
     .custom-subscription-badge{
         width: 15px;
         height: 15px;
@@ -1787,6 +1790,9 @@ a:hover {
     /*.col-sm-2{*/
     /*    width: auto;*/
     /*}*/
+    .custom-align-center{
+        margin-left: 80px;
+    }
     .mobile-track-home-margin{
         margin-left: 25%;
     }

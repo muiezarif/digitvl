@@ -237,7 +237,7 @@ class LandingPage extends React.Component {
                     {/*    returnTo={"txID"}// string value of state key to return the transaction id*/}
                     {/*/>*/}
                     <div className="custom-transparent-bg black-overlay">
-                        <div className="custom-z-index-2000 row w-100 d-flex d-inline-flex">
+                        <div className="custom-z-index-2000 custom-align-center row w-100 d-flex d-inline-flex">
                             <div className="col-md-4 custom-landing-heading">
                                 <h4 className="text-color-white custom-heading-text">DIGITVL</h4>
                             </div>
@@ -251,7 +251,7 @@ class LandingPage extends React.Component {
                                 </li>
                             </ul>
                         </div>
-                        <div className="row custom-row-margin text-center">
+                        <div className="row custom-row-margin custom-align-center text-center">
                             <div className="col-md-12">
                                 <h3 className="text-center text-white">Join Our Community!</h3>
                             </div>
