@@ -6,7 +6,7 @@ import EditTrack from "../../../../../components/EditTrack";
 
 export default function editTrack(){
     const router = useRouter();
-    console.log(router.query)
+    // console.log(router.query)
     return (
         <div>
             <EditTrack dataparams={router.query} />

@@ -51,7 +51,7 @@ class UploadMusic extends Component {
     }
 
     componentDidMount() {
-        console.log(userSession)
+        // console.log(userSession)
         if (userSession.user){
             this.setState({membershipPlan:userSession.user.membership_plan,limitRemaining:userSession.user.membership_plan.volume_remaining,totalLimit:userSession.user.membership_plan.membership.storage_size})
         }

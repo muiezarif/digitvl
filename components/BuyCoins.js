@@ -12,7 +12,7 @@ const BuyCoins = () => {
     const elements = useElements()
     const [loader,showLoader] = useState(false)
     const createPayment = async (userSession,priceId) => {
-        console.log(userSession)
+        // console.log(userSession)
         const API = axios.create({
             baseURL: "https://novamdigital.com/api/v1"
             // baseURL: "http://143.244.161.35/api/v1"
@@ -28,7 +28,7 @@ const BuyCoins = () => {
         var response = await API.post("/buy-coins/", formData, {
             headers: {'Authorization': `jwt ${userSession}`}
         })
-        console.log(response)
+        // console.log(response)
         showLoader(false)
         const result = stripe.redirectToCheckout({
             sessionId: response.data.id

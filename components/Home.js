@@ -81,7 +81,7 @@ class Home extends React.Component {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
-
+        // console.log(userSession)
         if (userSession) {
             this.props.fetchCurrentUserDetail(userSession).then(() => {
                 // userSession.user.membership_plan.membership.membership_type = this.props.successSubscriptionResponse.user_membership_data[0].membership_plan.membership.membership_type

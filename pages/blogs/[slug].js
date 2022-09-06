@@ -23,7 +23,7 @@ export default function verifyDetails(props){
     if (!data){
         return <div>Loading</div>
     }
-    console.log(data)
+    // console.log(data)
     return (
         <div>
             <NextSeo

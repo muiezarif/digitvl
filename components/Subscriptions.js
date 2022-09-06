@@ -10,7 +10,7 @@ const Subscriptions = () => {
     const stripe = useStripe()
     const elements = useElements()
     const createSubscription = async (userSession) => {
-        console.log(userSession)
+        // console.log(userSession)
         const API = axios.create({
             baseURL: "https://novamdigital.com/api/v1"
             // baseURL: "http://143.244.161.35/api/v1"
@@ -28,7 +28,7 @@ const Subscriptions = () => {
         var response = await API.post("/create-subscription/", formData, {
             headers: {'Authorization': `jwt ${userSession}`}
         })
-        console.log(response.data)
+        // console.log(response.data)
         const result = stripe.redirectToCheckout({
             sessionId: response.data.id
         })
@@ -44,7 +44,7 @@ const Subscriptions = () => {
         }
         userSession = window.localStorage.getItem("userToken")
         userCustomerId = window.localStorage.getItem("userStripeCustomerId")
-        console.log(userCustomerId)
+        // console.log(userCustomerId)
         const API = axios.create({
             baseURL: "https://novamdigital.com/api/v1"
             // baseURL: "http://143.244.161.35/api/v1"
@@ -55,7 +55,7 @@ const Subscriptions = () => {
         var response = await API.post("/create-customer-portal/", formData, {
             headers: {'Authorization': `jwt ${userSession}`}
         })
-        console.log(response.data.url)
+        // console.log(response.data.url)
         // window.location.assign(response.data.url)
         Router.push(response.data.url)
     }

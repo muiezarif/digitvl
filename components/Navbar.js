@@ -5,14 +5,35 @@ import Image from "next/image";
 import SearchBar from "./SearchBar";
 import Router from "next/router";
 import {connect} from "react-redux";
-import {fetchWebsiteAnnouncement, fetchAdData, posterRewards} from "../actions";
+// import Web3 from "web3";
+// import Web3Modal from "web3modal"
+// import WalletConnectProvider from "@walletconnect/web3-provider";
+import {fetchWebsiteAnnouncement, fetchAdData, posterRewards,generateXrpWallet} from "../actions";
 import dynamic from "next/dynamic";
+import LoadingOverlay from 'react-loading-overlay'
+import {RingLoader} from "react-spinners";
 // import AdModal from "./modals/AdModal";
 const AdModal = dynamic(() => import('./modals/AdModal'), {ssr: false})
+let web3modal
+// const providerOptions = {
+//     walletconnect:{
+//         package:WalletConnectProvider,
+//         options:{
+//             infuraId:"14a4e991cff14fe6f779b8aa08889615"
+//         }
+//     }
+// }
+// if (typeof window !== "undefined"){
+//     web3modal = new Web3Modal({
+//         network : "mainnet",
+//         cacheProvider : true,
+//         providerOptions,
+//     })
+// }
 
 
-let userLoggedIn
-let userSession
+let userSessionToken
+let userXrpWallet
 
 class Navbar extends React.Component {
     state = {
@@ -26,7 +47,10 @@ class Navbar extends React.Component {
         adResponseImage: "",
         adResponseDescription: "",
         adResponseRedirectUrl: "",
-        adResponseId: 0
+        adResponseId: 0,
+        user_Xrp_Wallet: {},
+        user_Xrp_Wallet_Address: null,
+        generateWalletLoader:false
     }
 
     componentWillUnmount() {
@@ -40,7 +64,7 @@ class Navbar extends React.Component {
 
         this.interval = setInterval(() => {
             this.props.fetchAdData().then(() => {
-                console.log(this.props.adDataResponse)
+                // console.log(this.props.adDataResponse)
                 if (this.props.adDataResponse.results.length > 0) {
                     this.setState({
                         adModalShow: true,
@@ -68,6 +92,14 @@ class Navbar extends React.Component {
                     this.setState({
                         userImage: userSession.user.profile.avatar
                     })
+                }
+                userSessionToken = userSession
+                userXrpWallet = userSession.user.user_xrp_wallet
+                // console.log(userSessionToken)
+                // console.log(userXrpWallet)
+                this.setState({user_Xrp_Wallet:userXrpWallet})
+                if (userSession.user.user_xrp_wallet){
+                    this.setState({user_Xrp_Wallet_Address:userSession.user.user_xrp_wallet.xrp_public_address})
                 }
             }
             if (userSession.profile) {
@@ -220,9 +252,9 @@ class Navbar extends React.Component {
                             <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
                                 src="/images/blogs_icon.svg" width={20} height={20} className="my-auto"/><Link
                                 href="/blogs"> Blogs</Link></ReactBootstrap.Nav>
-                            <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img
-                                src="/images/dollar_icon.svg" width={20} height={20} className="my-auto"/><Link
-                                href="/exclusive"> Exclusive</Link></ReactBootstrap.Nav>
+                            {/*<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img*/}
+                            {/*    src="/images/dollar_icon.svg" width={20} height={20} className="my-auto"/><Link*/}
+                            {/*    href="/exclusive"> Exclusive</Link></ReactBootstrap.Nav>*/}
                             {/*<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><img*/}
                             {/*    src="/images/support_icon.svg" width={20} height={20} className="my-auto"/><Link*/}
                             {/*    href="/support"> Support</Link></ReactBootstrap.Nav>*/}
@@ -232,13 +264,53 @@ class Navbar extends React.Component {
                                 href="https://www.digitvl.shop"> Shop</a></ReactBootstrap.Nav>
                             <SearchBar className="my-auto"/>
                             {this.state.userLoggedIn ? <div className="navbar ml-auto custom-navbar-top-right-links">
-                                <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Link
-                                    href="/subscriptions">
-                                    <div className="btn custom-upload-btn">
-                                        Go Pro
+                                {/*<ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><Link*/}
+                                {/*    href="/subscriptions">*/}
+                                {/*    <div className="btn custom-upload-btn">*/}
+                                {/*        Go Pro*/}
+                                {/*    </div>*/}
+                                {/*</Link>*/}
+                                {/*</ReactBootstrap.Nav>*/}
+                                {this.state.user_Xrp_Wallet ?
+                                    <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><button className="bg-dark">
+
+                                        <div className="w-100">
+                                        XRPL Wallet Connected
                                     </div>
-                                </Link>
+                                            <div>${this.state.user_Xrp_Wallet_Address.slice(0,10)}...</div>
+                                </button>
                                 </ReactBootstrap.Nav>
+                                    : <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><button className="bg-dark" onClick={async () => {
+                                    // const provider = await web3modal.connect()
+                                    // const web3 = new Web3(provider)
+                                    // console.log(web3)
+                                        this.setState({generateWalletLoader:true})
+                                    this.props.generateXrpWallet(userSessionToken).then(() => {
+                                        userXrpWallet = this.props.generateXrpWalletResponse.data.account_data.Account
+                                        this.setState({user_Xrp_Wallet:this.props.generateXrpWalletResponse,user_Xrp_Wallet_Address:this.props.generateXrpWalletResponse.data.account_data.Account})
+                                        let userSession2 = localStorage.getItem("userSession")
+                                        userSession2 = JSON.parse(userSession2)
+                                        // console.log(userSession2)
+                                        if (userSession2.user){
+                                            var data = {xrp_public_address:this.props.generateXrpWalletResponse.data.account_data.Account}
+                                            userSession2.user.user_xrp_wallet = data
+                                            localStorage.setItem("userSession", JSON.stringify(userSession2));
+                                        }
+                                        this.setState({generateWalletLoader:false})
+                                        // console.log(this.props.generateXrpWalletResponse.data.account_data.Account)
+                                    }).catch(err => {
+                                        console.log(err)
+                                        this.setState({generateWalletLoader:false})
+                                    })
+                                }
+                                }>
+                                        <LoadingOverlay active={this.state.generateWalletLoader} spinner>
+                                    <div className="btn custom-upload-btn">
+                                        Generate XRPL Wallet
+                                    </div>
+                                        </LoadingOverlay>
+                                </button>
+                                </ReactBootstrap.Nav>}
                                 <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links">
                                     <div onClick={this.onNotificationsClick}
                                          className="btn">{this.state.notificationCount > 0 ? this.state.notificationCount : null}<i
@@ -386,7 +458,8 @@ const mapStateToProps = (state) => {
     return {
         announcementResponse: state.websiteAnnouncement.announcementData,
         adDataResponse: state.adData.adDataResponse,
-        posterRewardResponse: state.posterReward.posterRewardDataResponse
+        posterRewardResponse: state.posterReward.posterRewardDataResponse,
+        generateXrpWalletResponse: state.xrpWalletCreate.xrpWalletCreateResponseData
     }
 }
-export default connect(mapStateToProps, {fetchWebsiteAnnouncement, fetchAdData, posterRewards})(Navbar);
+export default connect(mapStateToProps, {fetchWebsiteAnnouncement, fetchAdData, posterRewards,generateXrpWallet})(Navbar);

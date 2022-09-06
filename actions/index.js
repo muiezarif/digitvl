@@ -318,6 +318,17 @@ export const fetchCurrentUserPlaylist = (userSession,pageNo) =>{
         dispatch({type:TYPES.FETCH_CURRENT_USER_PLAYLISTS,payload:response.data})
     }
 }
+export const generateXrpWallet = (userSession) => {
+    // console.log(userSession.token)
+    return async (dispatch) =>{
+        const response = await novamdigital.post(`/xrp/wallet/create/`,{},{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            }
+        })
+        dispatch({type:TYPES.XRP_WALLET_CREATE,payload:response.data})
+    }
+}
 export const fetchUserSubscriptionDetail = (userSession,pageNo) =>{
     // console.log(userSession.token)
     return async (dispatch) =>{

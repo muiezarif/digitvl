@@ -35,7 +35,7 @@ class Login extends React.Component {
             if (isValid) {
                 const data = {email: this.state.email, password: this.state.password}
                 this.props.login(data).then(() => {
-                    console.log(this.props.responseData)
+                    // console.log(this.props.responseData)
                     if (this.props.responseData.status) {
                         localStorage.setItem("userSession", JSON.stringify(this.props.responseData.result.user))
                         localStorage.setItem("userLoggedIn", "true")

@@ -19,7 +19,7 @@ class AddDigitvlLinkstree extends Component {
         this.setState({user_slug:userSession.user.username_slug})
         this.props.getDTreeCurrentUserProfileLinks(userSession).then(() => {
             this.setState({links_array:this.props.getCurrentUserDlinksResponse.link_tree_data})
-            console.log(this.props.getCurrentUserDlinksResponse)
+            // console.log(this.props.getCurrentUserDlinksResponse)
         }).catch(err => {
 
         })
@@ -50,7 +50,7 @@ class AddDigitvlLinkstree extends Component {
                                 this.props.deleteDTreePublicProfileLinks(result.id,userSession).then(()=>{
                                     this.props.getDTreeCurrentUserProfileLinks(userSession).then(() => {
                                         this.setState({links_array:this.props.getCurrentUserDlinksResponse.link_tree_data})
-                                        console.log(this.props.getCurrentUserDlinksResponse)
+                                        // console.log(this.props.getCurrentUserDlinksResponse)
                                     }).catch(err => {
 
                                     })
@@ -79,7 +79,7 @@ class AddDigitvlLinkstree extends Component {
                     ]})
                 this.props.getDTreeCurrentUserProfileLinks(userSession).then(() => {
                     this.setState({links_array:this.props.getCurrentUserDlinksResponse.link_tree_data})
-                    console.log(this.props.getCurrentUserDlinksResponse)
+                    // console.log(this.props.getCurrentUserDlinksResponse)
                 }).catch(err => {
 
                 })

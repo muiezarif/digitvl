@@ -9,7 +9,7 @@ class SuccessBuyCoins extends Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         this.props.fetchBuyCoinsSuccessSession(this.props.dataparams.stripesessionid,userSession).then(()=>{
-            console.log(this.props.getSuccessBuyCoinsData)
+            // console.log(this.props.getSuccessBuyCoinsData)
             // userSession.user.coins = this.props.getSuccessBuyCoinsData.coin_amount
             // localStorage.setItem("userSession", JSON.stringify(userSession));
             Router.push("/wallet")

@@ -20,13 +20,13 @@ const ManageSubscription = () =>  {
             baseURL: "http://143.244.161.35/api/v1"
             // baseURL: "https://6ce33180aca4.ngrok.io/api/v1"
         })
-        console.log(userSession)
+        // console.log(userSession)
         var formData = new FormData()
         formData.append("customer_id",userCustomerId)
         var subscriptionResponse = await API.get("/user-subscription/detail/",{
             headers: {'Authorization': `jwt ${userSession}`}
         })
-        console.log(subscriptionResponse.data.subcription_data[0])
+        // console.log(subscriptionResponse.data.subcription_data[0])
         setUserSubscriptionDetailResponse(subscriptionResponse.data.subcription_data[0])
         setUserSubscriptionDataDetailResponse(subscriptionResponse.data.subcription_data[0].subscription)
 
@@ -38,7 +38,7 @@ const ManageSubscription = () =>  {
             }
             userSession = window.localStorage.getItem("userToken")
             userCustomerId = window.localStorage.getItem("userStripeCustomerId")
-            console.log(userCustomerId)
+            // console.log(userCustomerId)
             const API = axios.create({
                 baseURL: "https://novamdigital.com/api/v1"
                 // baseURL: "http://143.244.161.35/api/v1"
@@ -55,7 +55,7 @@ const ManageSubscription = () =>  {
             // })
             // console.log(subscriptionResponse)
             // setUserSubscriptionDetailResponse(subscriptionResponse)
-            console.log(response.data.url)
+            // console.log(response.data.url)
             // window.location.assign(response.data.url)
             Router.push(response.data.url)
         }

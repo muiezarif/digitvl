@@ -9,14 +9,14 @@ class SuccessSubscription extends Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         // let user = JSON.parse(userSession)
-        console.log(userSession)
+        // console.log(userSession)
         this.props.fetchSubscriptionSuccessSession(this.props.dataparams.stripesessionid,userSession).then(()=>{
-            console.log(this.props.successSubscriptionResponse)
+            // console.log(this.props.successSubscriptionResponse)
             // userSession.user.membership_plan.membership.membership_type = this.props.successSubscriptionResponse.user_membership_data[0].membership_plan.membership.membership_type
             userSession.user.membership_plan = this.props.successSubscriptionResponse.user_membership_data[0].membership_plan
             // userSession.user.membership_plan.membership.membership_type = "Testing"
             localStorage.setItem("userSession", JSON.stringify(userSession));
-            console.log(userSession)
+            // console.log(userSession)
             Router.push("/home")
         })
     }

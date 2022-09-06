@@ -9,7 +9,7 @@ class UserWallet extends Component {
         let userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
         this.props.getCurrentUserDigitvlCoins(userSession).then(()=>{
-            console.log(this.props.userCoinsResponse)
+            // console.log(this.props.userCoinsResponse)
             this.setState({coins:this.props.userCoinsResponse.coins})
         })
 

@@ -11,7 +11,7 @@ class DigitvlLinktreeProfilePage extends Component {
         this.props.getDTreePublicProfileLinks(this.props.dataparams.username_slug).then(() =>{
             this.setState({userData:this.props.getDlinksTreePublicResponse,userLinksArray:this.props.getDlinksTreePublicResponse.link_tree_data, userProfileImage:this.props.getDlinksTreePublicResponse.link_tree_data[0].artist.profile.avatar,userProfileName:this.props.getDlinksTreePublicResponse.link_tree_data[0].artist.profile.username,usernameSlug:this.props.getDlinksTreePublicResponse.link_tree_data[0].artist.profile.username_slug
         })
-            console.log(this.state.userLinksArray)
+            // console.log(this.state.userLinksArray)
         }).catch(err =>{
 
         })

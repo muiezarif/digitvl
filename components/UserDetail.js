@@ -35,7 +35,7 @@ class UserDetail extends Component {
         this.props.getUserProfileDetail(this.props.params.username_slug).then(() => {
             userLoggedIn = localStorage.getItem("userLoggedIn")
             userSession = localStorage.getItem("userSession")
-            console.log(this.props.userDetails)
+            // console.log(this.props.userDetails)
             if (userLoggedIn) {
                 userSession = JSON.parse(userSession)
                 this.props.getUserProfileFollowCheck(userSession, this.props.params.username_slug).then(() => {
