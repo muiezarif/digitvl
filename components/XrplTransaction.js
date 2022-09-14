@@ -43,7 +43,7 @@ class XrplTransaction extends Component {
                                        tabIndex="1"/>
                                 <div className="w-50 mt-3 mx-auto">
                                     <button type="submit" tabIndex="3" className="custom-login-button btn btn-block">
-                                        Send
+                                        Transfer
                                     </button>
                                 </div>
                             </div>
