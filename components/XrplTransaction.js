@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navbar from "./Navbar";
 import {sendXrpTransaction} from "../actions";
 import {connect} from "react-redux";
+
 class XrplTransaction extends Component {
     state = {xrpaddress:null,xrpamount:0.0,transactionDetails:{},transactionResponse:{},showDetails:false}
     render() {

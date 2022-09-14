@@ -122,6 +122,12 @@ class UserWallet extends Component {
                     <div className="row custom-row-margin mt-5">
                         <div className="col-md-5 col-sm-6 custom-totalcoins-bg">
                             <div className="d-flex flex-column mt-5">
+                                <span className="custom-total-coins-title ml-5">XRP Earned (Testnet)</span>
+                                <span className="custom-total-coins ml-5">{this.state.user_Xrp_Wallet ? this.state.user_Xrp_Wallet.xrp_token_earn : 0}</span>
+                            </div>
+                        </div>
+                        <div className="col-md-5 col-sm-6 custom-totalcoins-bg">
+                            <div className="d-flex flex-column mt-5">
                             <span className="custom-total-coins-title ml-5">Your DIGITVL Points</span>
                             <span className="custom-total-coins ml-5">{this.state.coins ? this.state.coins : 0}</span>
                             </div>

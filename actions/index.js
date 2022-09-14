@@ -340,6 +340,18 @@ export const sendXrpTransaction = (userSession,data) => {
         dispatch({type:TYPES.XRP_TRANSACTION,payload:response.data})
     }
 }
+export const earnXrpByLike = (userSession,data) => {
+    // console.log(userSession.token)
+    return async (dispatch) =>{
+        const response = await novamdigital.post(`/xrp/earn-by/like-song/`,data,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            }
+        })
+        dispatch({type:TYPES.EARN_XRP,payload:response.data})
+    }
+}
+
 export const fetchUserSubscriptionDetail = (userSession,pageNo) =>{
     // console.log(userSession.token)
     return async (dispatch) =>{

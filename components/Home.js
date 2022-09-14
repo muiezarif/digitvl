@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import Link from "next/link"
 import Image from "next/image";
+import {store as NotifyStore} from 'react-notifications-component';
 import {
     fetchCurrentUserLikes,
     fetchHomeMusic,
@@ -18,7 +19,7 @@ import {
     fetchCurrentUserDetail,
     fetchExclusiveContent,
     likeMusicApi,
-
+    earnXrpByLike
 } from "../actions"
 import * as ReactBootstrap from "react-bootstrap";
 import {connect} from "react-redux";
@@ -27,6 +28,7 @@ import Router from "next/router";
 import {NextSeo} from "next-seo";
 import AnnouncementBar from "./AnnouncementBar";
 import {FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton} from "react-share";
+import {store} from "react-notifications-component";
 
 let userSession
 let guestUser
@@ -57,7 +59,20 @@ class Home extends React.Component {
         showAddPlaylist:false,
         show:false
     }
-
+    notify = () => {
+        NotifyStore.addNotification({
+            title: "Success!",
+            message: "You earned Xrp",
+            type: "success",
+            container: "top-right",
+            insert: "top",
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+                duration: 2000
+            }
+        })
+    }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.playerDurationResponse !== prevProps.playerDurationResponse){
 
@@ -81,7 +96,7 @@ class Home extends React.Component {
         let userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
-        // console.log(userSession)
+        console.log(userSession)
         if (userSession) {
             this.props.fetchCurrentUserDetail(userSession).then(() => {
                 // userSession.user.membership_plan.membership.membership_type = this.props.successSubscriptionResponse.user_membership_data[0].membership_plan.membership.membership_type
@@ -640,6 +655,7 @@ class Home extends React.Component {
                             likeCheck = false
                             var page = this.state.page
                             this.fetchMusicList(page)
+
                         }).catch(err => {
                         })
                     } else if (!userSession) {
@@ -658,6 +674,16 @@ class Home extends React.Component {
                             likeCheck = true
                             var page = this.state.page
                             this.fetchMusicList(page)
+                            const data = {xrp_token_amount_earn:0.2}
+                            const formData = new FormData()
+                            formData.append("xrp_token_amount_earn", 0.1);
+                            this.props.earnXrpByLike(userSession,formData).then(() =>{
+                                // console.log(this.props.earnXrpByLikeResponse)
+                                // this.notify()
+                                alert("You earned 0.1 xrp")
+                            }).catch(err => {
+
+                            })
                         }).catch(err => {
                         })
                     } else if (!userSession) {
@@ -697,6 +723,15 @@ class Home extends React.Component {
                             likeCheck = true
                             var page = this.state.page
                             this.fetchFeaturedMusicList(page)
+                            const formData = new FormData()
+                            formData.append("xrp_token_amount_earn", 0.1);
+                            this.props.earnXrpByLike(userSession,formData).then(() =>{
+                                // console.log(this.props.earnXrpByLikeResponse)
+                                // this.notify()
+                                alert("You earned 0.1 xrp")
+                            }).catch(err => {
+
+                            })
                         }).catch(err => {
                         })
                     } else if (!userSession) {
@@ -736,6 +771,15 @@ class Home extends React.Component {
                             likeCheck = true
                             var page = this.state.page
                             this.fetchRelaxMusicList(page)
+                            const formData = new FormData()
+                            formData.append("xrp_token_amount_earn", 0.1);
+                            this.props.earnXrpByLike(userSession,formData).then(() =>{
+                                // console.log(this.props.earnXrpByLikeResponse)
+                                // this.notify()
+                                alert("You earned 0.1 xrp")
+                            }).catch(err => {
+
+                            })
                         }).catch(err => {
                         })
                     } else if (!userSession) {
@@ -775,6 +819,15 @@ class Home extends React.Component {
                             likeCheck = true
                             var page = this.state.page
                             this.fetchChillMusicList(page)
+                            const formData = new FormData()
+                            formData.append("xrp_token_amount_earn", 0.1);
+                            this.props.earnXrpByLike(userSession,formData).then(() =>{
+                                // console.log(this.props.earnXrpByLikeResponse)
+                                // this.notify()
+                                alert("You earned 0.1 xrp")
+                            }).catch(err => {
+
+                            })
                         }).catch(err => {
                         })
                     } else if (!userSession) {
@@ -1357,7 +1410,8 @@ const mapStateToProps = (state) => {
         randomMusicResponse: state.fetchRandomMusic.musicRandomFetchData,
         featuredMusicResponse: state.fetchFeaturedMusic.featuredMusicData,
         currentUserDataResponse: state.currentUserDetail.currentUserDetailResponse,
-        exclusiveSongsResponse: state.fetchExclusiveSongs.exclusiveSongsDataResponse
+        exclusiveSongsResponse: state.fetchExclusiveSongs.exclusiveSongsDataResponse,
+        earnXrpByLikeResponse: state.earnXrp.earnXrpData
     }
 }
 
@@ -1376,5 +1430,6 @@ export default connect(mapStateToProps, {
     fetchHomeFeaturedMusic,
     fetchCurrentUserDetail,
     fetchExclusiveContent,
-    likeMusicApi
+    likeMusicApi,
+    earnXrpByLike
 })(Home);

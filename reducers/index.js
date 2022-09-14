@@ -66,6 +66,7 @@ import fetchPlayerDurationReducer from "./fetchPlayerDurationReducer";
 import fetchMusicIdReducer from "./fetchMusicIdReducer";
 import xrpWalletCreateReducer from "./xrpWalletCreateReducer";
 import sendXrplTransactionReducer from "./sendXrplTransactionReducer";
+import addXrpCoinsReducer from "./addXrpCoinsReducer";
 export default combineReducers({
     auth:authReducer,
     musicUpload:musicUploadReducer,
@@ -133,5 +134,6 @@ export default combineReducers({
     playerDuration:fetchPlayerDurationReducer,
     getMusicId:fetchMusicIdReducer,
     xrpWalletCreate:xrpWalletCreateReducer,
-    xrplTransaction:sendXrplTransactionReducer
+    xrplTransaction:sendXrplTransactionReducer,
+    earnXrp:addXrpCoinsReducer
 })
