@@ -83,7 +83,7 @@ class UserWallet extends Component {
                             <div className="w-100">
                                 XRPL Wallet Connected
                             </div>
-                            <div>${this.state.user_Xrp_Wallet_Address}</div>
+                            <div>{this.state.user_Xrp_Wallet_Address}</div>
                         </button> : <button className="nav-pills-bg-custom" onClick={async () => {
                             // const provider = await web3modal.connect()
                             // const web3 = new Web3(provider)

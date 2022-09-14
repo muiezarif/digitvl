@@ -161,6 +161,9 @@ class Navbar extends React.Component {
     onSubscriptionClick = () => {
         Router.push("/subscriptions")
     }
+    onXrplTransactionClick = () => {
+        Router.push("/xrpl-transaction")
+    }
     onManageSubscriptionClick = () => {
         Router.push("/manage-subscription")
     }
@@ -393,6 +396,13 @@ class Navbar extends React.Component {
                                                     <div onClick={this.onSubscriptionClick}
                                                          className="btn dropdown-item"><i
                                                         className="fas fa-credit-card"/> Subscription
+                                                    </div>
+                                                </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
+                                            <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn ? (
+                                                <ReactBootstrap.Nav className="my-auto mr-2">
+                                                    <div onClick={this.onXrplTransactionClick}
+                                                         className="btn dropdown-item"><i
+                                                        className="fas fa-credit-card"/> XRPL Transaction
                                                     </div>
                                                 </ReactBootstrap.Nav>) : null}</ReactBootstrap.Dropdown.Item>
                                             <ReactBootstrap.Dropdown.Item>{this.state.userLoggedIn && this.state.userSubscriptionManage ? (

@@ -329,6 +329,17 @@ export const generateXrpWallet = (userSession) => {
         dispatch({type:TYPES.XRP_WALLET_CREATE,payload:response.data})
     }
 }
+export const sendXrpTransaction = (userSession,data) => {
+    // console.log(userSession.token)
+    return async (dispatch) =>{
+        const response = await novamdigital.post(`/xrp/send/`,data,{
+            headers: {
+                'Authorization': `jwt ${userSession.token}`,
+            }
+        })
+        dispatch({type:TYPES.XRP_TRANSACTION,payload:response.data})
+    }
+}
 export const fetchUserSubscriptionDetail = (userSession,pageNo) =>{
     // console.log(userSession.token)
     return async (dispatch) =>{
