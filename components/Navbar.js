@@ -93,14 +93,14 @@ class Navbar extends React.Component {
                         userImage: userSession.user.profile.avatar
                     })
                 }
-                userSessionToken = userSession
-                userXrpWallet = userSession.user.user_xrp_wallet
-                // console.log(userSessionToken)
-                // console.log(userXrpWallet)
-                this.setState({user_Xrp_Wallet:userXrpWallet})
-                if (userSession.user.user_xrp_wallet){
-                    this.setState({user_Xrp_Wallet_Address:userSession.user.user_xrp_wallet.xrp_public_address})
-                }
+                // userSessionToken = userSession
+                // userXrpWallet = userSession.user.user_xrp_wallet
+                // // console.log(userSessionToken)
+                // // console.log(userXrpWallet)
+                // this.setState({user_Xrp_Wallet:userXrpWallet})
+                // if (userSession.user.user_xrp_wallet){
+                //     this.setState({user_Xrp_Wallet_Address:userSession.user.user_xrp_wallet.xrp_public_address})
+                // }
             }
             if (userSession.profile) {
                 if (userSession.profile.avatar) {
@@ -271,46 +271,46 @@ class Navbar extends React.Component {
                                 {/*    </div>*/}
                                 {/*</Link>*/}
                                 {/*</ReactBootstrap.Nav>*/}
-                                {this.state.user_Xrp_Wallet ?
-                                    <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><button className="bg-dark">
+                                {/*{this.state.user_Xrp_Wallet ?*/}
+                                {/*    <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><button className="bg-dark">*/}
 
-                                        <div className="w-100">
-                                        XRPL Wallet Connected
-                                    </div>
-                                            <div>${this.state.user_Xrp_Wallet_Address.slice(0,10)}...</div>
-                                </button>
-                                </ReactBootstrap.Nav>
-                                    : <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><button className="bg-dark" onClick={async () => {
-                                    // const provider = await web3modal.connect()
-                                    // const web3 = new Web3(provider)
-                                    // console.log(web3)
-                                        this.setState({generateWalletLoader:true})
-                                    this.props.generateXrpWallet(userSessionToken).then(() => {
-                                        userXrpWallet = this.props.generateXrpWalletResponse.data.account_data.Account
-                                        this.setState({user_Xrp_Wallet:this.props.generateXrpWalletResponse,user_Xrp_Wallet_Address:this.props.generateXrpWalletResponse.data.account_data.Account})
-                                        let userSession2 = localStorage.getItem("userSession")
-                                        userSession2 = JSON.parse(userSession2)
-                                        // console.log(userSession2)
-                                        if (userSession2.user){
-                                            var data = {xrp_public_address:this.props.generateXrpWalletResponse.data.account_data.Account}
-                                            userSession2.user.user_xrp_wallet = data
-                                            localStorage.setItem("userSession", JSON.stringify(userSession2));
-                                        }
-                                        this.setState({generateWalletLoader:false})
-                                        // console.log(this.props.generateXrpWalletResponse.data.account_data.Account)
-                                    }).catch(err => {
-                                        console.log(err)
-                                        this.setState({generateWalletLoader:false})
-                                    })
-                                }
-                                }>
-                                        <LoadingOverlay active={this.state.generateWalletLoader} spinner>
-                                    <div className="btn custom-upload-btn">
-                                        Generate XRPL Wallet
-                                    </div>
-                                        </LoadingOverlay>
-                                </button>
-                                </ReactBootstrap.Nav>}
+                                {/*        <div className="w-100">*/}
+                                {/*        XRPL Wallet Connected*/}
+                                {/*    </div>*/}
+                                {/*            <div>${this.state.user_Xrp_Wallet_Address.slice(0,10)}...</div>*/}
+                                {/*</button>*/}
+                                {/*</ReactBootstrap.Nav>*/}
+                                {/*    : <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links"><button className="bg-dark" onClick={async () => {*/}
+                                {/*    // const provider = await web3modal.connect()*/}
+                                {/*    // const web3 = new Web3(provider)*/}
+                                {/*    // console.log(web3)*/}
+                                {/*        this.setState({generateWalletLoader:true})*/}
+                                {/*    this.props.generateXrpWallet(userSessionToken).then(() => {*/}
+                                {/*        userXrpWallet = this.props.generateXrpWalletResponse.data.account_data.Account*/}
+                                {/*        this.setState({user_Xrp_Wallet:this.props.generateXrpWalletResponse,user_Xrp_Wallet_Address:this.props.generateXrpWalletResponse.data.account_data.Account})*/}
+                                {/*        let userSession2 = localStorage.getItem("userSession")*/}
+                                {/*        userSession2 = JSON.parse(userSession2)*/}
+                                {/*        // console.log(userSession2)*/}
+                                {/*        if (userSession2.user){*/}
+                                {/*            var data = {xrp_public_address:this.props.generateXrpWalletResponse.data.account_data.Account}*/}
+                                {/*            userSession2.user.user_xrp_wallet = data*/}
+                                {/*            localStorage.setItem("userSession", JSON.stringify(userSession2));*/}
+                                {/*        }*/}
+                                {/*        this.setState({generateWalletLoader:false})*/}
+                                {/*        // console.log(this.props.generateXrpWalletResponse.data.account_data.Account)*/}
+                                {/*    }).catch(err => {*/}
+                                {/*        console.log(err)*/}
+                                {/*        this.setState({generateWalletLoader:false})*/}
+                                {/*    })*/}
+                                {/*}*/}
+                                {/*}>*/}
+                                {/*        <LoadingOverlay active={this.state.generateWalletLoader} spinner>*/}
+                                {/*    <div className="btn custom-upload-btn">*/}
+                                {/*        Generate XRPL Wallet*/}
+                                {/*    </div>*/}
+                                {/*        </LoadingOverlay>*/}
+                                {/*</button>*/}
+                                {/*</ReactBootstrap.Nav>}*/}
                                 <ReactBootstrap.Nav className="my-auto mr-2 custom-navbar-top-links">
                                     <div onClick={this.onNotificationsClick}
                                          className="btn">{this.state.notificationCount > 0 ? this.state.notificationCount : null}<i

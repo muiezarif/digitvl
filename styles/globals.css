@@ -430,7 +430,7 @@ a:hover {
 }
 
 .nav-pills-bg-custom {
-    background-image: linear-gradient(-30deg, #00D1E5, #00111B, #20C997);
+    background-image: linear-gradient(-30deg, #00D1E5, #DB8BF6, #20C997);
     border-radius: 5px;
     padding: 5px;
 }
