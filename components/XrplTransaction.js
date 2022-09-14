@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import {sendXrpTransaction} from "../actions";
 import {connect} from "react-redux";
 class XrplTransaction extends Component {
-    state = {xrpaddress:null,xrpamount:0.0}
+    state = {xrpaddress:null,xrpamount:0.0,transactionDetails:{},transactionResponse:{},showDetails:false}
     render() {
         const handleChange = (e) => {
             const isCheckbox = e.target.type === "checkbox";
@@ -13,9 +13,14 @@ class XrplTransaction extends Component {
             e.preventDefault()
             let userSession = localStorage.getItem("userSession")
             userSession = JSON.parse(userSession)
-            const data = {public_address:this.state.xrpaddress,xrp_amount:this.state.xrpamount}
-            this.props.sendXrpTransaction(userSession,data).then(() => {
+            // const data = {public_address:this.state.xrpaddress,xrp_amount:this.state.xrpamount}
+            // const data = {public_address:this.state.xrpaddress,xrp_amount:this.state.xrpamount}
+            const formData = new FormData();
+            formData.append("public_address", this.state.xrpaddress);
+            formData.append("xrp_amount", this.state.xrpamount);
+            this.props.sendXrpTransaction(userSession,formData).then(() => {
                 console.log(this.props.xrplTransactionResponse)
+                this.setState({transactionDetails:this.props.xrplTransactionResponse.data,showDetails:true,transactionResponse:this.props.xrplTransactionResponse.data["Transaction Response"]})
             }).catch(err => {
 
             })
@@ -44,6 +49,15 @@ class XrplTransaction extends Component {
                             </div>
                         </div>
                     </form>
+                    {this.state.showDetails ?
+                    <div className="container">
+                        <div className="nav-pills-bg-custom  mx-auto">
+                            <div><b>Transaction Explorer :</b> "<a target="_blank" href={this.state.transactionDetails["Explore Link"]}>{this.state.transactionDetails["Explore Link"]}</a>"</div>
+                            <div><b>Transaction Type : </b>"{this.state.transactionResponse.TransactionType}"</div>
+                            {/*<div>Txn Signature : "{this.state.transactionResponse.TxnSignature}"</div>*/}
+                            <div><b>Hash : </b>"{this.state.transactionResponse.hash}"</div>
+                        </div>
+                    </div>: null}
                 </div>
 
             </div>
