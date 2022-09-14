@@ -81,7 +81,7 @@ class UserWallet extends Component {
                         {this.state.user_Xrp_Wallet ? <button className="nav-pills-bg-custom">
 
                             <div className="w-100">
-                                XRPL Wallet Connected
+                                XRPL Wallet Connected (Testnet)
                             </div>
                             <div>{this.state.user_Xrp_Wallet_Address}</div>
                         </button> : <button className="nav-pills-bg-custom" onClick={async () => {
@@ -111,7 +111,7 @@ class UserWallet extends Component {
                         }>
                             <LoadingOverlay active={this.state.generateWalletLoader} spinner>
                                 <div className="btn">
-                                    Generate XRPL Wallet
+                                    Generate XRPL Wallet (Testnet)
                                 </div>
                             </LoadingOverlay>
                         </button>}

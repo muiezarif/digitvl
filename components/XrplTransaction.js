@@ -26,7 +26,7 @@ class XrplTransaction extends Component {
                 <div className="container-fluid">
                     <form onSubmit={onSubmit} className="form-box pt-3 pt-sm-3">
                         <div className="container-fluid w-75 h-100 custom-login-form custom-bg-dark pb-5 mx-auto mx-md-auto mx-sm-auto">
-                            <div className="text-center custom-blogs-heading pt-5">Send XRP</div>
+                            <div className="text-center custom-blogs-heading pt-5">Send XRP (Testnet)</div>
                             <div className="custom-input w-100 mt-2 text-center">
                                 <input className="mx-auto w-75" name="xrpaddress" value={this.state.xrpaddress} type="text"
                                        onChange={handleChange}
