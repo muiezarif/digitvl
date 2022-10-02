@@ -1721,7 +1721,7 @@ a:hover {
         width: 100%;
     }
     .custom-align-center{
-        margin-left: 70px;
+        padding-left: 70px;
     }
     .custom-subscription-badge{
         width: 15px;
@@ -1791,7 +1791,7 @@ a:hover {
     /*    width: auto;*/
     /*}*/
     .custom-align-center{
-        margin-left: 80px;
+        padding-left: 80px;
     }
     .mobile-track-home-margin{
         margin-left: 25%;
