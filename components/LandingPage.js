@@ -251,11 +251,11 @@ class LandingPage extends React.Component {
                                 </li>
                             </ul>
                         </div>
-                        <div className="row custom-row-margin custom-align-center text-center">
+                        <div className="row custom-row-margin align-content-center align-items-center justify-content-center text-center">
                             <div className="col-md-12">
                                 <h3 className="text-center text-white">Join Our Community!</h3>
                             </div>
-                            <div className="col-md-12 mt-2 align-content-center align-items-center justify-content-center">
+                            <div className="col-md-12 mt-2 align-content-center align-items-center justify-content-center text-center">
                                 <div className="d-flex align-content-center align-items-center justify-content-center">
                                 <div onClick={this.onTelegramClick} className="pointer-cursor">
                                     <img src="images/telegram_icon.png"/>
