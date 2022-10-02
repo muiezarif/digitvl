@@ -85,7 +85,8 @@ class Trending extends Component {
                                     <Link
                                         href={`/m-details/${result.username_slug}/${result.slug}`}>{result.song_title.slice(0, 20)}</Link>
                                     <div className="ml-3 my-auto custom-trending-item-plays-count">
-                                        ▶ {result.plays_count} plays
+                                        {result.plays_count} plays
+                                        {/*▶ {result.plays_count} plays*/}
                                     </div>
                                 </div>
                                 <div className="d-flex flex-row mt-2 custom-trending-item-title">
@@ -99,7 +100,8 @@ class Trending extends Component {
                         </div>
                         <div className="col-md-3 col-sm-6 my-auto">
                             <div className="text-center mt-2" onClick={() => this.playSong(result)}>
-                                <div className="btn btn-outline-primary">▶ Play</div>
+                                {/*<div className="btn btn-outline-primary">▶ Play</div>*/}
+                                <div className="btn btn-outline-primary">Play</div>
                             </div>
                         </div>
                     </div>

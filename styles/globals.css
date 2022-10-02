@@ -1805,6 +1805,7 @@ a:hover {
     .navbar-nav .dropdown-menu{
         position: absolute;
         top: -350px;
+        left: -200px;
     }
     .custom-how-to-use-digitvl-coins {
         margin: 0;
@@ -1872,7 +1873,8 @@ a:hover {
 
     .custom-home-left-section {
         margin-left: 0px;
-        padding: 0;
+        margin:0;
+        /*padding: 0;*/
     }
 
     .horizontal-menu {

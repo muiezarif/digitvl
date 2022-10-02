@@ -577,7 +577,8 @@ class Home extends React.Component {
                         </div>
                         <div className="col-md-3 col-sm-6 my-auto w-100">
                             <div className="text-center mt-2" onClick={() => this.playFeaturedSong(result.target)}>
-                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                                {/*<div className="btn btn-outline-primary cus-btn-width">▶ Play</div>*/}
+                                <div className="btn btn-outline-primary cus-btn-width">Play</div>
                             </div>
                         </div>
                         <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
@@ -916,7 +917,8 @@ class Home extends React.Component {
                         </div>
                         <div className="col-md-3 col-sm-12 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
-                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                                {/*<div className="btn btn-outline-primary cus-btn-width">▶ Play</div>*/}
+                                <div className="btn btn-outline-primary cus-btn-width">Play</div>
                             </div>
                         </div>
                         <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
@@ -982,7 +984,8 @@ class Home extends React.Component {
                         </div>
                         <div className="col-md-3 col-sm-12 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
-                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                                <div className="btn btn-outline-primary cus-btn-width">Play</div>
+                                {/*<div className="btn btn-outline-primary cus-btn-width">▶ Play</div>*/}
                             </div>
                         </div>
                     </div>
@@ -1040,7 +1043,8 @@ class Home extends React.Component {
                         </div>
                         <div className="col-md-3 col-sm-6 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
-                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                                {/*<div className="btn btn-outline-primary cus-btn-width">▶ Play</div>*/}
+                                <div className="btn btn-outline-primary cus-btn-width">Play</div>
                             </div>
                         </div>
                         <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
@@ -1109,7 +1113,8 @@ class Home extends React.Component {
                         </div>
                         <div className="col-md-3 col-sm-6 my-auto w-100">
                             <div className="text-center mt-2 " onClick={() => this.playSong(result)}>
-                                <div className="btn btn-outline-primary cus-btn-width">▶ Play</div>
+                                <div className="btn btn-outline-primary cus-btn-width">Play</div>
+                                {/*<div className="btn btn-outline-primary cus-btn-width">▶ Play</div>*/}
                             </div>
                         </div>
                         <div className="d-inline-block flex-row mt-2 ml-3 mb-3">
