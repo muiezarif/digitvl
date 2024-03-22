@@ -7,9 +7,16 @@ export const register = (data)=>{
         dispatch({type:TYPES.REGISTER,payload:response.data});
     }
 }
+// export const login = (data)=>{
+//     return async (dispatch)=>{
+//         const response = await novamdigital.post("/account/login/",{...data});
+//         dispatch({type:TYPES.SIGN_IN,payload:response.data});
+//     }
+// }
+
 export const login = (data)=>{
     return async (dispatch)=>{
-        const response = await novamdigital.post("/account/login/",{...data});
+        const response = await novamdigital.post("/account/auth/login/",{...data});
         dispatch({type:TYPES.SIGN_IN,payload:response.data});
     }
 }
@@ -19,7 +26,7 @@ export const uploadMusic = (data,userSession,options)=>{
     return async (dispatch)=>{
         const response = await novamdigital.post("/beats/upload/",data,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         });
         dispatch({type:TYPES.MUSIC_UPLOAD,payload:response.data});
@@ -35,7 +42,7 @@ export const tweetApi = (data,userSession) =>{
     return async (dispatch) => {
         const response = await novamdigital.post("/tweets/create/",data,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         });
         dispatch({type:TYPES.TWEET_FEATURE,payload:response.data})
@@ -45,7 +52,7 @@ export const addDigitvlTreeLinksApi = (data,userSession) =>{
     return async (dispatch) => {
         const response = await novamdigital.post("/link-tree/create/",data,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
                 'Content-Type' : 'application/json',
                 'Accept' : 'application/json'
             }
@@ -63,7 +70,7 @@ export const deleteDTreePublicProfileLinks = (data,userSession) =>{
     return async (dispatch) => {
         const response = await novamdigital.delete(`/link-tree/update/${data}/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
                 'Content-Type' : 'application/json',
             }
         });
@@ -74,7 +81,7 @@ export const getDTreeCurrentUserProfileLinks = (userSession) =>{
     return async (dispatch) => {
         const response = await novamdigital.get(`/link-tree/current-user/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
                 'Content-Type' : 'application/json',
             }
         });
@@ -86,7 +93,7 @@ export const createPlayList = (data,userSession)=>{
     return async (dispatch)=>{
         const response = await novamdigital.post("/beats/create/playlist/",{...data},{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         });
         dispatch({type:TYPES.CREATE_PLAYLIST,payload:response.data});
@@ -117,7 +124,7 @@ export const fetchHomeMusic = (pageNo,userSession) =>{
         if (userSession){
             response = await novamdigital.get(`/beats/`,{
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                 },
                 params:{
                     page:pageNo,
@@ -141,7 +148,7 @@ export const fetchHomeChillMusic = (pageNo,userSession) =>{
         if (userSession){
             response = await novamdigital.get(`/beats/tags/chill/`,{
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                 },
                 params:{
                     page:pageNo,
@@ -162,7 +169,7 @@ export const fetchExclusiveContent = (userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/exclusive/songs/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -177,7 +184,7 @@ export const fetchHomeRelaxMusic = (pageNo,userSession) =>{
         if (userSession){
             response = await novamdigital.get(`/beats/tags/relax/`,{
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                 },
                 params:{
                     page:pageNo,
@@ -200,7 +207,7 @@ export const fetchHomeFeaturedMusic = (pageNo,userSession) =>{
         if (userSession){
             response = await novamdigital.get(`/featured/songs/`,{
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                 },
                 params:{
                     page:pageNo,
@@ -260,7 +267,7 @@ export const editUserProfile = (data,userSession) =>{
         if (userSession.user) {
             response = await novamdigital.patch("/account/profile/update/" + userSession.user.id + "/", data, {
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                     'Content-Type': 'multipart/form-data',
                 }
             });
@@ -268,7 +275,7 @@ export const editUserProfile = (data,userSession) =>{
         if (userSession.profile){
             response = await novamdigital.patch("/account/profile/update/" + userSession.profile.id + "/", data, {
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                     'Content-Type': 'multipart/form-data',
                 }
             });
@@ -282,14 +289,14 @@ export const editUserProfileLinks = (data,userSession) =>{
         if (userSession.user) {
             response = await novamdigital.patch("/account/profile/update/" + userSession.user.id + "/", data, {
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                 }
             });
         }
         if (userSession.profile){
             response = await novamdigital.patch("/account/profile/update/" + userSession.profile.id + "/", data, {
                 headers: {
-                    'Authorization': `jwt ${userSession.token}`,
+                    'Authorization': `jwt ${userSession.access}`,
                 }
             });
         }
@@ -305,11 +312,11 @@ export const fetchMusicDetails = (username,slug) =>{
 }
 
 export const fetchCurrentUserPlaylist = (userSession,pageNo) =>{
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/you/library/playlist/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -319,33 +326,33 @@ export const fetchCurrentUserPlaylist = (userSession,pageNo) =>{
     }
 }
 export const generateXrpWallet = (userSession) => {
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.post(`/xrp/wallet/create/`,{},{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.XRP_WALLET_CREATE,payload:response.data})
     }
 }
 export const sendXrpTransaction = (userSession,data) => {
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.post(`/xrp/send/`,data,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.XRP_TRANSACTION,payload:response.data})
     }
 }
 export const earnXrpByLike = (userSession,data) => {
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.post(`/xrp/earn-by/like-song/`,data,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.EARN_XRP,payload:response.data})
@@ -353,22 +360,22 @@ export const earnXrpByLike = (userSession,data) => {
 }
 
 export const fetchUserSubscriptionDetail = (userSession,pageNo) =>{
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/user-subscription/detail/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.USER_SUBSCRIPTION_DETAIL,payload:response.data})
     }
 }
 export const fetchCurrentUserDetail = (userSession) =>{
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/account/current-user/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.USER_DETAIL,payload:response.data})
@@ -405,7 +412,7 @@ export const fetchCurrentUserLikes = (userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/you/library/likes/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -429,7 +436,7 @@ export const fetchUserFeeds = (userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/feeds/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -449,7 +456,7 @@ export const getUserFollowingList = (username,userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/profile/${username}/following/list/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -479,11 +486,11 @@ export const getMusicLikesList = (musicId,pageNo) =>{
     }
 }
 export const getUserFollowersList = (username,userSession,pageNo) =>{
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.get(`/profile/${username}/follower/list/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -506,7 +513,7 @@ export const getUserProfileFollowCheck = (userSession,username) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/check/${username}/follow/status/`,{
             headers: {
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.USER_PROFILE_FOLLOW_CHECK,payload:response.data})
@@ -526,7 +533,7 @@ export const getWhoToFollowList = (userSession,username) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/suggestions/${username}/who-to-follow/list/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.WHO_TO_FOLLOW,payload:response.data})
@@ -561,7 +568,7 @@ export const postBlog = (userSession,data) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/blog/create/`,data,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.POST_BLOG,payload:response.data})
@@ -571,7 +578,7 @@ export const posterRewards = (userSession,data) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/poster/reward/${data}/`,data,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.POSTER_REWARD,payload:response.data})
@@ -581,7 +588,7 @@ export const inviteUser = (userSession,data) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/invite/user/`,data,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.INVITE_USER,payload:response.data})
@@ -591,7 +598,7 @@ export const getNotificationCount = (userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/notification/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.GET_NOTIFICATIONS_COUNT,payload:response.data})
@@ -601,7 +608,7 @@ export const getReadNotifications = (userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/notification/read/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -617,18 +624,18 @@ export const getCurrentUserDigitvlCoins = (userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/account/GetCoins/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.GET_DIGITVL_COINS,payload:response.data})
     }
 }
 export const addMusicComments = (userSession,mId,data) =>{
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.post(`/beats/comments/${mId}/`,{...data},{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.ADD_MUSIC_COMMENTS,payload:response.data})
@@ -645,7 +652,7 @@ export const followUnfollowUserApi = (userSession,userId) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/profile/${userId}/follow/`,{},{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.FOLLOW_UNFOLLOW_USER,payload:response.data})
@@ -655,7 +662,7 @@ export const redeemCoinFeatureSongApi = (musicId,data,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/redeem/coins/featured/track/${musicId}/`,data,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.REDEEM_COIN_FEATURE_SONG,payload:response.data})
@@ -665,7 +672,7 @@ export const addMusicToPlayList = (playListId,musicId,data,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/beats/users/${playListId}/${musicId}/added/`,data,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.ADD_MUSIC_TO_PLAYLIST,payload:response.data})
@@ -675,7 +682,7 @@ export const addCoins = (userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/account/CounterCoins/`,{},{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.ADD_COINS,payload:response.data})
@@ -686,7 +693,7 @@ export const fetchMusicDetailsWithToken = (username,slug,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/beats/${username}/${slug}`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.FETCH_MUSIC_DETAIL,payload:response.data})
@@ -696,7 +703,7 @@ export const fetchSubscriptionSuccessSession = (checkoutSessionId,userSession) =
     return async (dispatch) =>{
         const response = await novamdigital.get(`/get-checkout-session/${checkoutSessionId}/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`
+                'Authorization': `jwt ${userSession.access}`
             }
         })
         dispatch({type:TYPES.FETCH_SUBSCRIPTION_SUCCESS_SESSION,payload:response.data})
@@ -706,7 +713,7 @@ export const fetchBuyCoinsSuccessSession = (checkoutSessionId,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/get-buy-coins/${checkoutSessionId}/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.FETCH_BUYCOINS_SUCCESS_SESSION,payload:response.data})
@@ -717,7 +724,7 @@ export const fetchCurrentUserMusic = (userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get("/you/library/tracks/",{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -731,7 +738,7 @@ export const fetchCurrentUserFeeds = (userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get("/feeds/current-user/",{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -744,7 +751,7 @@ export const deleteUserMusic = (userSession,songId) =>{
     return async (dispatch) =>{
         const response = await novamdigital.delete(`/Songs/update/${songId}/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.DELETE_USER_TRACK,payload:response.data})
@@ -755,7 +762,7 @@ export const deleteCurrentUserPlaylist = (userSession,slug) =>{
     return async (dispatch) =>{
         const response = await novamdigital.delete(`/you/library/delete/playlist/${slug}`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.DELETE_USER_PLAYLIST,payload:response.data})
@@ -765,18 +772,18 @@ export const deleteCurrentUserPlaylistSong = (userSession,slug,song_id) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/you/library/playlist/${slug}/delete/song/${song_id}/`,{},{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.DELETE_USER_PLAYLIST_SONG,payload:response.data})
     }
 }
 export const updateUserMusic = (userSession,songId,data) =>{
-    // console.log(userSession.token)
+    // console.log(userSession.access)
     return async (dispatch) =>{
         const response = await novamdigital.patch(`/Songs/update/${songId}/`,data,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.UPDATE_USER_TRACK,payload:response.data})
@@ -786,7 +793,7 @@ export const fetchUserMusic = (username,userSession,pageNo) =>{
     return async (dispatch) =>{
         const response = await novamdigital.get(`/profile/${username}/tracks/`,{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             },
             params:{
                 page:pageNo,
@@ -828,7 +835,7 @@ export const likeMusicApi = (id,userSession) =>{
     return async (dispatch) =>{
         const response = await novamdigital.post(`/beats/${id}/likes/`,{},{
             headers:{
-                'Authorization': `jwt ${userSession.token}`,
+                'Authorization': `jwt ${userSession.access}`,
             }
         })
         dispatch({type:TYPES.LIKE_MUSIC,payload:response.data})

@@ -29,19 +29,22 @@ class Login extends React.Component {
             this.setState({[e.target.name]: isCheckbox ? e.target.checked : e.target.value})
         }
         const handleSubmit = (e) => {
+            console.log("IN")
             e.preventDefault();
             this.setState({errors: {}})
             const isValid = validate();
-            if (isValid) {
+            // if (isValid) {
                 const data = {email: this.state.email, password: this.state.password}
+                console.log(data)
+
                 this.props.login(data).then(() => {
-                    // console.log(this.props.responseData)
+                    console.log(this.props.responseData)
                     if (this.props.responseData.status) {
-                        localStorage.setItem("userSession", JSON.stringify(this.props.responseData.result.user))
+                        localStorage.setItem("userSession", JSON.stringify(this.props.responseData.result))
                         localStorage.setItem("userLoggedIn", "true")
-                        localStorage.setItem("userToken", this.props.responseData.result.user.token)
-                        localStorage.setItem("userEmail", this.props.responseData.result.user.user.email)
-                        localStorage.setItem("userStripeCustomerId", this.props.responseData.result.user.user.membership_plan.get_customer_id)
+                        localStorage.setItem("userToken", this.props.responseData.result.access)
+                        localStorage.setItem("userEmail", this.props.responseData.result.user.email)
+                        localStorage.setItem("userStripeCustomerId", this.props.responseData.result.user.membership_plan.get_customer_id)
                         Router.push("/home")
 
                     } else if (!this.props.responseData.status) {
@@ -71,7 +74,7 @@ class Login extends React.Component {
                     }
                 }, ({data}) => {
                 });
-            }
+            // }
         }
         const validate = () => {
             let emailError = "";

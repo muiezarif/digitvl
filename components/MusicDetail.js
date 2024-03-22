@@ -66,6 +66,7 @@ class MusicDetail extends Component {
                 this.setState({userProfilePic: userSession.profile.avatar})
             }
             this.props.fetchMusicDetailsWithToken(this.props.dataparams.username_slug, this.props.dataparams.track_slug, userSession).then(() => {
+                console.log(this.props.fetchMusicDetail)
                 this.setState({
                     musicDetail: this.props.fetchMusicDetail.beats_detail,
                     like: this.props.fetchMusicDetail.beats_detail.user_like

@@ -16,7 +16,7 @@ async function fetcherFunction(url) {
 
 export default function mDetails(props){
     const router = useRouter();
-    const url = "https://novamdigital.com/api/v1/beats/"+router.query.username_slug+"/"+router.query.track_slug+"/"
+    const url = "https://digitvl.xyz/api/v1/beats/"+router.query.username_slug+"/"+router.query.track_slug+"/"
     const {data, error} = useSWR(url,fetcherFunction,{initialData:props})
     if (error){
         return <div>Failed to Load</div>
@@ -79,7 +79,7 @@ export default function mDetails(props){
 //     }
 // }
 export async function getServerSideProps(context){
-    const res = await fetch('https://novamdigital.com/api/v1/beats/'+context.params.username_slug+'/'+context.params.track_slug+'/')
+    const res = await fetch('https://digitvl.xyz/api/v1/beats/'+context.params.username_slug+'/'+context.params.track_slug+'/')
     const error_code = res.statusCode > 200 ? res.statusCode : false;
     const seodata = await res.json();
     return {props: seodata}
