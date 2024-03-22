@@ -14,7 +14,7 @@ class LandingPage extends React.Component {
     state = {userLoggedIn: "", trendingListResponse: {}, trendingList: [], page: 1, featuredReleases: {}}
 
     componentDidMount() {
-        localStorage.clear()
+        // localStorage.clear()
         userLoggedIn = localStorage.getItem("userLoggedIn")
         userSession = localStorage.getItem("userSession")
         userSession = JSON.parse(userSession)
